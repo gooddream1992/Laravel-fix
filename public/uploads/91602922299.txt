@@ -1,0 +1,30 @@
+
+Temp Reservation API
+<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n
+<EXT_RESERVATION><AGENT_CD></AGENT_CD>\n <PW></PW>\n <DATAKBN></DATAKBN>\n <OPERATION_KBN></OPERATION_KBN>\n <OFFICE_CD></OFFICE_CD>\n <AGENT_ACCOUNT_ID></AGENT_ACCOUNT_ID>\n <RESERVE_NO></RESERVE_NO>\n <UPDATE_TS></UPDATE_TS>\n <PRE_RESERVE_INFO_COM>\n <LINE_ID></LINE_ID>\n <NUM></NUM>\n <ADULT_MAN_NUM></ADULT_MAN_NUM>\n <ADULT_WOMAN_NUM></ADULT_WOMAN_NUM>\n <HANDICAP_ADULT_MAN_NUM></HANDICAP_ADULT_MAN_NUM>\n <HANDICAP_ADULT_WOMAN_NUM></HANDICAP_ADULT_WOMAN_NUM>\n  <CHILD_MAN_NUM></CHILD_MAN_NUM>\n <CHILD_WOMAN_NUM></CHILD_WOMAN_NUM>\n <HANDICAP_CHILD_MAN_NUM></HANDICAP_CHILD_MAN_NUM>\n <HANDICAP_CHILD_WOMAN_NUM></HANDICAP_CHILD_WOMAN_NUM>\n </PRE_RESERVE_INFO_COM>\n <PRE_RESERVE_INFO_ONE>\n <SERVICE_DT></SERVICE_DT>\n <WAY_ID></WAY_ID>\n  <BUS_NO></BUS_NO>\n  <ON_STATION_CD></ON_STATION_CD>\n <OFF_STATION_CD></OFF_STATION_CD>\n <DISCNT_NO></DISCNT_NO>\n  <LADY_ONLY_SEAT_FLG></LADY_ONLY_SEAT_FLG>\n  <PLACEMENT_KBN></PLACEMENT_KBN>\n  <FRONT_BACK_KBN></FRONT_BACK_KBN>\n  </PRE_RESERVE_INFO_ONE>\n <PRE_RESERVE_INFO_TWO>\n <SERVICE_DT></SERVICE_DT>\n  <WAY_ID></WAY_ID>\n  <BUS_NO></BUS_NO>\n <ON_STATION_CD></ON_STATION_CD>\n  <OFF_STATION_CD></OFF_STATION_CD>\n<DISCNT_NO></DISCNT_NO>\n <LADY_ONLY_SEAT_FLG></LADY_ONLY_SEAT_FLG>\n <PLACEMENT_KBN></PLACEMENT_KBN>\n  <FRONT_BACK_KBN></FRONT_BACK_KBN>\n  </PRE_RESERVE_INFO_TWO>\n <OUTPUT_FORMAT_VER>\n</EXT_RESERVATION>\n </soap:Body>\n</soap:Envelope>\n
+
+
+Reservation API
+<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n
+<EXT_RESERVATION><AGENT_CD></AGENT_CD>\n <PW></PW>\n <DATAKBN></DATAKBN>\n <OPERATION_KBN></OPERATION_KBN>\n <OFFICE_CD></OFFICE_CD>\n <AGENT_ACCOUNT_ID></AGENT_ACCOUNT_ID>\n <RESERVE_NO></RESERVE_NO>\n <UPDATE_TS></UPDATE_TS>\n <RESERVE_INFO_COM>\n <REPRESENT_NAME></REPRESENT_NAME>\n <REPRESENT_TEL></REPRESENT_TEL>\n <MAIL_ADDRESS></MAIL_ADDRESS>\n </RESERVE_INFO_COM>\n <OUTPUT_FORMAT_VER>\n</EXT_RESERVATION>\n </soap:Body>\n</soap:Envelope>\n
+
+
+Reservation cancel API
+<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n
+<EXT_RESERVATION><AGENT_CD></AGENT_CD>\n <PW></PW>\n <DATAKBN></DATAKBN>\n <OPERATION_KBN></OPERATION_KBN>\n <OFFICE_CD></OFFICE_CD>\n <AGENT_ACCOUNT_ID></AGENT_ACCOUNT_ID>\n <RESERVE_NO></RESERVE_NO>\n <UPDATE_TS></UPDATE_TS>\n <OTHER_PLACE_CANCEL_FLG></OTHER_PLACE_CANCEL_FLG>\n <PRE_RESERVE_CANCEL_FLG></PRE_RESERVE_CANCEL_FLG>\n <OUTPUT_FORMAT_VER>\n</EXT_RESERVATION>\n </soap:Body>\n</soap:Envelope>\n
+
+
+Reservation details : 
+<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n
+<EXT_RESERVATION><AGENT_CD></AGENT_CD>\n <PW></PW>\n <DATAKBN></DATAKBN>\n <OPERATION_KBN></OPERATION_KBN>\n <OFFICE_CD></OFFICE_CD>\n <AGENT_ACCOUNT_ID></AGENT_ACCOUNT_ID>\n <ECD></ECD>\n <IP></IP>\n <UPDATE_TS></UPDATE_TS>\n  <RESERVE_NO></RESERVE_NO>\n <OUTPUT_TWO_FLG></OUTPUT_TWO_FLG>\n <OUTPUT_FORMAT_VER>\n</EXT_RESERVATION>\n </soap:Body>\n</soap:Envelope>\n
+
+
+Payment API 
+<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n
+<EXT_RESERVATION><AGENT_CD></AGENT_CD>\n <PW></PW>\n <DATAKBN></DATAKBN>\n <OPERATION_KBN></OPERATION_KBN>\n <OFFICE_CD></OFFICE_CD>\n <AGENT_ACCOUNT_ID></AGENT_ACCOUNT_ID>\n <ECD></ECD>\n <IP></IP>\n <UPDATE_TS></UPDATE_TS>\n  <RESERVE_NO></RESERVE_NO>\n  <PAY_KBN></PAY_KBN>\n <PAY_TOTAL></PAY_TOTAL>\n  <SETTLEMENT_PLACE_KBN></SETTLEMENT_PLACE_KBN>\n <OUTPUT_TWO_FLG></OUTPUT_TWO_FLG>\n <SETTLEMENT_KBN></SETTLEMENT_KBN>\n <OUTPUT_FORMAT_VER>\n</EXT_RESERVATION>\n </soap:Body>\n</soap:Envelope>\n
+
+
+
+
+
+

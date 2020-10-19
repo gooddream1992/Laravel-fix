@@ -1,0 +1,293 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+
+import BasePage.BasePage;
+
+public class ConsultChat extends BasePage{
+
+	
+	@BeforeClass
+	public void setUp() {
+		driver = getDriver();
+	}
+	public ConsultChat(WebDriver driver) {
+		this.driver = driver;
+		// TODO Auto-generated constructor stub
+	}
+
+	By settingbtn = By.xpath("//a[@href='#show-logged-in-menu']");
+	By adminbtn = By.xpath("//a[text()='Admin']");
+	By consultchat = By.xpath("//a[text()='Consult Chat Commands']");
+	By addconsultchat = By.xpath("//a[text()='Add consult chat']");
+	By name = By.xpath("//input[@name='data[name]']");
+	By description = By.xpath("//textarea[@id='description']");
+	By importcsv = By.xpath("//div[@class='input file']/input");
+	By uploadbtn = By.xpath("//input[@value='Upload Excel File']");
+	By uploaddata = By.xpath("//input[@value='Upload Data']");
+	By updatedata = By.xpath("//input[@value='Update Data']");
+	By actualMessage = By.xpath("//div[@class='message']");
+	public void uploadfile()
+	{
+		WebElement upload = driver.findElement(By.xpath("//div[@class='input file']/input"));
+		upload.sendKeys("E:\\Praful\\WorkDetails\\HBPGroup\\sample_consult_chat.csv");
+		
+	}
+	
+	public void createChat() throws Exception {
+		String Name = ExcelUtils.getCellData(3, 1);
+		String Description = ExcelUtils.getCellData(3, 2);
+		String ImportCSV = ExcelUtils.getCellData(3, 3);
+		
+		Thread.sleep(2000);
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(consultchat);
+		click(consultchat);
+		waitUntil(addconsultchat);
+		click(addconsultchat);
+		waitUntil(name);
+		enterText(name, Name);
+		waitUntil(description);
+		enterText(description, Description);
+		uploadfile();
+		waitUntil(uploadbtn);
+		click(uploadbtn);
+		waitUntil(uploaddata);
+		click(uploaddata);
+		waitUntil(actualMessage);
+		String AcutalMessage = getText(actualMessage);
+		String Excepted = "The Command has been saved";
+		try {
+			Assert.assertEquals(AcutalMessage, Excepted);
+			System.out.println("Consult Chat  Saved Successfully :");
+			}
+		catch (Exception e) {
+			System.out.println("Survey Not add Succesfully :");
+			}
+		
+		
+	}
+	
+	By editbtn = By.xpath("//td[text()='Test Name']/following::td/a[1]");
+	By chatquestion = By.xpath("(//textarea[@name='data[SocialCommand][chat_question][]'])[1]");
+	By form = By.xpath("//form[@id='/addConsultChatForm']");
+	public void editChat() throws Exception
+	{
+		String Name = ExcelUtils.getCellData(3, 1);
+		String editChatQuestion = ExcelUtils.getCellData(13, 1);
+		
+		By StrChatName = By.xpath("//table[@id='survey_list']/tbody/tr/td[text()='"+Name+"']");
+		By editBtn = By.xpath("//td[text()='"+Name+"']/following::td/a[1]");
+		By chatquestion = By.xpath("(//textarea[@name='data[SocialCommand][chat_question][]'])[1]");
+		By editMessage = By.xpath("//div[@class='message']");
+		
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(consultchat);
+		click(consultchat);
+		if (isElementDisplayed(StrChatName)) {
+			waitUntil(editBtn);
+			click(editBtn);
+			waitUntil(chatquestion);
+			String strChatQuestion = getText(chatquestion);
+			System.out.println(strChatQuestion);
+			click(chatquestion);
+			enterText(chatquestion, editChatQuestion);
+			waitUntil(updatedata);
+			click(updatedata);
+			String AcutalMessage = getText(editMessage);
+			String ExceptedMessage = "The Command has been saved";
+			try {
+				Assert.assertEquals(AcutalMessage, ExceptedMessage);
+				System.out.println("Record Update Successfully");
+			} catch (Exception e) {
+				System.out.println("Message not found");
+				// TODO: handle exception
+			}
+			/*
+			 * if (isElementDisplayed(StrChatName)) { waitUntil(editBtn); click(editBtn);
+			 * waitUntil(chatquestion); if (strChatQuestion != editChatQuestion) {
+			 * 
+			 * System.out.println("Text not match.Test case pass successfully"); } else {
+			 * System.out.println("Text not found or not match with last text :"); } } else
+			 * { System.out.println("Element not found after edit inside details :"); }
+			 */
+
+		}
+
+		else {
+			System.out.println("Element not found :");
+		}
+	}
+	
+	public void deleteChat() throws Exception {
+		String Name = ExcelUtils.getCellData(3, 1);
+		
+		By strChatName = By.xpath("//table[@id='survey_list']/tbody/tr/td[text()='"+Name+"']");
+		By deletebtn = By.xpath("//td[text()='"+Name+"']/following::td/a[3]");
+		By deletemessage = By.xpath("//div[@class='message']");
+		
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(consultchat);
+		click(consultchat);
+		if(isElementDisplayed(strChatName)) {
+			waitUntil(deletebtn);
+			click(deletebtn);
+			driver.switchTo().alert().accept();
+			String AcutalMessage = getText(deletemessage);
+			String ExceptedMessage = "The Chat has been removed";
+			try {
+				Assert.assertEquals(AcutalMessage, ExceptedMessage);
+				System.out.println("Record Delete Successfully");
+			}
+			catch (Exception e) {
+				System.out.println("Message not found");
+				// TODO: handle exception
+			}
+			
+		}
+		else {
+			System.out.println("Lsast added Element not Found");
+		}
+		
+	}
+	
+	By chatbotcommand = By.xpath("//a[text()='Chatbot Commands']");
+	By commandtext = By.xpath("//textarea[@id='SocialCommandCommand']");
+	By submit = By.xpath("//input[@value='Submit']");
+	
+	public void addCommand() throws Exception {
+		String Name = ExcelUtils.getCellData(3, 1);
+		String commandText = ExcelUtils.getCellData(3, 5);
+		
+		By strChatName = By.xpath("//li[normalize-space(text()) = '"+Name+"']");
+		By expand = By.xpath("//li[normalize-space(text()) = '"+Name+"']/div");
+		By editbtn = By.xpath("(//li[normalize-space(text()) = '"+Name+"']/ul/li/a[text()='edit'])[1]");
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(chatbotcommand);
+		click(chatbotcommand);
+		Thread.sleep(5000);
+		//waitUntil(strChatName);
+		if (isElementDisplayed(strChatName)) {
+			waitUntil(expand);
+			click(expand);
+			waitUntil(editbtn);
+			click(editbtn);
+			enterText(commandtext, commandText);
+			waitUntil(submit);
+			click(submit);
+		}
+		else {
+			System.out.println("Element not found");
+		}
+		
+		
+	}
+	By homebtn = By.xpath("//a[text()='Home']");
+	By livechatbtn = By.xpath("//h2[text()=' Live Chat']");
+	By inputmessage = By.xpath("//input[@id='message-box']");
+	public void iframe() throws Exception {
+		//By iframe1 = By.xpath("//div[@class='tab-panel hide']");
+		//String variableName = ExcelUtils.getCellData(43,3);
+		WebElement Iframe1 = driver.findElement(By.xpath("//iframe[@id='chat-box']"));	
+		driver.switchTo().frame(Iframe1);
+		System.out.println("Switch to Iframe");
+	}
+	public void verifyChate() throws Exception {
+		
+		String inputMessageText = ExcelUtils.getCellData(3, 5);
+		String Name = ExcelUtils.getCellData(3, 1);
+		By strChatName = By.xpath("//table[@id='survey_list']/tbody/tr/td[text()='"+Name+"']");
+		By editBtn = By.xpath("//td[text()='"+Name+"']/following::td/a[1]");
+		By question1 = By.xpath("//p[text()='"+inputMessageText+"']/following::div[1]/p");
+		By answer1 = By.xpath("//p[text()='Whats your favorite Sport?']/following::button[1]");
+		By answer2 = By.xpath("//p[text()='Whats your favorite Sport?']/following::button[2]");
+		By answer3 = By.xpath("//p[text()='Whats your favorite Sport?']/following::button[3]");
+		/*
+		 * waitUntil(homebtn); click(homebtn); waitUntil(livechatbtn);
+		 * click(livechatbtn);
+		 */
+		
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(consultchat);
+		click(consultchat);
+		iframe();
+		waitUntil(inputmessage);
+		enterText(inputmessage, inputMessageText);
+		waitUntil(question1);
+		String Question1 = getText(question1);
+		System.out.println("First Question :"+Question1);
+		
+		 String[] arrSplit = Question1.split("?");
+		    for (int i=0; i < arrSplit.length; i++)
+		    {
+		      System.out.println("After Split :"+arrSplit[i]);
+		    }
+
+		/*
+		 * waitUntil(answer1); String Answer1 = getText(answer1);
+		 * System.out.println("First Answer :"+ Answer1); waitUntil(answer1); String
+		 * Answer2 = getText(answer2); System.out.println("Second Answer :"+ Answer2);
+		 * waitUntil(answer1); String Answer3 = getText(answer3);
+		 * System.out.println("Third Answer :"+ Answer3);
+		 */
+		
+		waitUntil(adminbtn);
+		click(adminbtn);
+		waitUntil(consultchat);
+		click(consultchat);
+		if (isElementDisplayed(strChatName)) {
+			waitUntil(editBtn);
+			click(editBtn);
+			if(isElementDisplayed(question1))
+			{
+				System.out.println("Questions found");
+			}
+			else {
+				System.out.println("Questions not found");
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+driver.get("https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/karmitp%40alakmalak.com");
+			 Thread.sleep(2000);
+			Select day = new Select(driver.findElement(By.xpath("//select[@id=\"day\"]")));
+			day.selectByVisibleText("21");
+
+
+

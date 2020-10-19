@@ -1,0 +1,128 @@
+.left_menu_main {height: 100%; position: relative; transition: all 0.4s ease 0s; z-index: 1000; float: right; margin: 20px 0}
+#sidebar-wrapper.active {right: 270px; transition: all 0.4s ease 0s; width: 270px; overflow: auto;}
+#click_here_back {display: none;}
+#click_here, #click_here_back, #trigger {display: none;} 
+#drop_menu ul{margin: 0; padding: 0; list-style: none; text-align: right; border-radius: 0;}
+#drop_menu ul li{text-align: right; line-height: 36px; display: inline-block; margin: 0}
+#drop_menu ul li a{color: #666666; text-align: left;}
+#drop_menu ul li a:hover{color: #097ae3}
+
+#drop_menu .dropdown-toggle::after{display: none}
+
+#drop_menu ul li.full-menu{position: inherit}
+#drop_menu ul li.full-menu ul{width: 100%; display: inline-block; top: auto; }
+#drop_menu ul li.full-menu ul li{width: 100%;}
+#drop_menu ul li.full-menu ul li .row{margin: 0; padding: 10px 0}
+#drop_menu ul li.full-menu ul li .col-md-6{border-right: 1px solid #CCCCCC;}
+#drop_menu ul li.full-menu ul li .col-md-6:last-child{border-right: none;}
+#drop_menu ul li.full-menu ul li ul{position: relative; top: auto; height: auto; visibility: visible; border: none; left: auto !important; width: 100% !important; padding: 0 !important;}
+#drop_menu ul li.full-menu ul li ul li{text-align: left; display: block; line-height: 40px;}
+#drop_menu ul li.full-menu ul li ul li h3{margin: 0 0 10px; font-size: 18px; text-transform: none;}
+#drop_menu ul li.full-menu ul li ul li a{border: none; width: 100%; padding: 0 10px; line-height: 40px; background: none; color: #333 !important; text-transform: none; border-bottom: 1px solid #CCCCCC;}
+#drop_menu ul li.full-menu ul li ul li:last-child a{border-bottom: 0;}
+#drop_menu ul li.full-menu ul li ul li a:hover{color: #097ae3 !important; background: #f1f1f1 !important}
+
+#navbar .right{display: none;}
+
+.dropdown-menu{border: none}
+.dropdown-menu.show{visibility: visible; height: auto; overflow: visible; position: relative}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+
+}
+
+@media only screen and (min-width:992px) and (max-width:1199px) {
+#drop_menu ul li a{font-size: 14px;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+.left_menu_main {background: #333333; height: 100%; margin-right: -270px; overflow-y: auto; position: fixed; right: 0; top: 0; transition: all 0.4s ease 0s; z-index: 1000; margin-top: 0}
+#click_here, #click_here_back, #trigger {background: rgba(0, 0, 0, 0) url("../images/close2.png") no-repeat scroll right 20px center; color: #fefefe; cursor: pointer; width: 269px; display: block; position: relative; height: 70px;} 
+
+#drop_menu ul li{text-align: left; padding: 0 20px; border-bottom: 1px solid #666666; line-height: 48px; display: block; transition: all .2s ease-in-out; clear: both;}
+#drop_menu ul li:hover, #drop_menu ul li.show{background: #666666}
+#drop_menu ul li a{padding: 0; color: #FFFFFF;}
+#drop_menu ul li a:hover{color: #FFFFFF;}
+
+#drop_menu ul li ul li, #drop_menu ul li.show ul li{border-bottom: 1px solid rgba(255,255,255,0.3); padding: 0;}
+#drop_menu ul li ul li:last-child{border: none}
+
+#drop_menu ul li.full-menu ul li .row{padding: 0}
+#drop_menu ul li.full-menu ul li{border: none; padding: 0;}
+#drop_menu ul li.full-menu ul li .col-md-6{padding: 0; border-right: none; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; display: flex;}
+#drop_menu ul li.full-menu ul li .col-md-6:last-child ul li:last-child{border: none;}
+#drop_menu ul li.full-menu ul li ul li:last-child a{border-bottom: none;}
+#drop_menu ul li.full-menu ul li ul li{border-bottom: 1px solid rgba(255,255,255,0.3);}
+#drop_menu ul li.full-menu ul li ul li a{color: #FFFFFF !important; border: none; padding: 0 !important; font-size: 14px;}
+
+.dropdown-menu{float: none}
+}
+
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+.left_menu_main {background: #333333; height: 100%; margin-right: -270px; overflow-y: auto; position: fixed; right: 0; top: 0; transition: all 0.4s ease 0s; z-index: 1000; margin-top: 0}
+#click_here, #click_here_back, #trigger {background: rgba(0, 0, 0, 0) url("../images/close2.png") no-repeat scroll right 20px center; color: #fefefe; cursor: pointer; width: 269px; display: block; position: relative; height: 70px;} 
+
+#drop_menu ul li{text-align: left; padding: 0 20px; border-bottom: 1px solid #666666; line-height: 48px; display: block; transition: all .2s ease-in-out; clear: both;}
+#drop_menu ul li:hover, #drop_menu ul li.show{background: #666666}
+#drop_menu ul li a{padding: 0; color: #FFFFFF;}
+#drop_menu ul li a:hover{color: #FFFFFF;}
+
+#drop_menu ul li ul li, #drop_menu ul li.show ul li{border-bottom: 1px solid rgba(255,255,255,0.3); padding: 0;}
+#drop_menu ul li ul li:last-child{border: none}
+
+#drop_menu ul li.full-menu ul li .row{padding: 0}
+#drop_menu ul li.full-menu ul li{border: none; padding: 0;}
+#drop_menu ul li.full-menu ul li .col-md-6{padding: 0; border-right: none; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; display: flex;}
+#drop_menu ul li.full-menu ul li .col-md-6:last-child ul li:last-child{border: none;}
+#drop_menu ul li.full-menu ul li ul li:last-child a{border-bottom: none;}
+#drop_menu ul li.full-menu ul li ul li{border-bottom: 1px solid rgba(255,255,255,0.3);}
+#drop_menu ul li.full-menu ul li ul li a{color: #FFFFFF !important; border: none; padding: 0 !important; font-size: 14px;}
+
+.dropdown-menu{float: none}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 639px) {
+.left_menu_main {background: #333333; height: 100%; margin-right: -270px; overflow-y: auto; position: fixed; right: 0; top: 0; transition: all 0.4s ease 0s; z-index: 1000; margin-top: 0}
+#click_here, #click_here_back, #trigger {background: rgba(0, 0, 0, 0) url("../images/close2.png") no-repeat scroll right 20px center; color: #fefefe; cursor: pointer; width: 269px; display: block; position: relative; height: 70px;} 
+
+#drop_menu ul li{text-align: left; padding: 0 20px; border-bottom: 1px solid #666666; line-height: 48px; display: block; transition: all .2s ease-in-out; clear: both;}
+#drop_menu ul li:hover, #drop_menu ul li.show{background: #666666}
+#drop_menu ul li a{padding: 0; color: #FFFFFF;}
+#drop_menu ul li a:hover{color: #FFFFFF;}
+
+#drop_menu ul li ul li, #drop_menu ul li.show ul li{border-bottom: 1px solid rgba(255,255,255,0.3); padding: 0;}
+#drop_menu ul li ul li:last-child{border: none}
+
+#drop_menu ul li.full-menu ul li .row{padding: 0}
+#drop_menu ul li.full-menu ul li{border: none; padding: 0;}
+#drop_menu ul li.full-menu ul li .col-md-6{padding: 0; border-right: none; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; display: flex;}
+#drop_menu ul li.full-menu ul li .col-md-6:last-child ul li:last-child{border: none;}
+#drop_menu ul li.full-menu ul li ul li:last-child a{border-bottom: none;}
+#drop_menu ul li.full-menu ul li ul li{border-bottom: 1px solid rgba(255,255,255,0.3);}
+#drop_menu ul li.full-menu ul li ul li a{color: #FFFFFF !important; border: none; padding: 0 !important; font-size: 14px;}
+
+.dropdown-menu{float: none}
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+.left_menu_main {background: #333333; height: 100%; margin-right: -270px; overflow-y: auto; position: fixed; right: 0; top: 0; transition: all 0.4s ease 0s; z-index: 1000; margin-top: 0}
+#click_here, #click_here_back, #trigger {background: rgba(0, 0, 0, 0) url("../images/close2.png") no-repeat scroll right 20px center; color: #fefefe; cursor: pointer; width: 269px; display: block; position: relative; height: 70px;} 
+
+#drop_menu ul li{text-align: left; padding: 0 20px; border-bottom: 1px solid #666666; line-height: 48px; display: block; transition: all .2s ease-in-out; clear: both;}
+#drop_menu ul li:hover, #drop_menu ul li.show{background: #666666}
+#drop_menu ul li a{padding: 0; color: #FFFFFF;}
+#drop_menu ul li a:hover{color: #FFFFFF;}
+
+#drop_menu ul li ul li, #drop_menu ul li.show ul li{border-bottom: 1px solid rgba(255,255,255,0.3); padding: 0;}
+#drop_menu ul li ul li:last-child{border: none}
+
+#drop_menu ul li.full-menu ul li .row{padding: 0}
+#drop_menu ul li.full-menu ul li{border: none; padding: 0;}
+#drop_menu ul li.full-menu ul li .col-md-6{padding: 0; border-right: none; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; display: flex;}
+#drop_menu ul li.full-menu ul li .col-md-6:last-child ul li:last-child{border: none;}
+#drop_menu ul li.full-menu ul li ul li:last-child a{border-bottom: none;}
+#drop_menu ul li.full-menu ul li ul li{border-bottom: 1px solid rgba(255,255,255,0.3);}
+#drop_menu ul li.full-menu ul li ul li a{color: #FFFFFF !important; border: none; padding: 0 !important; font-size: 14px;}
+
+.dropdown-menu{float: none}
+}

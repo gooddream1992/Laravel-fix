@@ -1,0 +1,44 @@
+
+
+.nav-link:hover {
+  transition: all 0.4s;
+}
+
+.nav-link-collapse:after {
+  float: right;
+  background: url(image/left-arrow2.png) no-repeat center center; width: 14px; height: 14px; content: ''; position: relative; background-size: 100%; top: 17px
+  /*content: "\f053";
+  font-family: 'Font Awesome 5 Brands';*/
+}
+.nav-link-collapse:hover:after{background: url(image/left-arrow.png) no-repeat center center; }
+
+.nav-link-show:after {
+  float: right;
+  /*content: "\f053";
+  font-family: 'Font Awesome 5 Brands';*/ transform: rotate(-90deg);
+}
+
+.nav-item ul.nav-second-level {
+  padding-left: 0; background: #FFFFFF;
+}
+
+/*.nav-item ul.nav-second-level > .nav-item {
+  padding-left: 20px;
+}*/
+
+@media (min-width: 992px) {
+
+
+  .navbar-expand-lg .sidenav {
+    flex-direction: column; width: 100%;
+  }
+
+  .content-wrapper {
+    margin-left: 230px;
+  }
+
+  .footer {
+    width: calc(100% - 230px);
+    margin-left: 230px;
+  }
+}

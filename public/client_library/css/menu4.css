@@ -1,0 +1,131 @@
+/* ================================================================ 
+This copyright notice must be untouched at all times.
+
+The original version of this stylesheet and the associated (x)html
+is available at http://www.cssplay.co.uk/menus/drop_examples.html
+Copyright (c) 2005-2007 Stu Nicholls. All rights reserved.
+This stylesheet and the assocaited (x)html may be modified in any 
+way to fit your requirements.
+=================================================================== */
+/* commom style for all browsers */
+.container4 { 
+text-align:center; border:0px solid #000000; /*border-width:5px 1px 1px 1px;*/ height:30px;
+margin:0 0 20px 0; /* for this demo only */
+}
+.menu4 {width:auto; font-size:14px; text-transform:uppercase; margin:0 auto; height:50px; position: relative; z-index: 100;}
+.menu4 ul {margin:0;margin-left:0px;padding:0px;list-style:none;}
+.menu4 ul li {position:relative; padding-left:0px;}
+
+.menu4 ul li a.last{background-image:none;}
+.menu4 ul li a, .menu4 ul li a:visited {padding: 0 15px; text-align: center;text-decoration: none; color: #302105; display:block; line-height:50px; }
+
+.menu4 ul li ul {visibility:hidden; position:absolute; top:0; left:0px; height:0; overflow:hidden;background:none; z-index:100;}
+.menu4 table {margin:-1px; border-collapse:collapse; font-size:1em;}
+
+.menu4 ul li:hover a,
+.menu4 ul li a:hover,
+.menu4 ul li a.active{color: #e0c48d; text-decoration:none;}
+
+.menu4 ul li:hover ul,
+.menu4 ul li a:hover ul, .menu4 ul li.show ul {visibility:visible; width:200px; height:auto; position:absolute; top:50px; border:0px solid #000000; overflow:visible; border: 1px solid #CCCCCC; background: #FFFFFF;}
+
+.menu4 ul li:hover ul li a, .menu4 ul li.show ul li a,
+.menu4 ul li a:hover ul li a {display:block; border-bottom:1px solid #CCCCCC; background:transparent; text-align:left; text-decoration:none; color:#666666 !important; height:auto; line-height: 40px; padding: 0 12px; width:110px; w\idth:198px; /*opacity:0.8;filter:alpha(opacity=80);*/}
+.menu4 ul li:hover ul li:last-child a{border-bottom: 0;}
+
+.menu4 ul li:hover ul li a.drop,
+.menu4 ul li a:hover ul li a.drop {display:block; color:#ffffff; height:auto; line-height:1.35em;  padding-top:5px; padding-bottom:5px; width:170px; width:125px;}
+
+.menu4 ul li:hover ul li ul,
+.menu4 ul li a:hover ul li a ul {visibility:hidden; position:absolute; top:0; left:0; height:0; overflow:hidden;}
+
+.menu4 ul li:hover ul li a:hover,
+.menu4 ul li a:hover ul li a:hover {color: #097ae3 !important; text-decoration:none; }
+
+.menu4 ul li:hover ul li:hover ul,
+.menu4 ul li a:hover ul li a:hover ul {visibility:visible; position:absolute; top:-1px; color:#666666; left:200px!important; height:auto; background:#FFFFFF!important; width:200px !important;  padding:0!important; z-index:1000!important; border: 1px solid #CCCCCC;}
+
+
+.menu4 ul li ul li ul.show {visibility:visible; position:absolute; top:-1px; color:#666666; left:200px!important; height:auto; background:#FFFFFF!important; width:200px !important;  padding:0!important; z-index:1000!important; border: 1px solid #CCCCCC;}
+
+
+.menu4 ul li:hover ul li:hover ul.left,
+.menu4 ul li a:hover ul li a:hover ul.left {left:-166px;}
+
+.menu4 ul li:hover ul li:hover ul li,
+.menu4 ul li a:hover ul li a:hover ul li{ background: none!important; }
+
+.menu4 ul li:hover ul li:hover ul li a,
+.menu4 ul li a:hover ul li a:hover ul li a {text-decoration:none!important; display:block; color:#666666!important; height:auto; line-height: 40px; padding: 0 12px; width:170px; w\idth:198px; border-bottom: 1px solid #CCCCCC}
+.menu4 ul li:hover ul li:hover ul li:last-child a{border-bottom: 0;}
+
+* html .menu4 ul li a:hover ul li a:hover ul li a { padding-top:5px; padding-bottom:5px;}
+
+.menu4 ul li:hover ul li:hover ul li:hover a,
+.menu4 ul li a:hover ul li a:hover ul li a:hover {color:#097ae3!important; text-decoration:underline; text-decoration:none!important;}
+
+.header-v2 .menu4 ul li a, .header-v2 .menu4 ul li a:visited{padding: 0 52px;}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+
+}
+
+@media only screen and (min-width:992px) and (max-width:1199px) {
+	
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{position: relative; top: 0; left: 0; width: 100%;}
+.menu4 ul li:hover ul li, .menu4 ul li a:hover ul li{padding: 0 !important;}	
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{width: 100%; padding: 0 10px; line-height: 40px; background: none; color: #333 !important; text-transform: none; border-bottom: none;} 
+.menu4 ul li .caret:hover ul, .menu4 ul li a .caret:hover ul, menu4 ul li.show ul{background: none; border: none;}
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{background: transparent; border:none}
+.menu4 ul li:hover ul li a:hover, .menu4 ul li a:hover ul li a:hover, .menu4 ul li.show ul li a:hover{color: #097ae3 !important; background: #FFF;}
+.menu4 ul li:hover ul li:hover ul, .menu4 ul li a:hover ul li a:hover ul{background: none !important; top: 0; position: relative;  left: 0 !important; width: 100% !important; border: none}
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{color: #FFFFFF !important; padding: 0 10px !important;}
+.menu4 ul li:hover ul li:hover ul li a, .menu4 ul li a:hover ul li a:hover ul li a, .menu4 ul li.show a:hover ul li a:hover ul li a{color: #FFF !important; width: 100%; border: none;}
+
+.menu4 ul li ul.dropdown-menu li a{line-height: 40px; text-transform: none;}
+}
+
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{position: relative; top: 0; left: 0; width: 100%;}
+.menu4 ul li:hover ul li, .menu4 ul li a:hover ul li{padding: 0 !important;}	
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{width: 100%; padding: 0 10px; line-height: 40px; background: none; color: #333 !important; text-transform: none; border-bottom: none;} 
+.menu4 ul li .caret:hover ul, .menu4 ul li a .caret:hover ul, menu4 ul li.show ul{background: none; border: none;}
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{background: transparent; border:none}
+.menu4 ul li:hover ul li a:hover, .menu4 ul li a:hover ul li a:hover, .menu4 ul li.show ul li a:hover{color: #097ae3 !important; background: #FFF;}
+.menu4 ul li:hover ul li:hover ul, .menu4 ul li a:hover ul li a:hover ul{background: none !important; top: 0; position: relative;  left: 0 !important; width: 100% !important; border: none}
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{color: #FFFFFF !important; padding: 0 10px !important;}
+.menu4 ul li:hover ul li:hover ul li a, .menu4 ul li a:hover ul li a:hover ul li a, .menu4 ul li.show a:hover ul li a:hover ul li a{color: #FFF !important; width: 100%; border: none;}
+
+.menu4 ul li ul.dropdown-menu li a{line-height: 40px; text-transform: none;}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 639px) {
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{position: relative; top: 0; left: 0; width: 100%;}
+.menu4 ul li:hover ul li, .menu4 ul li a:hover ul li{padding: 0 !important;}	
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{width: 100%; padding: 0 10px; line-height: 40px; background: none; color: #333 !important; text-transform: none; border-bottom: none;} 
+.menu4 ul li .caret:hover ul, .menu4 ul li a .caret:hover ul, menu4 ul li.show ul{background: none; border: none;}
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{background: transparent; border:none}
+.menu4 ul li:hover ul li a:hover, .menu4 ul li a:hover ul li a:hover, .menu4 ul li.show ul li a:hover{color: #097ae3 !important; background: #FFF;}
+.menu4 ul li:hover ul li:hover ul, .menu4 ul li a:hover ul li a:hover ul{background: none !important; top: 0; position: relative;  left: 0 !important; width: 100% !important; border: none}
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{color: #FFFFFF !important; padding: 0 10px !important;}
+.menu4 ul li:hover ul li:hover ul li a, .menu4 ul li a:hover ul li a:hover ul li a, .menu4 ul li.show a:hover ul li a:hover ul li a{color: #FFF !important; width: 100%; border: none;}
+
+.menu4 ul li ul.dropdown-menu li a{line-height: 40px; text-transform: none;}
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{position: relative; top: 0; left: 0; width: 100%;}
+.menu4 ul li:hover ul li, .menu4 ul li a:hover ul li{padding: 0 !important;}	
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{width: 100%; padding: 0 10px; line-height: 40px; background: none; color: #333 !important; text-transform: none; border-bottom: none;} 
+.menu4 ul li .caret:hover ul, .menu4 ul li a .caret:hover ul, menu4 ul li.show ul{background: none; border: none;}
+.menu4 ul li:hover ul, .menu4 ul li a:hover ul, .menu4 ul li.show ul{background: transparent; border:none}
+.menu4 ul li:hover ul li a:hover, .menu4 ul li a:hover ul li a:hover, .menu4 ul li.show ul li a:hover{color: #097ae3 !important; background: #FFF;}
+.menu4 ul li:hover ul li:hover ul, .menu4 ul li a:hover ul li a:hover ul{background: none !important; top: 0; position: relative;  left: 0 !important; width: 100% !important; border: none}
+.menu4 ul li:hover ul li a, .menu4 ul li a:hover ul li a, .menu4 ul li.show ul li a{color: #FFFFFF !important; padding: 0 10px !important;}
+.menu4 ul li:hover ul li:hover ul li a, .menu4 ul li a:hover ul li a:hover ul li a, .menu4 ul li.show a:hover ul li a:hover ul li a{color: #FFF !important; width: 100%; border: none;}
+
+.menu4 ul li ul.dropdown-menu li a{line-height: 40px; text-transform: none;}
+}

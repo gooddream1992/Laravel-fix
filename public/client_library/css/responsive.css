@@ -1,0 +1,823 @@
+@media only screen and (min-width:1800px) and (max-width:1899px) {
+    .home-ban .ban-text{width: 1740px;}
+    .navbar-inverse .right{width: 80%}
+    .navbar-header{width: 20%;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 20%; flex: 0 0 20%; max-width: 20%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 80%; flex: 0 0 80%; max-width: 80%;}
+    .task-type .box .filter .search .input{width: 285px;}
+
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+
+    .new-email-box .new-message .input{width: 69%;}
+    .new-email-box .new-message .patient{width: 26%;}
+    .new-email-box .new-message .form-box{width: 187px;}
+    .new-email-box .new-message .input.textarea {width: 89%;}
+
+    .client-reminders .box .left{margin-right: 28px;}
+}
+
+@media only screen and (min-width:1600px) and (max-width:1799px) {
+    .home-ban .ban-text{width: 1540px;}
+    .navbar-inverse .right{width: 80%}
+    .navbar-header{width: 20%;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 20%; flex: 0 0 20%; max-width: 20%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 80%; flex: 0 0 80%; max-width: 80%;}
+    .task-type .box .filter .search .input{width: 217px;}
+
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+
+    .new-email-box .new-message .input{width: 69%;}
+    .new-email-box .new-message .patient{width: 26%;}
+    .new-email-box .new-message .form-box{width: 130px;}
+    .new-email-box .new-message .input.textarea {width: 87%;}
+
+    .client-reminders .box .left{margin-right: 22px;}
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 93%;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 44%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 15px;    padding: 5px 15px 4px 15px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link{padding: 13px 35px;}
+
+}
+
+@media only screen and (min-width:1400px) and (max-width:1599px) {
+    .home-ban .ban-text{width: 1340px;}
+    .navbar-inverse .right{width: 80%}
+    .navbar-inverse .right h1 span{font-size: 28px;}
+    .navbar-header{width: 20%;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 20%; flex: 0 0 20%; max-width: 20%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 80%; flex: 0 0 80%; max-width: 80%;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms span {margin: 0 40px 0 10px;}
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width:25%;}
+
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 33.33%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    .add-new-staff .records .input{width: 56%;}
+
+    .staff-visit-history .staff-head .col-md-6 label:first-child, .staff-visit-history .staff-head .col-md-6 label{margin: 0}
+    .staff-visit-history .staff-head .input{width: 130px;}
+
+    .client-reminders .box .left{margin-right: 18px;}
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 92%;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link{padding: 12px 32px;}
+    .friendship-list .friend-rqst-box .profile-content {width: 36%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 55%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 15px;    padding: 5px 15px 4px 15px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+    .home-ban .ban-text{width: 1140px;}
+    .navbar-inverse .right{width: 80%}
+    .navbar-header{width: 20%;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 20%; flex: 0 0 20%; max-width: 20%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 80%; flex: 0 0 80%; max-width: 80%;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+
+    .navbar-inverse .right h1{font-size: 30px;}
+    .navbar-inverse .right h1 span{display: block}
+
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms span {margin: 0 0 0 10px; display: inline-block;} 
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width:25%;}
+
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 33.33%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    .add-new-staff .records .input{width: 44%;}
+
+    .staff-visit-history .staff-head .col-md-6 label:first-child, .staff-visit-history .staff-head .col-md-6 label{margin: 0}
+    .staff-visit-history .staff-head .input{width: 130px;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .client-reminders .box .left{margin-right: 18px;}
+    .list-check-grid{    -webkit-column-count: 3;-moz-column-count: 3;column-count: 3;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link{padding: 10px 22px;}
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 90%;}
+
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 15px;}
+    .blog-overview a.read-fblog{font-size: 14px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 26px;}
+    .feed-content {margin-top: 20px;}
+    .profile-feeds .profile-feed-inner .feed-action ul li{width: 44%;}
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{width: auto;margin-bottom: 0px;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 36%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 47%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 15px;    padding: 5px 15px 4px 15px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+
+
+    .profile-feeds .profile-feed-inner li .col-lg-5{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .profile-feeds .profile-feed-inner li .col-lg-7{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .multi_step_form #progressbar{margin-bottom: 40px;}
+}
+
+/** 5.0 - 1200 - Desktop **/
+@media only screen and (min-width:992px) and (max-width:1199px) {
+    .home-ban .ban-text{width: 960px;}
+    .navbar-inverse .right{width: 75%}
+    .navbar-inverse .right h1 span{font-size: 20px;}
+    .navbar-header{width: 25%;}
+    .navbar-inverse .right h1{font-size: 30px;}
+    .navbar-inverse .right h1 span{display: block}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 25%; flex: 0 0 25%; max-width: 25%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 75%; flex: 0 0 75%; max-width: 75%;}
+    .task-type .box .task-type{padding: 27px 20px}
+    .task-type .box .filter{padding: 40px 20px;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+    .task-type .box .table-box{width: 100%; overflow: auto}
+    .task-type .box .task-table{width: 1000px;}
+
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms span {margin: 0 0 0 10px; display: inline-block;} 
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width:25%;}
+
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+    .my-patients .box .task-table{width: 1000px;}
+    .my-patients .box .task-table th{padding: 10px 20px; }
+    .my-patients .box .task-table td{padding: 10px 20px;}
+
+    .new-email-box ul li{width: 50%;}
+    .new-email-box .add-email label{width: 100%; margin: 0 0 20px; float: none; display: inline-block;}
+    .new-email-box .add-email .input{width: 100%; margin: 0 0 20px;}
+    .new-email-box .add-email .submit{position: relative}
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 100%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    /* admin */
+    .green-btn, .orange-btn, .gray-btn{padding: 0 20px;}
+
+    .print-staff-certifications .box .col-md-6{margin: 0 0 20px; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .add-new-staff .records .input{width: 100%;}
+
+    .staff-visit-history .staff-head .col-md-6{padding: 0}
+    .staff-visit-history .staf-listing .col-md-6{margin: 0; -ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .client-reminders .box .left{width: 44%; margin: 0 24px 20px 0;}
+    .client-reminders .box .table-box{width: 100%; overflow: auto}
+    .list-check-grid{    -webkit-column-count: 3;-moz-column-count: 3;column-count: 3;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link{padding: 7px 10px;margin: 0px 4px;}
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 87%;}
+    .blog-list .col-lg-4{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 15px;}
+    .blog-overview a.read-fblog{font-size: 14px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 26px;}
+    .feed-content {margin-top: 20px;}
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{width: auto;margin-bottom: 0px;}
+
+
+    .friendship-list .friend-rqst-box .profile-content {width: 73%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 75%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 15px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+    .profile-list .col-lg-3.col-md-6{-ms-flex: 0 0 33.33%;flex: 0 0 33.33%;max-width: 33.33%;}
+
+    .profile-feeds .profile-feed-inner li .col-lg-5{-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;}
+    .profile-feeds .profile-feed-inner li .col-lg-7{-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;}
+    .profile-other-info-fields .box-body .col-lg-3.col-md-6{-ms-flex: 0 0 33.33%;flex: 0 0 33.33%;max-width: 33.33%;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link{font-size: 16px;}
+    .multi_step_form #progressbar{margin-bottom: 20px;}
+    .multi_step_form #progressbar li{font-size: 17px;}
+}
+
+/** 7.0 - 768 - iPad **/
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #menu-toggle{display: block; float: right; padding: 28px 12px;}
+    .caret {position: absolute; right: 20px; top: 20px;}
+    .navbar-inverse .right .name{display: none}
+
+    .navbar-inverse .right h1{font-size: 30px;margin-top: 0px;}
+    .navbar-inverse .right h1 span{display: block}
+    .navbar-inverse .right .notification-area{right: 96px; top: 21px;}
+    .navbar-inverse .right .frd-rqst-area {right: 150px;top: 21px;}
+    .navbar-inverse .right .user{right: 20px;top :17px;}
+    .navbar-expand-lg .navbar-toggler {display: none;}
+    .navbar-expand-lg .navbar-collapse{display: flex !important}
+    .navbar-expand-lg .sidenav {flex-direction: column; width: 100%;}
+    .navbar-header{width: 25%;}
+    .navbar-header img {max-width: 80%;margin-top: 7px;}
+    .navbar-inverse .right{width: 75%; padding: 30px 20px;}
+    .navbar-inverse .right h1 span{font-size: 20px;}
+    .home .col-md-3.left-admin-menu{    -ms-flex: 0 0 27%;flex: 0 0 27%;max-width: 27%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 73%; flex: 0 0 73%; max-width: 73%;}
+    .home .col-md-9.right-content .box{margin: 40px 20px 0}
+    .task-type .box .task-type{padding: 27px 20px}
+    .task-type .box .filter{padding: 20px 10px;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+    .task-type .box .table-box{width: 100%; overflow: auto}
+    .task-type .box .task-table{width: 1000px;}
+    .task-type .box{margin: -100px 20px 0;}
+    .task-type .box .task-type label{width: 22%;}
+    .task-type .box .task-type .form-box{width: 78%;}
+    .home .col-md-3.left-admin-menu {padding: 15px 7px;}
+    .home .col-md-9.right-content .box .filter .show,.home .col-md-9.right-content .box .filter .arrange,.home .col-md-9.right-content .box .filter .search{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .col-md-4{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; margin: 0 0 20px}
+
+    .missed-visit-report .box .col-md-4{padding: 0}
+    .missed-visit-report .box .left, .missed-visit-report .box .right{margin: 0 0 20px; width: 100%;}
+    .missed-visit-report .box h3 {margin: 0 0px 20px; padding: 0 0px;}
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width: 50%;}
+
+    .my-patients h3{padding: 14px 20px; line-height: 26px;}
+    .home.episode-manager.my-patients h3 span{float: none; display: block}
+    .home.episode-manager .col-md-9 .box h4{padding: 0 20px}
+    .episode-manager .nursing-view{padding: 40px 20px}
+    .episode-manager .nursing-view .col-md-4{padding: 0; margin: 0 0 20px; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+    .episode-manager .nursing-view ul{text-align: left;}
+    .episode-manager .nursing-view ul li{margin: 0 20px 0 0}
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+    .my-patients .box .task-table{width: 1000px;}
+    .my-patients .box .task-table th{padding: 10px 20px; }
+    .my-patients .box .task-table td{padding: 10px 20px;}
+
+    .email-box .box .table-box .tab ul li{width: 50%;}
+
+    .new-email-box ul li{width: 50%;}
+    .new-email-box .add-email label{width: 100%; margin: 0 0 20px; float: none; display: inline-block;}
+    .new-email-box .add-email .input{width: 100%; margin: 0 0 20px;}
+    .new-email-box .add-email .submit{position: relative}
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 100%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    /* admin */
+    .navbar-inverse .right .admin{display: none}
+    .schedule-visit .box .left, .schedule-visit .box .right{width: 100%;}
+    .green-btn, .orange-btn, .gray-btn{margin: 5px 0; line-height: 20px; padding: 10px 20px; width: 100%;}
+
+    .print-staff-certifications .box .left, .print-staff-certifications .box .right{width: 100%;}
+    .print-staff-certifications .box .col-md-6 label:first-child{display: block; margin: 0 -15px;}
+    .print-staff-certifications .box .col-md-6{margin: 0 0 20px; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .add-new-staff .records .input{width: 48%;}
+
+    .staff-visit-history .staff-head .col-md-6{padding: 0}
+    .staff-visit-history .staff-head .col-md-6 label:first-child, .staff-visit-history .staff-head .col-md-6 label {display: block; margin: 0; text-align: left;}
+    .staff-visit-history .staff-head .input{width: 100%;}
+    .staff-visit-history .staf-listing .col-md-6{margin: 0; -ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .admin-email .heading{padding: 0px 20px}
+    .admin-email form .form-box{float: left;margin: 0 0 20px;}
+    .admin-email h3{line-height: 30px;padding: 10px 0;}
+    .admin-email .name{padding:0 20px}
+    .admin-email .text{padding: 20px;}
+    .admin-email .btn-group{padding: 20px; display: block;}
+    .admin-email .compose{margin:20px;}
+
+    .create-new-group .box ul li{width: 50%;}
+
+    .client-reminders .box .left{width: 44%; margin: 0 24px 20px 0;}
+    .client-reminders .box .table-box{width: 100%; overflow: auto}
+    .client-reminders .box .task-table th, .client-reminders .box .task-table td{padding: 0px 10px; font-size: 11px;}
+    .box form .form-box .box-header h3{font-size: 20px;}
+    .list-check-grid{    -webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link {padding: 9px 15px 11px 15px;margin: 0px 3px;font-size: 16px;line-height: normal;}
+
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 83%;}
+
+
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 14px;}
+    .blog-overview a.read-fblog{font-size: 13px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 20px;}
+
+    .feed-content {margin-top: 20px;}
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{width: auto;margin-bottom: 0px;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 35%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 57%;}
+}
+
+/** 8.0 - 640 - Mobile **/
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+    #menu-toggle{display: block; float: right; padding: 28px 12px;}
+    .caret {position: absolute; right: 20px; top: 20px;}
+    .navbar-brand{width: 160px;}
+    .navbar-brand img{width: 100%;}
+    .navbar-inverse .right .name{display: none}
+    .navbar-header{width: auto;}
+    .navbar-inverse .right{width: 100%; padding: 15px 20px;}
+    .navbar-inverse .right h1 span{font-size: 20px;}
+    .navbar-inverse .right .notification-area{right: 96px; top: 21px;}
+    .navbar-inverse .right .frd-rqst-area{right: 155px; top: 21px;}
+    .navbar-inverse .right .user{right: 10px;top: 17px;}
+    .login{top: 50px; transform: translate(-50%,0%); -webkit-transform: translate(-50%,0%); width: 90%;}
+    .login .box .left, .login .box .right{width: 100%;}
+    .login .box .left{position: relative; padding: 20px; border-radius:6px;}
+    .login .box .left span{position: relative; top: 0; left:0; transform: translate(0%,0%); -webkit-transform: translate(0%,0%); width: 100%; display: block; padding: 0}
+
+
+    .home .col-md-3{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+    .home .col-md-9.right-content .box{margin: 20px;}
+    .task-type .box .task-type{padding: 27px 20px}
+    .task-type .box .filter{padding: 20px 10px;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+    .task-type .box .table-box{width: 100%; overflow: auto}
+    .task-type .box .task-table{width: 1000px;}
+    .task-type .box .task-type label{width: 22%;}
+    .task-type .box .task-type .form-box{width: 78%;}
+
+    .left-icon{height: auto;}
+    .left-icon .icon-bar {background-color: #fff; display: block; width: 22px; height: 2px; border-radius: 1px; margin-top: 4px;}
+
+    .task-type .box .filter .show,.task-type .box .filter .arrange,.task-type .box .filter .search{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .col-md-4{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; margin: 0 0 20px}
+
+    .missed-visit-report .box .col-md-4{padding: 0}
+    .missed-visit-report .box .left, .missed-visit-report .box .right{margin: 0 0 20px;}
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width: 33.33%;}
+
+    .my-patients h3{padding: 14px 20px; line-height: 26px;}
+    .home.episode-manager .col-md-9 .box h4{padding: 0 20px}
+    .episode-manager .nursing-view{padding: 40px 20px}
+    .episode-manager .nursing-view .col-md-4{padding: 0; margin: 0 auto 20px;}
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+    .episode-manager .nursing-view ul{text-align: left;}
+    .episode-manager .nursing-view ul li{margin: 0 20px 0 0}
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+    .my-patients .box .task-table{width: 1000px;}
+    .my-patients .box .task-table th{padding: 10px 20px; }
+    .my-patients .box .task-table td{padding: 10px 20px;}
+
+    .new-email-box ul li{width: 50%;}
+    .new-email-box .add-email label{width: 100%; margin: 0 0 20px; float: none; display: inline-block;}
+    .new-email-box .add-email .input{width: 100%; margin: 0 0 20px;}
+    .new-email-box .add-email .submit{position: relative}
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 100%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    .mobile{display: block;}
+    .desktop{display: none;}
+
+    .green-btn, .orange-btn, .gray-btn{padding: 0 20px;}
+
+    /* admin */
+    .navbar-inverse .right .admin{right: 90px; top: 50px;}
+    .set-up .box .btn-group{padding: 40px 20px;}
+
+    .print-staff-certifications .box .left, .print-staff-certifications .box .right{width: 100%;}
+    .print-staff-certifications .box .col-md-6.generated{margin: 0 0 20px;}
+
+    .add-new-staff .records .input{width: 100%;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .admin-email .heading{padding: 0px 20px}
+    .admin-email h3{line-height: 30px;padding: 10px 0;}
+    .admin-email .name{padding:0 20px}
+    .admin-email .text{padding: 20px;}
+    .admin-email .btn-group{padding: 20px; display: block;}
+    .admin-email .compose{margin:20px;}
+
+    .client-reminders .box .left{width: 44%; margin: 0 24px 20px 0;}
+    .client-reminders .box .table-box{width: 100%; overflow: auto}
+    .home .col-md-3.left-admin-menu{max-width: 100%;    -ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;padding: 3px 15px;}
+
+    .left-icon{padding: 7px 0px;}.left-icon .navbar-nav{margin-top: 7px;}
+    .box form .form-box .box-header h3{font-size: 20px;}
+    .list-check-grid{    -webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link {padding: 6px 15px 10px 15px;margin: 0px 3px;font-size: 13px;line-height: normal;}
+    .gallery-image-grid .row .col-lg-3{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+
+    .feed-list-box .feeds-list ul li .feed-content-box .right {width: 83%;}
+
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 14px;}
+    .blog-overview a.read-fblog{font-size: 13px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 20px;}
+    .left-admin-menu .left-icon {float: right;width: 100%;margin-top: -60px; background-color: transparent;}
+    .left-admin-menu .left-icon .navbar-toggler{float: right;}
+    .left-admin-menu .left-icon .navbar-collapse .navbar-nav{width: 100%;    margin-top: 60px;}
+    .left-icon ul li.logout-menu {margin-top: 10px;}
+    .navbar-inverse .right h1{font-size: 30px;margin-top: 0px;}
+    .feed-content {margin-top: 20px;}
+
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{margin-bottom: 0px;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 44%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 60%;}
+    .profile-list .col-lg-3.col-md-6{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    
+}
+
+/** 9.0 - 480 - Mobile **/
+@media only screen and (min-width: 480px) and (max-width: 639px) {
+    #menu-toggle{display: block; float: right; padding: 28px 12px;}
+    .caret {position: absolute; right: 20px; top: 20px;}
+    .navbar-brand{width: 160px;}
+    .navbar-brand img{width: 100%;}
+    .navbar-inverse .right .name{display: none}
+    .navbar-inverse .right .notification-area{right: 82px; top: 21px;}
+    .navbar-inverse .right .frd-rqst-area {right: 137px;top: 21px;}
+    .navbar-inverse .right .user{right: 5px; top: 16px;}
+    .navbar-header{width: auto;}
+    .navbar-inverse .right h1{font-size: 26px;}
+
+    .login{top: 50px; transform: translate(-50%,0%); -webkit-transform: translate(-50%,0%); width: 90%;}
+    .login .box .left, .login .box .right{width: 100%;}
+    .login .box .left{position: relative; padding: 20px; border-radius:6px;}
+    .login .box .left span{position: relative; top: 0; left:0; transform: translate(0%,0%); -webkit-transform: translate(0%,0%); width: 100%; display: block; padding: 0}
+
+    .navbar-inverse .right{width: 100%; padding: 10px 20px;}
+    .navbar-inverse .right h1 span{font-size: 20px;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;padding: 3px 15px;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+    .home .col-md-9.right-content .box{margin: 20px; padding: 20px;}
+    .task-type .box .task-type{padding: 27px 0}
+    .task-type .box .filter{padding: 20px 10px;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+    .task-type .box .table-box{width: 100%; overflow: auto}
+    .task-type .box .task-table{width: 1000px;}
+    .task-type .box .task-table th, .task-type .box .task-table td{padding: 12px 20px}
+
+    .task-type .box .task-type label{width: 22%;}
+    .task-type .box .task-type .form-box{width: 78%;}
+
+    .left-icon{height: auto;}
+    .left-icon .icon-bar {background-color: #fff; display: block; width: 22px; height: 2px; border-radius: 1px; margin-top: 4px;}
+
+    .task-type .box .filter .show,.task-type .box .filter .arrange,.task-type .box .filter .search{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .green-btn, .orange-btn, .gray-btn{margin: 5px 0; line-height: 20px; padding: 10px 20px; width: 100%;}
+
+    .missed-visit-report .box .left, .missed-visit-report .box .right{width: 100%;}
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .col-md-4{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; margin: 0 0 20px}
+
+    .missed-visit-report .box .col-md-4{padding: 0}
+    .missed-visit-report .box .left, .missed-visit-report .box .right{margin: 0 0 20px;}
+    .missed-visit-report .box .symptoms span {margin: 0 0 0 10px; display: inline-block;} 
+    .missed-visit-report .box h3 {margin: 0 0px 20px; padding: 0 0px;}
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms ul li:first-child{width: 100%;}
+    .missed-visit-report .box .symptoms ul li{width: 50%;}
+
+    .my-patients h3{padding: 14px 0; line-height: 26px;}
+    .home.episode-manager.my-patients h3 span{float: none; display: block}
+    .home.episode-manager .col-md-9 .box h4{padding: 0 20px}
+    .episode-manager .nursing-view{padding: 40px 0}
+    .episode-manager .nursing-view .col-md-4{padding: 0; margin: 0 0 20px;}
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+    .episode-manager .nursing-view ul{text-align: left;}
+    .episode-manager .nursing-view ul li{margin: 0 20px 0 0}
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+    .my-patients .box .task-table{width: 1000px;}
+    .my-patients .box .task-table th{padding: 10px 20px; }
+    .my-patients .box .task-table td{padding: 10px 20px;}
+
+    .email-box .box .table-box .tab ul li{width: 50%;}
+
+    .new-email-box{margin: 20px 0px; width: 100%;}
+    .new-email-box ul li{width: 100%;}
+    .new-email-box .add-email label{width: 100%; margin: 0 0 20px; float: none; display: inline-block;}
+    .new-email-box .add-email .input{width: 100%; margin: 0 0 20px;}
+    .new-email-box .add-email .submit{position: relative}
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 100%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    .mobile{display: block;}
+    .desktop{display: none;}
+
+    /* admin */
+    .navbar-inverse .right .admin{right: 60px; top: 17px;}
+    .schedule-visit .box .left, .schedule-visit .box .right{width: 100%;}
+    .set-up .lead{padding: 0}
+    .set-up h3{padding: 14px 0; line-height: 30px;}
+    .set-up .box .table-box{width: 100%; overflow: auto}
+    .set-up .box .task-table th, .set-up .box .task-table td{padding: 0px 10px; font-size: 11px;}
+    .set-up .box .btn-group{padding: 40px 0}
+
+    .print-staff-certifications .box .left, .print-staff-certifications .box .right{width: 100%;}
+    .print-staff-certifications .box .col-md-6 label:first-child{display: block; margin: 0 -15px;}
+    .print-staff-certifications .box .col-md-6.generated{margin: 0 0 20px;}
+
+    .add-new-staff .records .input{width: 100%;}
+
+    .staff-visit-history .staff-head .col-md-6{padding: 0}
+    .staff-visit-history .staff-head .col-md-6 label:first-child, .staff-visit-history .staff-head .col-md-6 label {display: block; margin: 0; text-align: left;}
+    .staff-visit-history .staff-head .input{width: 100%;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .admin-email .heading{padding: 0px 10px}
+    .admin-email h3{line-height: 30px;padding: 10px 0;}
+    .admin-email form .form-box{float: left;margin: 0 0 20px;}
+    .admin-email .name{padding: 0}
+    .admin-email .text{padding: 20px 0;}
+    .admin-email .btn-group{padding: 20px 0 0; display: block;}
+    .admin-email .btn-group .white-btn{width: 100%; margin: 5px 0}
+    .admin-email .compose{margin:10px 0; width: 100%;}
+
+    .create-new-group .box ul li{width: 50%;}
+
+    .client-reminders .box .left{width: 44%; margin: 0 24px 20px 0;}
+    .client-reminders .box .table-box{width: 100%; overflow: auto}
+    .client-reminders .box .task-table th, .client-reminders .box .task-table td{padding: 0px 10px; font-size: 11px;}
+
+    .left-icon{padding: 7px 0px;}
+    .left-icon .navbar-nav{margin-top: 7px;}
+    .box form .form-box .box-header h3{font-size: 20px;}
+    .list-check-grid{    -webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link {padding: 6px 10px 10px 10px;margin: 0px 3px;font-size: 13px;line-height: normal;}
+    .gallery-grid-box .nav-tabs .nav-item{margin-top: 8px;}
+    .gallery-image-grid .row .col-lg-3{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 14px;}
+    .blog-overview a.read-fblog{font-size: 13px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 20px;}
+    .left-admin-menu .left-icon {float: right;width: 100%;margin-top: -55px; background-color: transparent;}
+    .left-admin-menu .left-icon .navbar-toggler{float: right;}
+    .left-admin-menu .left-icon .navbar-collapse .navbar-nav{width: 100%;    margin-top: 60px;}
+    .left-icon ul li.logout-menu {margin-top: 10px;}
+    .feed-content {margin-top: 20px;}
+    .profile-feeds .profile-feed-inner .feed-action ul li {width: 100%;}
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{width: auto;margin-bottom: 0px;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 83%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 10px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+    .profile-list .col-lg-3.col-md-6{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 45%;}
+}
+
+/** 10.0 - 320 - Mobile **/
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    #menu-toggle{display: block; float: right; padding: 28px 12px;}
+    .caret {position: absolute; right: 20px; top: 20px;}
+    .navbar-brand{width: 160px;}
+    .navbar-brand img{width: 100%;    max-width: 140px;}
+    .navbar-inverse .right .name{display: none}
+    .navbar-inverse .right .notification-area img,.navbar-inverse .right .frd-rqst-area img {max-width: 23px;}
+    .navbar-inverse .right .notification-area{right: 75px; top: 25px;}
+    .navbar-inverse .right .frd-rqst-area {right: 116px;top: 25px;}
+    .navbar-inverse .right .user{right: 0px; top: 16px;}
+    .navbar-header{width: auto;}
+    .navbar-inverse .right h1{font-size: 23px;margin-top: 0px;margin-bottom: 10px;}
+    /*.left-admin-menu .navbar .navbar-toggler{position: absolute;right: 0;top: 0;}*/
+    .login{top: 50px; transform: translate(-50%,0%); -webkit-transform: translate(-50%,0%); width: 90%;}
+    .login .box .left, .login .box .right{width: 100%;}
+    .login .box .left{position: relative; padding: 20px; border-radius:6px;}
+    .login .box .left span{position: relative; top: 0; left:0; transform: translate(0%,0%); -webkit-transform: translate(0%,0%); width: 100%; display: block; padding: 0}
+
+    .navbar-inverse .right{width: 100%; padding: 10px 60px 10px 20px;   }
+    .navbar-inverse .right h1 span{font-size: 20px;}
+    .home .col-md-3.left-admin-menu{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;padding: 3px 15px;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+    .home .col-md-9.right-content .box{margin: 20px; padding: 20px 0px;}
+    .multi_step_form #progressbar li:after{top:15px;}
+    .task-type .box .task-type{padding: 27px 20px}
+    .task-type .box .filter{padding: 20px 10px;}
+    .task-type .box .filter .search .input{width: 100%;}
+    .task-type .box .filter label{float: none; width: 100%;}
+    .task-type .box .filter .submit{bottom: 11px; top: auto;}
+    .task-type .box .table-box{width: 100%; overflow: auto}
+    .task-type .box .task-table{width: 1000px;}
+    .task-type .box .task-table th, .task-type .box .task-table td{padding: 12px 20px}
+    .task-type .box .task-type .form-box{width: 100%;}
+    .task-type .box .task-type label{float: none; width: 100%;}
+
+    .task-type .box .pagination a{font-size: 12px; padding: 8px 10px;}
+    .task-type .box .pagination a:hover, .task-type .box .pagination a.active{padding: 8px 10px;}
+
+    .left-icon{height: auto;}
+    .left-icon .icon-bar {background-color: #fff; display: block; width: 22px; height: 2px; border-radius: 1px; margin-top: 4px;}
+
+    .task-type .box .filter .show,.task-type .box .filter .arrange,.task-type .box .filter .search{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;}
+
+    .missed-visit-report .box .left, .missed-visit-report .box .right{width: 100%;}
+    .missed-visit-report .box .col-md-4 label:first-child {margin-right: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .col-md-4{-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; margin: 0 0 20px}
+
+    .green-btn, .orange-btn, .gray-btn{margin: 5px 0; line-height: 20px; padding: 10px 20px; width: 100%;}
+
+    .missed-visit-report .box .col-md-4{padding: 0}
+    .missed-visit-report .box .left, .missed-visit-report .box .right{margin: 0 0 20px;}
+    .missed-visit-report .box .symptoms span {margin: 0 0 0 10px; display: inline-block;} 
+    .missed-visit-report .box h3 {margin: 0 0px 20px; padding: 0 0px;}
+    .missed-visit-report .box .symptoms label:first-child{margin: 0; width: 100%; display: inline-block;}
+    .missed-visit-report .box .symptoms ul li{width: 100%; float: none}
+
+    .my-patients h3{padding: 14px 0; line-height: 26px;}
+    .home.episode-manager.my-patients h3 span{float: none; display: block}
+    .home.episode-manager .col-md-9 .box h4{padding: 0 20px}
+    .episode-manager .nursing-view{padding: 40px 0}
+    .episode-manager .nursing-view .col-md-4{padding: 0; margin: 0 0 20px;}
+    .episode-manager .nursing-view .col-md-4 img{width: 100%;}
+    .episode-manager .nursing-view ul{text-align: left;}
+    .episode-manager .nursing-view ul li{margin: 0}
+    .my-patients .box .table-box{width: 100%; overflow: auto}
+    .my-patients .box .task-table{width: 1000px;}
+    .my-patients .box .task-table th{padding: 10px 20px; }
+    .my-patients .box .task-table td{padding: 10px 20px;}
+
+    .email-box .box .table-box .tab ul li{width: 100%;}
+
+    .email-box .box .tab ul li{width: 100%;}
+    .new-email-box{margin: 20px 0px; width: 100%;}
+    .new-email-box ul li{width: 100%;}
+    .new-email-box .add-email label{width: 100%; margin: 0 0 20px; float: none; display: inline-block;}
+    .new-email-box .add-email .input{width: 100%; margin: 0 0 20px;}
+    .new-email-box .add-email .submit{position: relative}
+    .new-email-box .new-message .subject, .new-email-box .new-message .attachment, .new-email-box .new-message .patient{width: 100%; margin: 0 0 20px;}
+    .new-email-box .new-message .input{width: 100%;}
+    .new-email-box .new-message label{width: 100%;}
+    .new-email-box .new-message .form-box{width: 100%; margin: 0}
+    .new-email-box .new-message .input.textarea{width: 100%;}
+    .new-email-box .new-message .submit{margin-left: 0}
+
+    .mobile{display: block;}
+    .desktop{display: none;}
+
+    /* admin */
+    .navbar-inverse .right .admin{display: none}
+    .schedule-visit .box .left, .schedule-visit .box .right{width: 100%;}
+    .set-up .lead{padding: 0}
+    .set-up h3{padding: 14px 0; line-height: 30px;}
+    .set-up .box .table-box{width: 100%; overflow: auto}
+    .set-up .box .task-table th, .set-up .box .task-table td{padding: 0px 10px; font-size: 11px;}
+    .set-up .box .btn-group{padding: 40px 0}
+
+    .print-staff-certifications .box .left, .print-staff-certifications .box .right{width: 100%;}
+    .print-staff-certifications .box .col-md-6 label:first-child{display: block; margin: 0 -15px;}
+    .print-staff-certifications .box .col-md-6 span{width: 70%; display: inline-block;}
+    .print-staff-certifications .box .col-md-6.generated{margin: 0 0 20px;}
+    .multi_step_form #progressbar li.icon-1:before,
+    .multi_step_form #progressbar li.icon-2:before,
+    .multi_step_form #progressbar li.icon-3:before,
+    .multi_step_form #progressbar li.icon-4:before,
+    .multi_step_form #progressbar li.icon-5:before{background-size: 19px 19px;}
+    .multi_step_form #progressbar li:before {width: 36px;height: 36px;}
+    .add-new-staff .records .input{width: 100%;}
+
+    .staff-visit-history .box .tab ul li{float: none; width: 100%;}
+    .staff-visit-history .staff-head .col-md-6{padding: 0}
+    .staff-visit-history .staff-head .col-md-6 label:first-child, .staff-visit-history .staff-head .col-md-6 label {display: block; margin: 0; text-align: left;}
+    .staff-visit-history .staff-head .input{width: 100%;}
+
+    .manage-staff .box .table-box{width: 100%; overflow: auto}
+
+    .admin-email .heading{padding: 0px 10px}
+    .admin-email h3{line-height: 30px;padding: 10px 0;}
+    .admin-email form .form-box{float: left;margin: 0 0 20px;}
+    .admin-email .name{padding: 0}
+    .admin-email .name .date{float: left;}
+    .admin-email .text{padding: 20px 0;}
+    .admin-email .btn-group{padding: 20px 0 0; display: block;}
+    .admin-email .btn-group .white-btn{width: 100%; margin: 5px 0}
+    .admin-email .compose{margin:10px 0; width: 100%;}
+    .admin-email .compose h4{padding: 10px; line-height: 30px; text-overflow: ellipsis; white-space: revert; word-wrap: break-word; font-size: 14px;}
+    .create-new-group .box ul li{float: none; width: 100%;}
+
+    .client-reminders .box .left{width: 100%; margin: 0 0 20px;}
+    .client-reminders .box .table-box{width: 100%; overflow: auto}
+    .client-reminders .box .task-table th, .client-reminders .box .task-table td{padding: 0px 10px; font-size: 11px;}
+    .left-icon{padding: 7px 0px;}
+    .left-icon .navbar-nav{margin-top: 7px;}
+
+    .box form .form-box .box-header h3{font-size: 20px;}
+    .list-check-grid{    -webkit-column-count: 1;-moz-column-count: 1;column-count: 1;}
+    .gallery-grid-box .nav-tabs .nav-item .nav-link {    padding: 8px 15px 10px 15px;margin: 0px 3px;font-size: 13px;line-height: normal;}
+    .gallery-grid-box .nav-tabs .nav-item{margin-top: 8px;}
+    .gallery-image-grid .row .col-lg-3{-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;}
+    .table-step3-wishlist  .table thead th, .table-remove-row .table thead th{font-size: 14px;}
+    .table-remove-row .table tbody td:first-child,
+    .table-remove-row .table tbody td:nth-child(2){width: 200px;}
+
+    .left-admin-menu .left-icon {float: right;width: 100%;margin-top: -64px; background-color: transparent;}
+    .left-admin-menu .left-icon .navbar-toggler{float: right;}
+    .left-admin-menu .left-icon .navbar-collapse .navbar-nav{width: 100%;    margin-top: 60px;}
+    .left-icon ul li.logout-menu {margin-top: 10px;}
+    .feed-content {margin-top: 20px;}
+    .profile-feeds .profile-feed-inner .feed-action ul li {width: 100%;}
+    .profile-feeds .profile-feed-inner .feed-action ul li .left,
+    .profile-feeds .profile-feed-inner .feed-action ul li .right{width: auto;margin-bottom: 0px;}
+
+    .friendship-list .friend-rqst-box .profile-content {width: 68%;}
+    .friendship-list .friend-rqst-box .accept-rqst-btn,.friendship-list .friend-rqst-box .deny-rqst-btn{margin-top: 10px;}
+    .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
+    .home .col-md-9{padding-bottom: 20px;}
+    .multi_step_form #progressbar{margin-bottom: 0px;}
+    .friendship-list.current-friends .friend-rqst-box .profile-content {width: 70%;}
+
+}
+@media screen and (max-width:600px){
+    .multi_step_form #progressbar li a span{display:none;}
+    .multi_step_form #progressbar li a{display:block;height:40px;width:40px;margin:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin-top:-6px;}
+    .table-step2-wishlist table,.table-step3-wishlist table{border:0;}
+    .table-step2-wishlist table thead{border:none;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
+    .table-step3-wishlist table thead{border:none;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
+    .table-step2-wishlist table tr,.table-step3-wishlist table tr{border-bottom:3px solid #ddd;display:block;margin-bottom:0.35em;float:left;padding-bottom:0.625em;}
+    .table-step2-wishlist table td,.table-step3-wishlist table td{display:block;font-size:0.8em;text-align:right;}
+    .table-step2-wishlist table td::before,.table-step3-wishlist table td::before{content:attr(data-label);float:left;font-weight:bold;text-transform:uppercase;}
+    .table-step2-wishlist table td:last-child,.table-step3-wishlist table td:last-child{border-bottom:0;}
+    .table-step2-wishlist table td:first-child, .table-step2-wishlist table th:first-child{width:100%;}
+    .table-step2-wishlist table td:nth-child(2), .table-step2-wishlist table td:nth-child(2), .table-step2-wishlist table th:nth-child(2), .table-step2-wishlist table th:nth-child(2){width:78%;float:left;}
+    .table-step2-wishlist table td:last-child, .table-step2-wishlist table td:last-child, .table-step2-wishlist table th:last-child, .table-step2-wishlist table th:last-child{width:22%;float:left;text-align:right;}
+    .table-step2-wishlist table td:nth-child(3):before{float: right;}
+
+    .table-step3-wishlist .table tbody td:first-child, .table-step3-wishlist .table tbody td:nth-child(2){width: 100%;}
+    .table-step3-wishlist .table tbody tr{width: 100%;}
+    .table-step3-wishlist .table tbody td:nth-child(3), .table-step3-wishlist .table tbody td:nth-child(4) {width: 50%;float: left;}
+    .table-step3-wishlist .custom-time-pick{max-width: 100%;}
+
+    .blog-overview {padding: 30px 20px 20px;}
+    .blog-overview .post-date{font-size: 14px;}
+    .blog-overview a.read-fblog{font-size: 13px;margin-top: 4px;}
+    .blog-overview h5 {font-size: 15px;line-height: 20px;}
+}
+@media screen and (max-width:420px){
+    .table-step3-wishlist .custom-time-pick .input-group .input-group-prepend {width: 58%;margin-right: 0px;}
+    .table-step3-wishlist .custom-time-pick .input-group .form-control {width: 42%;margin-right: 0px;}
+}
+@media screen and (max-width:360px){
+    .table-step3-wishlist .custom-time-pick .input-group .input-group-prepend {width: 50%;margin-right: 0px;}
+    .table-step3-wishlist .custom-time-pick .input-group .form-control {width: 50%;margin-right: 0px;}
+}
