@@ -71,9 +71,7 @@ float: right;
 				</tr>
 				@endforeach
 			</tbody>
-        
 		</table>
-    {{ $socail->links() }}
         </div>
       </div>
     </div>

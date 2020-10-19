@@ -88,8 +88,9 @@ class EscortProfileController extends Controller
             if (User::find(Auth::user()->id)->roleStatus == 1) {
                 return $id;
             }
-        } 
-        return Auth::user()->id;
+        } else {
+            return Auth::user()->id;
+        }
     }
 
     /**
@@ -178,10 +179,8 @@ class EscortProfileController extends Controller
      * STEP 2 - Biography 
      * Route name : profile.biography.index
      */
-    public function getProfileBiography($id = null)
+    public function getProfileBiography()
     {
-        $id = $this->getUserId($id);
-
         $about_me = ProfileDescription::where('escortId', Auth::user()->id)
             ->where('status', 2)->pluck('description')->first();
 
@@ -190,7 +189,7 @@ class EscortProfileController extends Controller
         $wishlist = ProfileWishlist::where('escortId', Auth::user()->id)->get();
 
         return view('frontend.escort_dashboard.new.profile.profileBiography', 
-            compact('id', 'about_me', 'favourite', 'wishlist'));
+            compact('about_me', 'favourite', 'wishlist'));
     }
 
 
@@ -201,9 +200,9 @@ class EscortProfileController extends Controller
      * 
      * @return  \Illuminate\Http\Response
      */
-    public function updateProfileBiography(Request $request, $id = null)
+    public function updateProfileBiography(Request $request)
     {
-        $id = $this->getUserId($id);
+        $id = Auth::user()->id;
 
         // About Me
         $profile_description = ProfileDescription::where('escortId', $id)->where('status', 2)->first();

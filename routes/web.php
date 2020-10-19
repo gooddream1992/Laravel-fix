@@ -133,12 +133,12 @@ Route::group(['prefix' => '/new/profile'], function () {
     Route::post('/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileStats')->name('profile.stats.update');
 
     // Step - 2 - Biography
-    Route::get('/biography/{id?}', 'escortBackEnd\EscortProfileController@getProfileBiography')->name('profile.biography.index');
-    Route::post('/biography/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileBiography')->name('profile.biography.update');
+    Route::get('/biography/{id}', 'escortBackEnd\EscortProfileController@getProfileBiography')->name('profile.biography.index');
+    Route::post('/biography/{id}/update', 'escortBackEnd\EscortProfileController@updateProfileBiography')->name('profile.biography.update');
 
     // Step - 3 - Services
-    Route::get('/services/{id?}', 'escortBackEnd\EscortProfileController@getProfileServices')->name('profile.services.index');
-    Route::post('/services/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileServices')->name('profile.services.update');
+    Route::get('/services', 'escortBackEnd\EscortProfileController@getProfileServices')->name('profile.services.index');
+    Route::post('/services/update', 'escortBackEnd\EscortProfileController@updateProfileServices')->name('profile.services.update');
 
     // Step - 4 - Photos
     Route::get('/photos', 'escortBackEnd\EscortProfileController@getProfilePhotos')->name('profile.photos.index');

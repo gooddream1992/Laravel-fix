@@ -73,10 +73,7 @@ float: right;
 				</tr>
 				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</tbody>
-        
 		</table>
-    <?php echo e($socail->links()); ?>
-
         </div>
       </div>
     </div>
