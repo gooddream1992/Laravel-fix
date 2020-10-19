@@ -808,7 +808,7 @@ table.rates-table tbody td:first-child{width: 120px;}
     /*border: 1px solid rgba(255,255,255,0.2);*/
     height: 100vh;
 }
-.modal-content {height: auto; background-color: #131313;border :none;}
+.modal-content {height: auto !important; background-color: #131313 !important;border :none !important;}
 .modal-content .modal-title{font-size: 20px;color: #fff;text-transform: uppercase;font-weight: 700;}
 #advanceSearch .modal-content .modal-title{
     font-size: 30px;
