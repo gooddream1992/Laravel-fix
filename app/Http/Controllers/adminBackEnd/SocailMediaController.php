@@ -24,7 +24,7 @@ class SocailMediaController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-      $socail_media = DB::table('social_media')->select('*')->get();
+      $socail_media = DB::table('social_media')->select('*')->paginate(10);
       return view('admin.socialMedia.index',['socail'=>$socail_media]);
     }
 

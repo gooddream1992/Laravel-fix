@@ -3,7 +3,7 @@
 @section('title', 'Escort - Biography')
 
 @section('content')
-<form method="POST" action="{{ route('profile.biography.update') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('profile.biography.update', $id) }}" enctype="multipart/form-data">
     @csrf
 
     @include('partials._profileSteps')
