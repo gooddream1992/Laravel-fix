@@ -39,6 +39,8 @@
     .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
     .home .col-md-9{padding-bottom: 20px;}
     .gallery-grid-box .nav-tabs .nav-item .nav-link{padding: 13px 35px;}
+    
+    .profile-list .profile-box {min-height: 420px;}
 
 }
 
@@ -84,6 +86,7 @@
     .home .col-md-9{padding-bottom: 20px;}
 
     .tour-detail-fields .box-body .row .col-lg-3{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .profile-list .profile-box {min-height: 350px;}
 }
 
 @media only screen and (min-width:1200px) and (max-width:1399px) {
@@ -153,6 +156,7 @@
     .box form .form-box .box-header h3{font-size: 23px;}
 
     .tour-detail-fields .box-body .row .col-lg-3{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .profile-list .profile-box {min-height: 300px;}
 }
 
 /** 5.0 - 1200 - Desktop **/
@@ -252,6 +256,9 @@
     body .tours-fields-row .form-group:first-child, .tours-fields-row .form-group:nth-child(2), .tours-fields-row .form-group:nth-child(3) {width: 33.33%;}
     body .tours-fields-row .form-group:first-child {padding-left: 12px;}
     body .tours-fields-row .form-group:last-child {padding-right: 12px;}
+    .profile-feeds .profile-feed-inner .feed-action ul + ul {padding: 6px 25px;} 
+    
+    .profile-list .profile-box {min-height: 300px;}
 }
 
 /** 7.0 - 768 - iPad **/
@@ -260,7 +267,7 @@
     .caret {position: absolute; right: 20px; top: 20px;}
     .navbar-inverse .right .name{display: none}
 
-    .navbar-inverse .right h1{font-size: 30px;margin-top: 0px;}
+    .navbar-inverse .right h1{font-size: 30px  !important;margin-top: 0px  !important;}
     .navbar-inverse .right h1 span{display: block}
     .navbar-inverse .right .notification-area{right: 96px; top: 21px;}
     .navbar-inverse .right .frd-rqst-area {right: 150px;top: 21px;}
@@ -268,12 +275,12 @@
     .navbar-expand-lg .navbar-toggler {display: none;}
     .navbar-expand-lg .navbar-collapse{display: flex !important}
     .navbar-expand-lg .sidenav {flex-direction: column; width: 100%;}
-    .navbar-header{width: 25%;}
+    .navbar-header{width: 25%  !important;}
     .navbar-header img {max-width: 80%;margin-top: 7px;}
-    .navbar-inverse .right{width: 75%; padding: 30px 20px;}
+    .navbar-inverse .right{width: 75%  !important; padding: 30px 20px;}
     .navbar-inverse .right h1 span{font-size: 20px;}
-    .home .col-md-3.left-admin-menu{    -ms-flex: 0 0 27%;flex: 0 0 27%;max-width: 27%;}
-    .home .col-md-9.right-content{-ms-flex: 0 0 73%; flex: 0 0 73%; max-width: 73%;}
+    .home .col-md-3.left-admin-menu{    -ms-flex: 0 0 27% !important;flex: 0 0 27% !important;max-width: 27% !important;}
+    .home .col-md-9.right-content{-ms-flex: 0 0 73% !important; flex: 0 0 73% !important; max-width: 73% !important;}
     /*.home .col-md-9.right-content .box{margin: 40px 20px 0}*/
     .custom-toggle.switch label{font-size: 13px;}
     .task-type .box .task-type{padding: 27px 20px}
@@ -381,6 +388,9 @@
     .tours-fields-row .form-group:first-child, .tours-fields-row .form-group:nth-child(2), .tours-fields-row .form-group:nth-child(3) {width: 33.33%;}
     .tours-fields-row .form-group:first-child {padding-left: 12px;}
     .tours-fields-row .form-group:last-child {padding-right: 12px;}
+    
+    .multi_step_form #progressbar li span{font-size: 15px;}
+    .profile-list .profile-box {min-height: 360px;}
 }
 
 /** 8.0 - 640 - Mobile **/
@@ -506,7 +516,7 @@
     .profile-list .col-lg-3.col-md-6{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
     .friend-search .input-group-prepend .input-group-text{font-size: 18px;}
     .box.multi_step_form .col-lg-6 + .col-lg-6 {margin-top: 40px;}
-    
+    .profile-list .profile-box {min-height: 380px;}
     .tours-fields-row{margin: 0px 0px 15px;display: block;float: left;}
     .tours-fields-row .form-group {display: block;padding: 0px 12px 0px 12px;float: left;width: 33.33%;}
     .tours-fields-row .form-group:first-child, .tours-fields-row .form-group:nth-child(2), .tours-fields-row .form-group:nth-child(3) {width: 33.33%;}
@@ -660,6 +670,7 @@
     .friendship-list .col-lg-6:last-child  .friend-rqst-box{margin-bottom: 0px;}
     .home .col-md-9{padding-bottom: 20px;}
     .profile-list .col-lg-3.col-md-6{-ms-flex: 0 0 50%;flex: 0 0 50%;max-width: 50%;}
+    .profile-list .profile-box {min-height: 280px;}
     .friendship-list.current-friends .friend-rqst-box .profile-content {width: 45%;}
     .friend-search .input-group-prepend .input-group-text{font-size: 18px;}
     .profile-list .touring-escort-profile .touring-escort-detail h6{font-size: 14px;}
@@ -842,9 +853,11 @@
     .tours-fields-row .form-group:first-child, .tours-fields-row .form-group:nth-child(2), .tours-fields-row .form-group:nth-child(3) {width: 100%;}
     .tours-fields-row .form-group:first-child {padding-left: 12px;}
     .tours-fields-row .form-group:last-child {padding-right: 12px;}
+    
+    .profile-list .profile-box{max}
 }
 @media screen and (max-width:600px){
-    .multi_step_form #progressbar li a span{display:none;}
+    .multi_step_form #progressbar li a span,.multi_step_form #progressbar li span{display:none;}
     .multi_step_form #progressbar li a{display:block;height:40px;width:40px;margin:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin-top:-6px;}
     .table-step2-wishlist table,.table-step3-wishlist table{border:0;}
     .table-step2-wishlist table thead{border:none;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
@@ -872,6 +885,8 @@
 @media screen and (max-width:420px){
     .table-step3-wishlist .custom-time-pick .input-group .input-group-prepend {width: 58%;margin-right: 0px;}
     .table-step3-wishlist .custom-time-pick .input-group .form-control {width: 42%;margin-right: 0px;}
+    .custom-box-message .card-body{flex-wrap: wrap;}
+    .custom-box-message i{margin-bottom: 10px;}
 
 }
 @media screen and (max-width:360px){

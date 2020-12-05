@@ -3,7 +3,7 @@
 @section('title', 'Escort - Services')
 
 @section('content')
-<form method="POST" action="{{ route('profile.services.update') }}">
+<form method="POST" action="{{ route('profile.services.update', $id) }}">
     @csrf
 
     @include('partials._profileSteps')
@@ -23,7 +23,7 @@
                                     <th scope="col">Avail 24hrs</th>
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
-                                    <th scope="col">Descriptions</th>
+                                    <th scope="col" id="important-information">Important Information (Optional)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,13 +47,13 @@
                                                         value="{{ !empty($availability[$week_day]->fromDate) ? $availability[$week_day]->fromDate : '' }}"/>
                                                 </div>
                                                 <select class="form-control {{ $week_day . '-field' }}" name="availability[{{ $week_day }}][from_indicator]">
-                                                    <option value="AM" 
+                                                    <option style="color:black" value="AM" 
                                                         {{ (!empty($availability[$week_day]->fromIndicator) && $availability[$week_day]->fromIndicator == 'AM') 
                                                             ? 'selected' : '' }}>
                                                             AM
                                                     </option>
 
-                                                    <option value="PM" 
+                                                    <option style="color:black" value="PM" 
                                                         {{ (!empty($availability[$week_day]->fromIndicator) && $availability[$week_day]->fromIndicator == 'PM') 
                                                             ? 'selected' : '' }}>
                                                             PM
@@ -71,13 +71,13 @@
                                                         value="{{ !empty($availability[$week_day]->untilDate) ? $availability[$week_day]->untilDate : '' }}" />
                                                 </div>
                                                 <select class="form-control {{ $week_day . '-field' }}" name="availability[{{ $week_day }}][until_indicator]">
-                                                    <option value="AM" 
+                                                    <option style="color:black" value="AM" 
                                                         {{ (!empty($availability[$week_day]->untilIndicator) && $availability[$week_day]->untilIndicator == 'AM') 
                                                             ? 'selected' : '' }}>
                                                             AM
                                                     </option>
 
-                                                    <option value="PM" 
+                                                    <option style="color:black" value="PM" 
                                                         {{ (!empty($availability[$week_day]->untilIndicator) && $availability[$week_day]->untilIndicator == 'PM') 
                                                             ? 'selected' : '' }}>
                                                             PM
@@ -87,7 +87,7 @@
                                         </div>
                                     </td>
                                     <td data-label="Description">
-                                        <div class="custom-desc-box">
+                                        <div class="custom-desc-box alert">
                                             <input type="text" class="form-control"
                                                 name="availability[{{ $week_day }}][description]"
                                                 value="{{ !empty($availability[$week_day]->description) ? $availability[$week_day]->description : '' }}" />
@@ -106,7 +106,7 @@
         <div class="col-md-12 mt-4">
             <div class="form-box">
                 <div class="box-header">
-                    <h3>SERVICE I OFFER</h3>
+                    <h3>SERVICES I OFFER</h3>
                 </div>
                 <div class="box-body">
                     <ul class="list-check-grid">
@@ -128,7 +128,7 @@
                             <input type="text" name="service_tags" data-role="tagsinput" class="form-control" 
                                 placeholder="Service keywords as tags" 
                                 value="{{ !empty($service_tags) ? $service_tags : '' }}">
-                            <textarea class="form-control mt-1" placeholder="Descriptions" name="tags_description">{{ $tags_description }}</textarea>
+                            <textarea class="form-control mt-1" placeholder="Would you like to add any information about the services you offer..." name="tags_description">{{ $tags_description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -153,17 +153,30 @@
                                     <div class="row justify-content-between mt-4 in_call_fields" id="in_call_field_{{ $index }}">
                                         <input type="hidden" name="rates[in_call][{{ $index }}][id]" value="{{ $rate->id }}">
                                         <input type="hidden" name="rates[in_call][{{ $index }}][status]" value="{{ $rate->status }}">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 align-self-end">
                                             <div class="form-group">
                                                 <label>Hours</label>
-                                                <input type="number" class="form-control" name="rates[in_call][{{ $index }}][hours]"
-                                                    value="{{ !empty($rate->hours) ? $rate->hours : '' }}">
+                                                <select class="form-control select-for-rates" name="rates[in_call][{{ $index }}][hours]" onchange="loadWyo($(this))">
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "" ? 'selected' : '' }} style="color:black" value="">-- Select Hours --</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "1 Hours" ? 'selected' : '' }} style="color:black" value="1 Hours">1 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "2 Hours" ? 'selected' : '' }} style="color:black" value="2 Hours">2 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "3 Hours" ? 'selected' : '' }} style="color:black" value="3 Hours">3 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "4 Hours" ? 'selected' : '' }} style="color:black" value="4 Hours">4 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "5 Hours" ? 'selected' : '' }} style="color:black" value="5 Hours">5 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "wyo" ? 'selected' : '' }} style="color:black" value="wyo">Write Your Own</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-4 align-self-end">
+                                            <div class="form-group">
+                                                <label>Create Your Own Service</label>
+                                                <input type="text" class="form-control" name="rates[in_call][{{ $index }}][hours_own]" value="{{ !empty($rate->hours) ? $rate->hours : '' }}" maxlength="15">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 align-self-end">
                                             <div class="form-group d-flex align-items-end">
                                                 <div>
-                                                    <label class="text-white">Rate $</label>
+                                                    <label class="text-white">Rate </label>
                                                     <input type="number" name="rates[in_call][{{ $index }}][price]" class="form-control" placeholder="0"
                                                         value="{{ !empty($rate->price) ? $rate->price : '' }}">
                                                 </div>
@@ -178,7 +191,7 @@
                                             <div class="form-group custom-desc-box">
                                                 <label>Description</label>
                                                 <input type="text" class="form-control" name="rates[in_call][{{ $index }}][description]"
-                                                    value="{{ !empty($rate->description) ? $rate->description : '' }}" />
+                                                    value="{{ !empty($rate->description) ? $rate->description : '' }}"  minlength="30" maxlength="50"/>
                                             </div>
                                         </div>
                                     </div>
@@ -186,16 +199,30 @@
                                 @else 
                                 <div class="row justify-content-between mt-4 in_call_fields" id="in_call_field_0">
                                     <input type="hidden" name="rates[in_call][0][status]" value="1">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 align-self-end">
                                         <div class="form-group">
                                             <label>Hours</label>
-                                            <input type="number" class="form-control" name="rates[in_call][0][hours]">
+                                            <select class="form-control select-for-rates" name="rates[in_call][0][hours]" onchange="loadWyo($(this))">
+                                                <option {{ !empty($rate->hours) && $rate->hours == "" ? 'selected' : '' }}  style="color:black" value="">-- Select Hours --</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "1 Hours" ? 'selected' : '' }}  style="color:black" value="1 Hours">1 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "2 Hours" ? 'selected' : '' }}  style="color:black" value="2 Hours">2 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "3 Hours" ? 'selected' : '' }}  style="color:black" value="3 Hours">3 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "4 Hours" ? 'selected' : '' }}  style="color:black" value="4 Hours">4 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "5 Hours" ? 'selected' : '' }}  style="color:black" value="5 Hours">5 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "wyo" ? 'selected' : '' }}  style="color:black" value="wyo">Write Your Own</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4 align-self-end">
+                                        <div class="form-group">
+                                            <label>Create Your Own Service</label>
+                                            <input type="text" class="form-control" name="rates[in_call][0][hours_own]" value="{{ !empty($rate->hours) ? $rate->hours : '' }}" maxlength="15">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 align-self-end">
                                         <div class="form-group d-flex align-items-end">
                                             <div>
-                                                <label class="text-white">Rate $</label>
+                                                <label class="text-white">Rate </label>
                                                 <input type="number" name="rates[in_call][0][price]" class="form-control" placeholder="0">
                                             </div>
                 
@@ -208,7 +235,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group custom-desc-box">
                                             <label>Description</label>
-                                            <input type="text" class="form-control" name="rates[in_call][0][description]">
+                                            <input type="text" class="form-control" name="rates[in_call][0][description]" minlength="30" maxlength="50" >
                                         </div>
                                     </div>
                                 </div>
@@ -232,17 +259,30 @@
                                     <div class="row justify-content-between mt-4 out_call_fields" id="out_call_field_{{ $index }}">
                                         <input type="hidden" name="rates[out_call][{{ $index }}][id]" value="{{ $rate->id }}">
                                         <input type="hidden" name="rates[out_call][{{ $index }}][status]" value="{{ $rate->status }}">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 align-self-end">
                                             <div class="form-group">
                                                 <label>Hours</label>
-                                                <input type="number" class="form-control" name="rates[out_call][{{ $index }}][hours]"
-                                                    value="{{ !empty($rate->hours) ? $rate->hours : '' }}">
+                                                <select class="form-control select-for-rates" name="rates[out_call][{{ $index }}][hours]" onchange="loadWyo($(this))">
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "" ? 'selected' : '' }}  style="color:black" value="">-- Select Hours --</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "1 Hours" ? 'selected' : '' }}  style="color:black" value="1 Hours">1 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "2 Hours" ? 'selected' : '' }}  style="color:black" value="2 Hours">2 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "3 Hours" ? 'selected' : '' }}  style="color:black" value="3 Hours">3 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "4 Hours" ? 'selected' : '' }}  style="color:black" value="4 Hours">4 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "5 Hours" ? 'selected' : '' }}  style="color:black" value="5 Hours">5 Hours</option>
+                                                    <option {{ !empty($rate->hours) && $rate->hours == "wyo" ? 'selected' : '' }}  style="color:black" value="wyo">Write Your Own</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-4 align-self-end">
+                                            <div class="form-group">
+                                                <label>Create Your Own Service</label>
+                                                <input type="text" class="form-control" name="rates[out_call][{{ $index }}][hours_own]" value="{{ !empty($rate->hours) ? $rate->hours : '' }}" maxlength="15">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 align-self-end">
                                             <div class="form-group d-flex align-items-end">
                                                 <div>
-                                                    <label class="text-white">Rate $</label>
+                                                    <label class="text-white">Rate</label>
                                                     <input type="number" name="rates[out_call][{{ $index }}][price]" class="form-control" placeholder="0"
                                                         value="{{ !empty($rate->price) ? $rate->price : '' }}">
                                                 </div>
@@ -257,7 +297,7 @@
                                             <div class="form-group custom-desc-box">
                                                 <label>Description</label>
                                                 <input type="text" class="form-control" name="rates[out_call][{{ $index }}][description]"
-                                                    value="{{ !empty($rate->description) ? $rate->description : '' }}" />
+                                                    value="{{ !empty($rate->description) ? $rate->description : '' }}" minlength="30" maxlength="50"/>
                                             </div>
                                         </div>
                                     </div>
@@ -265,16 +305,30 @@
                                 @else
                                 <div class="row justify-content-between mt-4 out_call_fields" id="out_call_field_0">
                                     <input type="hidden" name="rates[out_call][0][status]" value="2">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 align-self-end">
                                         <div class="form-group">
                                             <label>Hours</label>
-                                            <input type="number" class="form-control" name="rates[out_call][0][hours]">
+                                            <select class="form-control select-for-rates" name="rates[out_call][0][hours]" onchange="loadWyo($(this))">
+                                                <option {{ !empty($rate->hours) && $rate->hours == "" ? 'selected' : '' }}  style="color:black" value="">-- Select Hours --</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "1 Hours" ? 'selected' : '' }}  style="color:black" value="1 Hours">1 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "2 Hours" ? 'selected' : '' }}  style="color:black" value="2 Hours">2 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "3 Hours" ? 'selected' : '' }}  style="color:black" value="3 Hours">3 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "4 Hours" ? 'selected' : '' }}  style="color:black" value="4 Hours">4 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "5 Hours" ? 'selected' : '' }}  style="color:black" value="5 Hours">5 Hours</option>
+                                                <option {{ !empty($rate->hours) && $rate->hours == "wyo" ? 'selected' : '' }}  style="color:black" value="wyo">Write Your Own</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4 align-self-end">
+                                        <div class="form-group">
+                                            <label>Create Your Own Service</label>
+                                            <input type="text" class="form-control" name="rates[out_call][0][hours_own]" value="{{ !empty($rate->hours) ? $rate->hours : '' }}" maxlength="15">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 align-self-end">
                                         <div class="form-group d-flex align-items-end">
                                             <div>
-                                                <label class="text-white">Rate $</label>
+                                                <label class="text-white">Rate </label>
                                                 <input type="number" name="rates[out_call][0][price]" class="form-control" placeholder="0">
                                             </div>
                 
@@ -287,7 +341,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group custom-desc-box">
                                             <label>Description</label>
-                                            <input type="text" class="form-control" name="rates[out_call][0][description]">
+                                            <input type="text" class="form-control" name="rates[out_call][0][description]" minlength="30" maxlength="50">
                                         </div>
                                     </div>
                                 </div>
@@ -314,22 +368,57 @@
 </form>
 
 <script>
+
+    $(document).ready(function () {
+        $('.select-for-rates').each(function(i, obj) 
+        {
+            loadWyo($(this));
+        });
+    });
+
+    function toggleCustomRates(id) 
+    { 
+        if($('#check_custom_time-'+id).prop('checked'))
+        {
+            $('.check_custom_time-'+id).parent().show();
+        }
+        else
+        {
+            $('.check_custom_time-'+id).parent().hide();
+        }
+    }
+
     function addFields(callType, status) {
         var index = $(`.${callType}_fields`).length;
 
         var item = $(`
             <div class="row justify-content-between mt-4 ${callType}_fields" id="${callType}_field_${index}">
                 <input type="hidden" name="rates[${callType}][${index}][status]" value="${status}">
+                
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label>Hours</label>
-                        <input type="number" class="form-control" name="rates[${callType}][${index}][hours]">
+                        <select class="form-control" name="rates[${callType}][${index}][hours]" onchange="loadWyo($(this))">
+                            <option style="color:black" value="">-- Select Hours --</option>
+                            <option style="color:black" value="1 Hours">1 Hours</option>
+                            <option style="color:black" value="2 Hours">2 Hours</option>
+                            <option style="color:black" value="3 Hours">3 Hours</option>
+                            <option style="color:black" value="4 Hours">4 Hours</option>
+                            <option style="color:black" value="5 Hours">5 Hours</option>
+                            <option style="color:black" value="wyo">Write Your Own</option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4" style="display:none">
+                    <div class="form-group">
+                        <label>Create Your Own Service</label>
+                        <input type="text" class="form-control" name="rates[${callType}][${index}][hours_own]" maxlength="15">
+                    </div>
+                </div>
+                <div class="col-lg-4">
                     <div class="form-group d-flex align-items-end">
                         <div>
-                            <label class="text-white">Rate $</label>
+                            <label class="text-white">Rate </label>
                             <input type="number" name="rates[${callType}][${index}][price]" class="form-control" placeholder="0">
                         </div>
 
@@ -342,7 +431,7 @@
                 <div class="col-lg-12">
                     <div class="form-group custom-desc-box">
                         <label>Description</label>
-                        <input type="text" class="form-control" name="rates[${callType}][${index}][description]">
+                        <input type="text" class="form-control" name="rates[${callType}][${index}][description]" minlength="30" maxlength="50">
                     </div>
                 </div>
             </div>
@@ -359,13 +448,27 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Hours</label>
-                            <input type="number" class="form-control" name="rates[${callType}][0][hours]">
+                            <select class="form-control" name="rates[${callType}][0][hours]" onchange="loadWyo($(this))">
+                                <option style="color:black" value="">-- Select Hours --</option>
+                                <option style="color:black" value="1 Hours">1 Hours</option>
+                                <option style="color:black" value="2 Hours">2 Hours</option>
+                                <option style="color:black" value="3 Hours">3 Hours</option>
+                                <option style="color:black" value="4 Hours">4 Hours</option>
+                                <option style="color:black" value="5 Hours">5 Hours</option>
+                                <option style="color:black" value="wyo">Write Your Own</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-4" style="display:none">
+                        <div class="form-group">
+                            <label>Create Your Own Service</label>
+                            <input type="text" class="form-control" name="rates[${callType}][0][hours_own]" maxlength="15">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="form-group d-flex align-items-end">
                             <div>
-                                <label class="text-white">Rate $</label>
+                                <label class="text-white">Rate </label>
                                 <input type="number" name="rates[${callType}][0][price]" class="form-control" placeholder="0">
                             </div>
 
@@ -378,7 +481,7 @@
                     <div class="col-lg-12">
                         <div class="form-group custom-desc-box">
                             <label>Description</label>
-                            <input type="text" class="form-control" name="rates[${callType}][0][description]">
+                            <input type="text" class="form-control" name="rates[${callType}][0][description]" minlength="30" maxlength="50">
                         </div>
                     </div>
                 </div>
@@ -388,6 +491,20 @@
         }
 
         $(`#${id}`).remove();
+    }
+
+    function loadWyo(element)
+    {
+        // console.log(element.parent().parent().next('div').next('input[type=text]'));
+        if(element.val() == null || element.val() == '1 Hours' || element.val() == '2 Hours' || element.val() == '3 Hours' || element.val() == '4 Hours' || element.val() == '5 Hours' )
+        {
+            element.parent().parent().next('div').hide();
+        }
+        else
+        {
+            element.parent().parent().next('div').show();
+            element.val('wyo');
+        }
     }
 </script>
 @endsection

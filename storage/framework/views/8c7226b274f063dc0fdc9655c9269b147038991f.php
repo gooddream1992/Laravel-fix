@@ -20,6 +20,7 @@
                          $copyrights= $hedfoots->copyrights;
 
                          ?>
+                         
                         <h3 ><img src="<?php echo e(asset('public/uploads/'.$footerlogo)); ?>" class="title-logo"/></h3>
 
                     </div>
@@ -29,7 +30,7 @@
                             <li><a href="<?php echo e(route('copyright')); ?>">Copyright</a></li>   
                             <li><a href="<?php echo e(route('disclaimer')); ?>">Disclaimer</a></li>   
                             <li><a href="<?php echo e(route('acceptable.usage')); ?>">Acceptable Usage</a></li>   
-                            <li><a href="<?php echo e(url('terms/condition')); ?>">Terms & Conditions</a></li>   
+                            <!-- <li><a href="<?php echo e(url('terms/condition')); ?>">Terms & Conditions</a></li>    -->
                         </ul>
                     </div>
                     <p><?php echo e($footerinfo); ?></p>
@@ -54,6 +55,4 @@
     </section>
 </footer>
 
-<!-- <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script> -->
-<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-<script src="https://npmcdn.com/isotope-masonry-horizontal@2/masonry-horizontal.js"></script><?php /**PATH /home/honeydevealakmal/public_html/resources/views/frontend/includes/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH /home/honeydevealakmal/public_html/resources/views/frontend/includes/footer.blade.php ENDPATH**/ ?>

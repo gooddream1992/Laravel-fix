@@ -32,8 +32,8 @@
                 <th>{{ __('Picture') }}</th>
                 <th>{{ __('User Name') }}</th>
                 <th>{{ __('Activation') }}</th>
-                <th>{{ __('Gender') }}</th>
-                <th>{{ __('Phone No.') }}</th>
+                <!-- <th>{{ __('Gender') }}</th>
+                <th>{{ __('Phone No.') }}</th> -->
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Action') }}</th>
                 </tr>
@@ -64,7 +64,7 @@
                     <a href="{{ url('escort/activation').'/'.$user->id.'/'.$user->activation}}" class="btn btn-warning">Deactive</a>
                   @endif
                  </td>
-                <td>
+                <!-- <td>
                   @if($user->gender==1)
                     Male
                   @elseif($user->gender==2)
@@ -72,24 +72,24 @@
                   @else
                     Guy
                   @endif
-                </td>
+                </td> 
                 <td>
                   {{$user->phone}}
-                </td>
+                </td>-->
                 <td>
                   {{$user->email}}
                 </td>               
                 <td>
-                    <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal-xl-pfv{{$user->id }}">Profile Preview</a>
-                    <a href="{{url('escort/modify/'.$user->id)}}" class="btn btn-xs btn-primary">Modify</a>
+                    <!-- <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal-xl-pfv{{$user->id }}">Profile Preview</a> 
+                    <a href="{{url('escort/modify/'.$user->id)}}" class="btn btn-xs btn-primary">Modify</a>-->
                     <a href="{{ route('profile.stats.index', $user->id) }}" class="btn btn-xs btn-primary">Modify Profile</a> {{-- SMPEDIT 19-10-2020 --}}
                     <a href="" class="btn btn-xs btn-danger">Delete</a>
-                    <a href="{{ url('profile/'.$user->id) }}" class="btn btn-xs btn-warning">IMAGE</a>
+                    <!-- <a href="{{ url('profile/'.$user->id) }}" class="btn btn-xs btn-warning">IMAGE</a>
                     <a href="{{ url('profile/description/admin/'.$user->id) }}" class="btn btn-xs btn-warning">DESCRIPTION</a>
                     <a href="{{ url('profile/list/admin/'.$user->id) }}" class="btn btn-xs btn-warning">LIST LINE</a>
                     <a href="{{ url('profile/rate/admin/'.$user->id) }}" class="btn btn-xs btn-warning">RATE</a>
                     <a href="{{ url('profile/availability/admin/'.$user->id) }}" class="btn btn-xs btn-warning">AVAILABILITY</a>
-                    <a href="{{ url('profile/tour/admin/'.$user->id) }}" class="btn btn-xs btn-warning">TOUR</a>
+                    <a href="{{ url('profile/tour/admin/'.$user->id) }}" class="btn btn-xs btn-warning">TOUR</a> -->
                 </td>
               </tr>
               @endforeach

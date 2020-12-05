@@ -14,16 +14,23 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', 'WelcomeController@home');
+Route::get('/', 'WelcomeController@home')->name('index');
 Route::post('suburb', 'WelcomeController@suburb')->name('suburb');
 Route::post('escorts-ajax-data', 'WelcomeController@escortsAjaxData')->name('escorts-ajax-data');
 
 //FrontEnd Section=======================================================================
 
-
+Route::post('get/city/ajax', 'FrontEndController@getCityAjax')->name('get.city.ajax');
+Route::get('get/notification', 'FrontEndController@getNotification')->name('get.notification');
 Route::get('explore/cities', 'FrontEndController@exploreCities');
 Route::post('explore/state', 'FrontEndController@exploreState');
 Route::post('explore/city', 'FrontEndController@exploreCity');
+Route::get('feed/{id}', 'FrontEndController@feedShow')->name('show-feed');
+Route::get('delete-comment/{id}', 'FrontEndController@deleteComment')->name('delete-comment');
+
+
+Route::post('store/testimonal', 'FrontEndController@storeTestimonial')->name('store.testimonial');
+Route::get('show/testimonal', 'FrontEndController@showTestimonial')->name('show.testimonial');
 
 Route::get('business/etiquete', 'FrontEndController@businessEtiquete');
 Route::get('our/story', 'FrontEndController@ourStory');
@@ -35,7 +42,13 @@ Route::get('acceptable/usage', 'FrontEndController@acceptable')->name('acceptabl
 
 Route::get('disclaimer', 'FrontEndController@disclaimer')->name('disclaimer');
 
-Route::get('profile/{id}', 'FrontEndController@profile');
+
+// Route For Send Email By View The Profile Start Here
+Route::get('profile/email/{id}', 'FrontEndController@profileEmailPage')->name('profile.email');
+Route::post('profile-guest-mail', 'FrontEndController@emailMe')->name('profile-guest-mail');
+Route::get('profile/{id}/{name?}', 'FrontEndController@profile');
+// Route For Send Email By View The Profile Start Here
+
 Route::get('client/membership', 'FrontEndController@clientMembership');
 Route::get('faq', 'FrontEndController@faq');
 
@@ -53,6 +66,8 @@ Route::get('escort/signup', 'FrontEndController@escortSignup');
 Route::get('escort/confirmation/{id}/{name}', 'FrontEndController@confirmation');
 
 Route::get('profile-guest/{id}', 'FrontEndController@profile')->name('profile-guest');
+Route::get('profile-guest/{id}/blogs', 'FrontEndController@profileBlogs')->name('profile-guest.blogs.index');
+
 
 //Provider resources
 Route::get('sex/trafficking', 'FrontEndController@frontSexTrafficking');
@@ -62,19 +77,26 @@ Route::get('purchase/marketing', 'FrontEndController@frontPurchaseMarketing');
 Route::get('readmore_purchase/{id}', 'FrontEndController@readmore_purchase')->name('readmore_purchase');
 
 Route::get('bacome/escort', 'FrontEndController@frontBecomeEscort');
-Route::get('blog', 'FrontEndController@frontBlog');
+Route::match(['get', 'post'], 'blog', 'FrontEndController@frontBlog')->name('front.admin.blog');
 
-Route::post('search/blog', 'FrontEndController@searchBlog');
+// SMPEDIT 21-10-2020
+Route::match(['get', 'post'], '/multi/page', 'FrontEndController@multiPage')->name('multi.page.search');
+Route::get('blog/details/{id}', 'FrontEndController@frontBlogDetails')->name('multi.blog.details');
+Route::post('blog/comment/{id?}/store', 'FrontEndController@storeBlogComment')->name('multi.blog_comment.store');
+Route::get('admin/blog/details/{id}', 'FrontEndController@frontAdminBlogDetails')->name('admin.blog.details');
+Route::post('admin/blog/comment/{id?}/store', 'FrontEndController@storeAdminBlogComment')->name('admin.blog_comment.store');
+Route::get('review/details/{id}', 'FrontEndController@frontReviewDetails')->name('multi.review.details');
 
-Route::get('blog/details/{id}', 'FrontEndController@frontBlogDetails');
 
-
-Route::get('multi/page', 'FrontEndController@multiPage');
-Route::post('search/multi/page/blog', 'FrontEndController@searchMultiPageBlog');
+// Route::get('multi/page', 'FrontEndController@multiPage');
+// Route::post('search/multi/page/blog', 'FrontEndController@searchMultiPageBlog');
+// SMPEDIT 21-10-2020
 
 Route::post('clint/escort/signup/store', 'FrontEndController@clientEscoertSignupStore');
 
-Route::get('country/list/escort/{country}', 'FrontEndController@countryListEscort');
+Route::get('country/{country}', 'FrontEndController@countryListEscortCountry');
+Route::get('country/{country}/{city}', 'FrontEndController@countryListEscortCityCountry');
+Route::get('country/{country}/{city}/{gender}', 'FrontEndController@countryListEscortCityCountryGender');
 Route::post('country/list/escort/statelist', 'FrontEndController@statelist')->name('country.list.escort.statelist');
 Route::post('country/list/escort/citylist', 'FrontEndController@citylist')->name('country.list.escort.citylist');
 
@@ -92,6 +114,8 @@ Route::post('add-escort-profile-offer','escortBackEnd\EscortProfileController@pr
 Route::get('escort/profile/setting/{id}', 'adminBackEnd\EscortDashboardController@profileSettings');
 Route::post('profile-country-name','adminBackEnd\EscortDashboardController@profileCountry')->name('profile-country-name');
 Route::post('profile-suburb-name','adminBackEnd\EscortDashboardController@profileSuburb')->name('profile-suburb-name');
+
+Route::get('escort/my-profiles', 'escortBackEnd\EscortFriendsController@myProfiles')->name('escort.my-profiles');
 
 Route::get('escort/profile/image', 'adminBackEnd\EscortDashboardController@profileImage')->name('escort.profile.image');
 Route::get('escort/profile-image-gallery/{id}', 'adminBackEnd\EscortDashboardController@profilegalleryview')->name('escort.profile-image-gallery');
@@ -119,6 +143,8 @@ Route::get('escort/profile/escort/blog', 'adminBackEnd\EscortDashboardController
 
 Route::get('escort-services-Offer-add/{id}', 'adminBackEnd\EscortDashboardController@escortServiceOfferAdd')->name('escort-services-Offer-add');
 
+Route::get('escort/feed-upload', 'adminBackEnd\EscortDashboardController@escortFeedUpload')->name('escort.feed-upload');
+
 Route::get('escort/feeds', 'adminBackEnd\EscortDashboardController@escortFeeds');
 Route::get('escort/updates', 'adminBackEnd\EscortDashboardController@escortUpdates');
 Route::get('3hours/available', 'adminBackEnd\EscortDashboardController@hoursAvailable');
@@ -133,28 +159,31 @@ Route::group(['prefix' => '/new/profile'], function () {
     Route::post('/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileStats')->name('profile.stats.update');
 
     // Step - 2 - Biography
-    Route::get('/biography/{id}', 'escortBackEnd\EscortProfileController@getProfileBiography')->name('profile.biography.index');
-    Route::post('/biography/{id}/update', 'escortBackEnd\EscortProfileController@updateProfileBiography')->name('profile.biography.update');
+    Route::get('/biography/{id?}', 'escortBackEnd\EscortProfileController@getProfileBiography')->name('profile.biography.index');
+    Route::post('/biography/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileBiography')->name('profile.biography.update');
 
     // Step - 3 - Services
-    Route::get('/services', 'escortBackEnd\EscortProfileController@getProfileServices')->name('profile.services.index');
-    Route::post('/services/update', 'escortBackEnd\EscortProfileController@updateProfileServices')->name('profile.services.update');
+    Route::get('/services/{id?}', 'escortBackEnd\EscortProfileController@getProfileServices')->name('profile.services.index');
+    Route::post('/services/{id?}/update', 'escortBackEnd\EscortProfileController@updateProfileServices')->name('profile.services.update');
 
     // Step - 4 - Photos
-    Route::get('/photos', 'escortBackEnd\EscortProfileController@getProfilePhotos')->name('profile.photos.index');
-    Route::post('/photos/store', 'escortBackEnd\EscortProfileController@storeProfilePhoto')->name('profile.photos.store');
-    Route::get('/photos/{id}/show/{thumbnail?}', 'escortBackEnd\EscortProfileController@showProfilePhoto')->name('profile.photos.show');
-    Route::post('/photos/{id}/update/{thumbnail?}', 'escortBackEnd\EscortProfileController@updateProfilePhoto')->name('profile.photos.update');
-    Route::post('/photos/{id}/delete', 'escortBackEnd\EscortProfileController@deleteProfilePhoto')->name('profile.photos.delete');
+    Route::get('/photos/{id?}', 'escortBackEnd\EscortProfileController@getProfilePhotos')->name('profile.photos.index');
+    Route::post('/photos/{id?}/store', 'escortBackEnd\EscortProfileController@storeProfilePhoto')->name('profile.photos.store');
+    Route::get('/photos/{id?}/show/{imageId}', 'escortBackEnd\EscortProfileController@showProfilePhoto')->name('profile.photos.show');
+    Route::post('/photos/{id}/update', 'escortBackEnd\EscortProfileController@updateProfilePhoto')->name('profile.photos.update');
+    Route::post('/photos/{id?}/delete/{imageId}', 'escortBackEnd\EscortProfileController@deleteProfilePhoto')->name('profile.photos.delete');
+    Route::get('/photos/delete/{userId?}/{id}/{imageId}', 'escortBackEnd\EscortProfileController@delete')->name('profile.delete');
 
     // Step 5 - Verification - Disabled on Client's Request
-    // Route::get('/verification', 'escortBackEnd\EscortProfileController@getVerification')->name('profile.verification.index');
-    // Route::post('/verification/{id}/update', 'escortBackEnd\EscortProfileController@updateVerification')->name('profile.verification.update');
+    Route::get('/verification/{id}', 'escortBackEnd\EscortProfileController@getVerification')->name('profile.verification.index');
+    Route::post('/verification/{id}/update', 'escortBackEnd\EscortProfileController@updateVerification')->name('profile.verification.update');
 });
 // SMPEDIT 13-10-2020 END
 
 /* Ashish 16-10-2020 */
+Route::get('admin/session', 'escortBackEnd\EscortProfileController@moveLoginAdmin')->name('admin.session');
 Route::post('escort/profile/activation/ajax', 'escortBackEnd\EscortActivationController@ajaxCall')->name('escort.profile.activation.ajax');
+Route::post('escort/profile/deactivation/ajax', 'escortBackEnd\EscortActivationController@ajaxCallDeactivate')->name('escort.profile.deactivation.ajax');
 
 /* Ashish 13-10-2020 */
 Route::get('escort/faq','escortBackEnd\EscortFaqController@index')->name('escort.faq');
@@ -176,18 +205,26 @@ Route::post('escort/blog/store','escortBackEnd\EscortBlogController@store')->nam
 
 Route::get('escort/notifications','escortBackEnd\EscortNotificationController@index')->name('escort.notifications');
 Route::get('escort/notifications/data','escortBackEnd\EscortNotificationController@data')->name('escort.notifications.data');
+Route::get('client/notifications/data','clientBackEnd\ClientNotificationController@data')->name('client.notifications.data');
 Route::get('escort/frequest/data','escortBackEnd\EscortNotificationController@friendRequestData')->name('escort.frequest.data');
 Route::get('escort/friend-requests','escortBackEnd\EscortFriendsController@friendRequest')->name('escort.friend-requests');
 Route::post('escort/change-request-status','escortBackEnd\EscortFriendsController@changeRequestStatus')->name('escort.change-request-status');
 
 Route::post('escort/feed/store','escortBackEnd\EscortFeedController@store')->name('escort.feed.store');
+Route::get('delete/feed/{id}','escortBackEnd\EscortFeedController@delete')->name('escort.feed.delete');
+Route::get('new-post','escortBackEnd\EscortFeedController@uploadPost')->name('escort.feed.upload');
 
 /* Ashish Escort Route For Tours 14-10-2020 */
 Route::get('escort/tour','escortBackEnd\EscortTourController@index')->name('escort.tour');
 Route::post('escort/tour/store','escortBackEnd\EscortTourController@store')->name('escort.tour.store');
 Route::get('escort/tour/delete/{id}','escortBackEnd\EscortTourController@delete')->name('escort.tour.delete');
+Route::get('escort/tour/update/{id}','escortBackEnd\EscortTourController@update')->name('escort.tour.update');
 
-
+Route::get('manage-account','escortBackEnd\EscortManageAccountController@index')->name('manage-account');
+Route::post('escort/check-password','escortBackEnd\EscortManageAccountController@checkPassword')->name('escort.check-password');
+Route::post('escort/change-password','escortBackEnd\EscortManageAccountController@changePassword')->name('escort.change-password');
+Route::post('escort/email-notification','escortBackEnd\EscortManageAccountController@emailNotification')->name('escort.email-notification');
+Route::post('escort/account-activation-or-deactivation','escortBackEnd\EscortManageAccountController@activationORdeactivation')->name('escort.account-activation-or-deactivation');
 
 //Client Dashboard Section==============================
 Route::get('client/profile/setting/{id}', 'adminBackEnd\ClientDashboardController@clientProfileSettings');
@@ -201,6 +238,7 @@ Route::get('client/report','clientBackEnd\ClientReportController@index')->name('
 Route::get('client/manage-account','clientBackEnd\ClientAccountController@index')->name('client.manage-account');
 
 Route::get('client/send-friend-request/{id}','FrontEndController@SendFriendRequest')->name('client.send-friend-request');
+Route::get('client/unfriend/{id}','FrontEndController@UnFriendRequest')->name('client.unfriend');
 
 Route::get('client/feed','clientBackEnd\ClientFeedController@index')->name('client.feed');
 Route::post('client/like-unlike','clientBackEnd\ClientFeedController@likeUnlike')->name('client.like-unlike');
@@ -212,6 +250,8 @@ Route::post('escort/do-comment','escortBackEnd\EscortFeedController@doComment')-
 
 Route::get('escort/report','escortBackEnd\EscortReportController@index')->name('escort.report');
 Route::post('escort/get-client-by-number','escortBackEnd\EscortReportController@GetClientByNumber')->name('escort.get-client-by-number');
+
+Route::post('escort/store-report','escortBackEnd\EscortReportController@storeReport')->name('escort.store-report');
 
 /* Ashish  08-10-2020 */
 Route::get('client/blog','clientBackEnd\ClientBlogController@index')->name('client.blog');
@@ -225,6 +265,9 @@ Route::get('client/notification','clientBackEnd\ClientNotificationController@ind
 Route::get('client/friendlist','clientBackEnd\ClientFriendsController@index')->name('client.friendlist');
 Route::post('client/friendlist/unfriend','clientBackEnd\ClientFriendsController@unfriend')->name('client.unfriend');
 Route::get('client/newprofiles','clientBackEnd\ClientFriendsController@newProfiles')->name('client.newprofiles');
+Route::get('client/escort-tours','clientBackEnd\ClientFriendsController@newEscortTours')->name('client.escort-tours');
+
+Route::get('client/available-now','clientBackEnd\AvailableNowController@index')->name('client.available-now');
 
 
 Route::get('client/faq/client','clientBackEnd\ClientFaqController@index')->name('client.faq.client');
@@ -254,6 +297,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('admin/logout', 'HomeController@logoutAdmin')->name('admin.logout');
 
+// 22-10-2020 Ashish Escort Profile Request Start's Here
+Route::get('admin/escort/profile/request', 'adminBackEnd\EscortProfileRequestController@index')->name('admin.escort.profile.request');
+Route::get('admin/escort/profile/request/accept/{id}/{name}/{request}', 'adminBackEnd\EscortProfileRequestController@accept')->name('admin.escort.profile.request.accept');
+Route::get('admin/escort/profile/request/deny/{id}/{email}/{name}', 'adminBackEnd\EscortProfileRequestController@deny')->name('admin.escort.profile.request.deny');
+Route::post('admin/escort/profile/request/deny/reason', 'adminBackEnd\EscortProfileRequestController@denyReason')->name('admin.escort.profile.request.deny.reason');
+Route::get('admin/escort/request/deny/reason', 'adminBackEnd\EscortProfileRequestController@denyList')->name('admin.escort.request.deny.reason');
+// Route::get('admin/escort/request/reject/list', 'adminBackEnd\EscortProfileRequestController@rejectList')->name('admin.escort.request.reject.list');
+
+// 22-10-2020 Ashish Escort Profile Request End's Here
 
 Route::get('admin/social/media', 'adminBackEnd\SocailMediaController@index')->name('admin.social.media');
 Route::post('admin/social/media/store', 'adminBackEnd\SocailMediaController@store')->name('admin.social.media.store');
@@ -316,13 +368,22 @@ Route::get('admin/location/state/{id}','adminBackEnd\GeneralSettingController@lo
 Route::get('admin/location/stateadd/{id}','adminBackEnd\GeneralSettingController@locationstateadd')->name('admin.location.stateadd');
 Route::post('admin/location/statebulk','adminBackEnd\GeneralSettingController@statebulk')->name('admin.location.statebulk');
 
+// 23-10-2020 Ashish Manage SEO City route Start's Here
+Route::get('admin/seo/city/{id}/{gender}/{cityid}','adminBackEnd\GeneralSettingController@seoIndex')->name('admin.seo.city');
+Route::post('admin/seo/city/store','adminBackEnd\GeneralSettingController@seoStore')->name('admin.seo.city.store');
+Route::get('admin/seo/city/delete/{id}','adminBackEnd\GeneralSettingController@seodelete')->name('admin.seo.city.delete');
+Route::post('admin/seo/city/update/{id}','adminBackEnd\GeneralSettingController@seoUpdate')->name('admin.seo.city.update');
+// 23-10-2020 Ashish Manage SEO City route End's Here
+
 Route::get('admin/location/city/{id}','adminBackEnd\GeneralSettingController@locationcity')->name('admin.location.city');
 Route::get('admin/location/cityadd/{id}','adminBackEnd\GeneralSettingController@locationcityadd')->name('admin.location.cityadd');
 Route::post('admin/location/citybulk','adminBackEnd\GeneralSettingController@citybulk')->name('admin.location.citybulk');
 
 Route::post('country/store', 'adminBackEnd\GeneralSettingController@countryStore');
 Route::post('country/update', 'adminBackEnd\GeneralSettingController@countryUpdate');
-Route::get('country/delete/{id}', 'adminBackEnd\GeneralSettingController@countryDelete');
+Route::get('delete/country/{id}', 'adminBackEnd\GeneralSettingController@countryDelete')->name('delete.country');
+
+
 
 Route::post('state/store', 'adminBackEnd\GeneralSettingController@stateStore');
 Route::post('state/update', 'adminBackEnd\GeneralSettingController@stateUpdate');
@@ -335,12 +396,22 @@ Route::get('city/delete/{id}', 'adminBackEnd\GeneralSettingController@cityDelete
 Route::get('select_country','adminBackEnd\GeneralSettingController@country')->name('select_country');
 Route::get('select_state','adminBackEnd\GeneralSettingController@state')->name('select_state');
 Route::get('get_cities','adminBackEnd\GeneralSettingController@getCities')->name('get_cities'); // SMPEDIT 30-09-2020
+Route::post('getCity','adminBackEnd\GeneralSettingController@getCity')->name('getCity'); // SMPEDIT 30-09-2020
 
 
 //General Setting
 Route::get('new/user', 'adminBackEnd\GeneralSettingController@newUserCreate');
 Route::post('user/store', 'adminBackEnd\GeneralSettingController@newUserCreateStore');
 Route::get('user/list', 'adminBackEnd\GeneralSettingController@userList');
+
+Route::get('user/list/delete/{id}/{name}', 'adminBackEnd\GeneralSettingController@userListDelete')->name('user.list.delete');
+
+Route::get('testimonial/list', 'adminBackEnd\GeneralSettingController@testimonialList')->name('testimonial.list');
+Route::get('testimonial/approve/{id}', 'adminBackEnd\GeneralSettingController@testimonialApprove')->name('testimonial.approve');
+Route::get('testimonial/reject/{id}', 'adminBackEnd\GeneralSettingController@testimonialReject')->name('testimonial.reject');
+Route::get('testimonial/delete-page', 'adminBackEnd\GeneralSettingController@testimonialDeletePage')->name('testimonial.delete-page');
+Route::get('testimonial/delete/{id}', 'adminBackEnd\GeneralSettingController@testimonialDelete')->name('testimonial.delete');
+
 Route::get('profile/edit/{id}', 'adminBackEnd\GeneralSettingController@userProfileEdit');
 Route::post('profile/update', 'adminBackEnd\GeneralSettingController@userProfileUpdated');
 
@@ -529,3 +600,9 @@ Route::get('admin/blog', 'adminBackEnd\ProviderResourcesController@adminBlog');
 Route::post('admin/blog/store', 'adminBackEnd\ProviderResourcesController@adminBlogStore');
 Route::post('admin/blog/update', 'adminBackEnd\ProviderResourcesController@adminBlogUpdate');
 Route::get('admin/blog/delete/{id}', 'adminBackEnd\ProviderResourcesController@adminBlogDelete');
+
+//Blogging Center
+Route::get('admin/blogging', 'adminBackEnd\ProviderResourcesController@adminBlogging')->name('admin.blogging.index');
+Route::post('admin/blogging/store', 'adminBackEnd\ProviderResourcesController@adminBloggingStore')->name('admin.blogging.store');
+Route::post('admin/blogging/{id}/update', 'adminBackEnd\ProviderResourcesController@adminBloggingUpdate')->name('admin.blogging.update');
+Route::get('admin/blogging/{id}/delete', 'adminBackEnd\ProviderResourcesController@adminBloggingDelete')->name('admin.blogging.delete');

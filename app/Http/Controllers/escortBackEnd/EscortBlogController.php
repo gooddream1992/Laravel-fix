@@ -67,7 +67,13 @@ class EscortBlogController extends Controller
                 'role'=> $user_role->roleStatus,
                 'publishBy'=> $user_role->id
             ]);
-            return redirect()->back()->with('message', "Local Resources Added Successfully!");
+            DB::table('notification')->insert([
+              'notification_title'=>Auth::user()->name." posted a blog",
+              'url'=> "profile/".$user_role->id, // SMPEDIT 21-10-2020
+              'notification_content'=>$description,
+              'user_id'=>$user_role->id // SMPEDIT 21-10-2020
+              ]);
+            return redirect()->back()->with('message', "Blog Added Successfully!");
     }    
 
     public function details($id){
@@ -112,11 +118,11 @@ class EscortBlogController extends Controller
           'role'=> $user_role->roleStatus,
           'publishBy'=> $user_role->id
       ]);
-      return redirect()->route('escort.blog')->with('message', "Local Resources Added Successfully!");
+      return redirect()->route('escort.blog')->with('message', "Blog Updated Successfully!");
     }
 
     public function delete($id){
       DB::table('blogs')->where('id','=',$id)->delete();
-      return redirect()->route('escort.blog')->with('message', "Local Resources Added Successfully!");
+      return redirect()->route('escort.blog')->with('message', "Blog Deleted Successfully!");
     }
 }

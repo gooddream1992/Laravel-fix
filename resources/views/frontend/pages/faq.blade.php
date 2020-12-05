@@ -45,7 +45,7 @@ $description=$sliders->description;  }
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-8">
-                            <div class="sec-video-box">
+                            <div class="faq-counple-img sec-video-box">
                                 <img src="{{asset('public/uploads/'.$top->imageurl)}}" class="w-100" />
                             </div>
                         </div>

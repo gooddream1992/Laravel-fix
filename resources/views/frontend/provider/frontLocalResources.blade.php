@@ -36,7 +36,7 @@
             <div class="col-lg-11 c">
                <div class="large-title box-title dark c-center">
                   <h2>{{$res3->title}}</h2>
-                  <p>{!! $res3->description !!}</p>
+                  <p >{!!$res3->description!= '<p><br><p>' ? $res3->description : ''  !!}</p>
                </div>
             </div>
          </div>
@@ -52,12 +52,12 @@
                @foreach($resources4 as $res4)
                <div class="box-title dark c-center">
                   <h2>{{$res4->title}}</h2>
-                  <p>{!! $res4->description !!}</p>
+                  <p style="display: none">{!! $res4->description !!}</p>
                </div>
                @endforeach
             </div>
          </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" >
          <div class="col-lg-7">
                <input type="hidden" name="tab_value" id="tab-value" value="healthcare">
                <div  class="res-search-city-form">
@@ -104,71 +104,11 @@
    .simplebar, [data-simplebar-direction] {
     position: relative !important;
     overflow-x: hidden !important;
-    overflow-y: scroll !important;
+    
     
     -webkit-overflow-scrolling: touch
 }
 
 </style>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.js" integrity="sha512-JwPA+oZ5uRgh1AATPhLKeByWbXcsRnMMSBpvhuAGQp+CWISl/fHecOshbRcPPgKWau9Wy1H5LhiwAa4QFiQKYw==" crossorigin="anonymous"></script>
-<!-- Content END -->
-<script>
-   $(document).ready(function(){
-      src = "{{ route('suburb') }}";
-             $("#city_id").autocomplete({
-                 source: function(request, response) {
-                     $.ajax({
-                         url: src,
-                         type : 'POST',
-                         dataType: "json",
-                         data: {
-                             "_token": "{{ csrf_token() }}",
-                             query : request.term
-                         },
-                         success: function(data) {
-                             response(data);
-                         }
-                     });
-                 },
-                 minLength: 2,
-            
-             });
-      $("#search-location").click(function(){
-        load_data();
-      });
-      function load_data()
-      {
 
-        var tab_value = $("#tab-value").val();
-        var city_id = $("#city_id").val();
-        $.ajax({
-            url:"{{ url('search/city/escort') }}",
-            type:"POST",
-            data:{
-              "_token": "{{ csrf_token() }}",
-              city_id:city_id,
-              tab_value:tab_value
-            },success: function(data){
-              $("#pills-tabContent").empty();
-              var html = '<div class="col-lg-12"><div class="tab-content" id="pills-tabContent"><div class="tab-pane fade show active " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">';
-              html += '<div class="simplebar res-img-grid" id="myElement" ><ul class="res-tab-imgs" >';
-              for(var count =0; count < data.length; count++){
-                  html +=' <li><div class="img-box">';
-                  html +='<a href="'+data[count].title+'" target="_blank">';
-                  html +='<img src="{{ asset('public/localresources/') }}/'+data[count].image+'" class="img-fluid"/>';
-                  html +='<div class="top-content">'+data[count].name+'</div></a></div></li>';
-              }
-              html +='</ul></div></div></ul></div></div></div></div>';
-              $("#pills-tabContent").append(html);
-            }
-        });
-      
-      }
-
-      $(".get-data").click(function(){
-        load_data();
-      });
-   });
-</script>
 @endsection

@@ -52,8 +52,8 @@
 
                        <select class="form-control" name="country_id" onchange="selectcountry()" id="selectCountry">
                         <?php $countries=\App\Country::all();?>
-                        @foreach($countries as $country)
-                        <option value="{{$country->id}}">{{$country->country}}</option>
+                        @foreach($countries as $country_details)
+                        <option {{ $country_details->id == $country ? 'selected' : '' }} value="{{$country_details->id}}">{{$country_details->country}}</option>
                         @endforeach
                                 </select>
                                                 </div>
@@ -65,10 +65,11 @@
                                                 <div class="form-group">
 
                                                     <select class="form-control" name="gender">
-
-                                                        <option value="1">Male</option>
-
-                                                        <option value="2">Female</option>
+                                                        <option value="">--Select Gender--</option>
+                                                        <option {{ $gender == '1' ? 'selected' : '' }} value="1">Male</option>
+                                                        <option {{ $gender == '2' ? 'selected' : '' }} value="2">Female</option>
+                                                        <option {{ $gender == '3' ? 'selected' : '' }} value="3">Trans Gender</option>
+                                                        <option {{ $gender == '4' ? 'selected' : '' }} value="4">Gay</option>
 
                                                     </select>
 
@@ -81,6 +82,7 @@
                                                 <div class="form-group">
 
                                                     <select class="form-control">
+                                                        <option value="">-- Select Service Type --</option>
 
                                                         <option>Escort</option>
 
@@ -124,8 +126,9 @@
 
                                                     <select class="form-control" name="state_id" onchange="selectstate()" id="stateSelect">
                                           <?php $States=\App\State::all();?>
+                                          <option value="">--Select City--</option>                  
                         @foreach($States as $state)
-                        <option value="{{$state->id}}">{{$state->state}}</option>
+                        <option {{ $state->id == $city ? 'selected' : '' }} value="{{$state->id}}">{{$state->state}}</option>
                         @endforeach
                                 </select>
                                                 </div>
@@ -138,8 +141,9 @@
 
                                                   <select class="form-control" name="city_id" onchange="selectstate()" id="stateSelect">
                                           <?php $cities=\App\City::all();?>
-                        @foreach($cities as $city)
-                        <option value="{{$city->id}}">{{$city->city}}</option>
+                                          <option value="">--Select Suburb--</option>
+                        @foreach($cities as $city_details)
+                        <option {{ $city_details->id == $suburb ? 'selected' : '' }} value="{{$city_details->id}}">{{$city_details->city}}</option>
                         @endforeach
                                 </select>
 
@@ -201,8 +205,94 @@
                 <div class="container">
                     <div class="row justify-content-lg-center justify-content-md-center escort-row">
 
-                        <?php $escorts= \App\User::where('roleStatus', 2)->orWhere('country', $country)->orWhere('city', $city)->orWhere('gender', $gender)->get();?>
+                        <?php 
+                        $where = array();
 
+                        if ($country!='') 
+                        {
+                            $where[] = array('country','=',$country);
+                        }
+                        if ($city!='') 
+                        {
+                            $where[] = array('state','=',$city);
+                        }
+                        if ($gender!='') 
+                        {
+                            $where[] = array('gender','=',$gender);
+                        }
+                        if ($post_data['sexuality']!='') 
+                        {
+                            $where[] = array('sexuality','=',$post_data['sexuality']);
+                        }
+                        if ($post_data['height']!='') 
+                        {
+                            $where[] = array('height','=',$post_data['height']);
+                        }
+                        if ($post_data['bodyShape']!='') 
+                        {
+                            $where[] = array('bodyShape','=',$post_data['bodyShape']);
+                        }
+                        if ($post_data['dress']!='') 
+                        {
+                            $where[] = array('dress','=',$post_data['dress']);
+                        }
+                        if ($post_data['hair']!='') 
+                        {
+                            $where[] = array('hair','=',$post_data['hair']);
+                        }
+                        if ($post_data['age']!='') 
+                        {
+                            $where[] = array('age','=',$post_data['age']);
+                        }
+                        if ($post_data['nationality']!='') 
+                        {
+                            $where[] = array('nationality','=',$post_data['nationality']);
+                        }
+                        if ($post_data['escortTouring']!='' && $post_data['escortTouring']!='0') 
+                        {
+                            $where[] = array('escortTouring','=',$post_data['escortTouring']);
+                        }
+                        if ($post_data['activation']!='' && $post_data['activation']!='0') 
+                        {
+                            $where[] = array('activation','=',$post_data['activation']);
+                        }
+                        if ($post_data['agency']!='') 
+                        {
+                            $where[] = array('type_IA','=',($post_data['agency']) == '0' ? null : '1');
+                        }
+                        // if ($post_data['independent']!='') 
+                        // {
+                        //     $where[] = array('type_IA','=',$post_data['independent']);
+                        // }
+                        if ($post_data['price_to']!='') 
+                        {
+                            $where[] = array('price','<',$post_data['price_to']);
+                        }
+                        if ($post_data['price_from']!='') 
+                        {
+                            $where[] = array('price','>',$post_data['price_from']);
+                        }
+                        DB::enableQueryLog();
+                        $escorts= \App\User::where([['roleStatus', 2],['request','=',1]])
+                        ->where($where)
+                        // ->where('city', $city)
+                        // ->where('gender', $gender)
+                        // ->where('sexuality', $post_data['sexuality'])    
+                        // ->where('height',$post_data['height'])
+                        // ->where('bodyShape',$post_data['bodyShape'])
+                        // ->where('dress',$post_data['dress'])
+                        // ->where('hair',$post_data['hair'])
+                        // ->where('age',$post_data['age'])
+                        // ->where('nationality',$post_data['nationality'])
+                        // ->where('escortTouring',$post_data['escortTouring'])
+                        // ->where('activation',$post_data['activation'])
+                        // ->where('type_IA',$post_data['agency'])
+                        // ->where('type_IA',$post_data['independent'])
+                        // ->where('price','<',$post_data['price_to'])
+                        // ->where('price','>',$post_data['price_from'])
+                        ->get();
+                        // dd(DB::getQueryLog());
+                        ?>
 
                         @foreach($escorts as $escort)
                         <div class="col-lg-3 col-6">
@@ -219,7 +309,7 @@
                                 </div>
                                 <div class="overlay-bottom">
                                     <div class="text">
-                                        <h3><?php $statecount=\App\State::all()->where('id', $escort->city);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->city)->state}} @endif  - {{date('d')}}<sup>th</sup> {{date('M')}}</h3>
+                                        
                                         <table class="escort-profile-details">
                                             <tr>
                                                 <td>Suburb</td>

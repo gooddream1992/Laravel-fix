@@ -36,7 +36,17 @@ class EscortNotificationController extends Controller {
     public function index()
     {
 		$user_id = (Auth::user())->id;
-    $notifications = DB::table('notification')->where('user_id',$user_id)->get();
+    $notifications_update = DB::table('notification')->where([
+        ['type','=','escort'],
+        ['user_id',$user_id]
+      ])
+    ->update(['is_readed'=>'1']);
+    $notifications = DB::table('notification')
+      ->join('users','users.id','notification.client_id')
+      ->where('notification.type','=','escort')
+      ->where('notification.user_id',$user_id)
+      ->orderBy('created_on','desc')
+      ->get();
     $notification_count = count($notifications);
 		return view('frontend/escort_dashboard/new.notification.notifications',compact('notifications'));
     }
@@ -44,7 +54,11 @@ class EscortNotificationController extends Controller {
     public function data()
     {
 		$user_id = (Auth::user())->id;
-    $notifications = DB::table('notification')->where('user_id',$user_id)->get();
+    $notifications = DB::table('notification')->where([
+        ['type','=','escort'],
+        ['user_id',$user_id],
+        ['is_readed','=','0']
+      ])->get();
     $notification_count = count($notifications);
 		echo $notification_count;
     }

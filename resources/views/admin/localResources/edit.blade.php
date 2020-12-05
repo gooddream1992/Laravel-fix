@@ -84,7 +84,8 @@
                        <select class="form-control" name="section">
                         <option value="">Section</option>
                          <option value="healthcare" @if(isset($data->section) && $data->section == "healthcare") selected @endif>Healthcare</option>
-                         <option value="Legal Advice"  @if(isset($data->section) && $data->section == "Legal Advice") selected @endif>Legal Advice</option>
+                         <option value="Legal Advice"  @if(isset($data->section) && $data->section == "Legal Advice") selected @endif>Mentors</option>
+                         <!-- <option value="Legal Advice"  @if(isset($data->section) && $data->section == "Legal Advice") selected @endif>Legal Advice</option> -->
                          <option value="Photographers" @if(isset($data->section) && $data->section == "Photographers") selected @endif>Photographers</option>
                        </select>
                       </div>

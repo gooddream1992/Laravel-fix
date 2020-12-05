@@ -31,8 +31,8 @@
                 <th><?php echo e(__('Picture')); ?></th>
                 <th><?php echo e(__('User Name')); ?></th>
                 <th><?php echo e(__('Activation')); ?></th>
-                <th><?php echo e(__('Gender')); ?></th>
-                <th><?php echo e(__('Phone No.')); ?></th>
+                <!-- <th><?php echo e(__('Gender')); ?></th>
+                <th><?php echo e(__('Phone No.')); ?></th> -->
                 <th><?php echo e(__('Email')); ?></th>
                 <th><?php echo e(__('Action')); ?></th>
                 </tr>
@@ -64,7 +64,7 @@
                     <a href="<?php echo e(url('escort/activation').'/'.$user->id.'/'.$user->activation); ?>" class="btn btn-warning">Deactive</a>
                   <?php endif; ?>
                  </td>
-                <td>
+                <!-- <td>
                   <?php if($user->gender==1): ?>
                     Male
                   <?php elseif($user->gender==2): ?>
@@ -72,26 +72,26 @@
                   <?php else: ?>
                     Guy
                   <?php endif; ?>
-                </td>
+                </td> 
                 <td>
                   <?php echo e($user->phone); ?>
 
-                </td>
+                </td>-->
                 <td>
                   <?php echo e($user->email); ?>
 
                 </td>               
                 <td>
-                    <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal-xl-pfv<?php echo e($user->id); ?>">Profile Preview</a>
-                    <a href="<?php echo e(url('escort/modify/'.$user->id)); ?>" class="btn btn-xs btn-primary">Modify</a>
+                    <!-- <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal-xl-pfv<?php echo e($user->id); ?>">Profile Preview</a> 
+                    <a href="<?php echo e(url('escort/modify/'.$user->id)); ?>" class="btn btn-xs btn-primary">Modify</a>-->
                     <a href="<?php echo e(route('profile.stats.index', $user->id)); ?>" class="btn btn-xs btn-primary">Modify Profile</a> 
                     <a href="" class="btn btn-xs btn-danger">Delete</a>
-                    <a href="<?php echo e(url('profile/'.$user->id)); ?>" class="btn btn-xs btn-warning">IMAGE</a>
+                    <!-- <a href="<?php echo e(url('profile/'.$user->id)); ?>" class="btn btn-xs btn-warning">IMAGE</a>
                     <a href="<?php echo e(url('profile/description/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">DESCRIPTION</a>
                     <a href="<?php echo e(url('profile/list/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">LIST LINE</a>
                     <a href="<?php echo e(url('profile/rate/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">RATE</a>
                     <a href="<?php echo e(url('profile/availability/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">AVAILABILITY</a>
-                    <a href="<?php echo e(url('profile/tour/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">TOUR</a>
+                    <a href="<?php echo e(url('profile/tour/admin/'.$user->id)); ?>" class="btn btn-xs btn-warning">TOUR</a> -->
                 </td>
               </tr>
               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

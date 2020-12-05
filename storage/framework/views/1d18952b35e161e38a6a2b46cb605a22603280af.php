@@ -41,16 +41,21 @@ $name;
                           <div class="flexbox-container">
                               <a href="" class="red-small">Menu</a>
                             </div>
+                            
                             <ul class="submenu">
-                              <li class="subOption"><a href="">Privacy Policy</a></li>
-                                <li class="subOption"><a href="">Terms & Condition</a></li>
-                                <li class="subOption"><a href="">Link 1</a></li>
-                                <li class="subOption"><a href="">Link 2</a></li>
-                                <li class="subOption"><a href="">Link 3</a></li>
-                                <li class="subOption"><a href="">Link 4</a></li>
-                                <li class="subOption"><a href="">Link 5</a></li>
-                                <li class="subOption"><a href="">Link 6</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/home')); ?>">Dashboard</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/multi/page')); ?>">Activities</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/blog')); ?>">Blogs</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/local/resources')); ?>">Local Resources</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/explore/cities')); ?>">Explore Cities</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/business/etiquete')); ?>">Business Etiquette</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/out/story')); ?>">Our Story</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/client/membership')); ?>">Client Membership</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/faq')); ?>">FAQs</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/privacy/statement')); ?>">Privacy Policy</a></li>
+                                <li class="subOption"><a href="<?php echo e(url('/terms/condition')); ?>">Terms & Condition</a></li>
                             </ul>
+                            
                       </li>
                     </ul>
                     <div class="hamburger m-hidden"><span></span></div>
@@ -72,7 +77,22 @@ $name;
                             <li><a href="<?php echo e(url('our/story')); ?>">Our Story</a></li>
                             <li><a href="<?php echo e(url('faq')); ?>">FAQ</a></li>
                             <li><a href="<?php echo e(url('client/membership')); ?>">Client Membership</a></li>
-                            <li><a class=" btn red-small client-login" href="<?php echo e(url('client/signup')); ?>">Join Now</a></li>
+                            
+                            
+                            <li>
+                                <?php if(auth()->guard()->guest()): ?>
+                                <div class="flexbox-container">
+                                  <a class="red-small">Join Now</a>
+                                </div>
+                                <ul class="submenu">
+                                  <li class="subOption"><a href="<?php echo e(url('client/signup')); ?>">As Client</a></li>
+                                  <li class="subOption"><a href="<?php echo e(url('escort/signup')); ?>">As Escort</a></li>
+                                </ul>
+                                <?php else: ?> 
+                                  <a href="<?php echo e(url('/home')); ?>" class="red-small">Dashboard</a>
+                                <?php endif; ?>
+                              </li>
+                              
                         </ul>
                         <div class="hamburger m-hidden"><span></span></div>
                         <div class="dimmer"></div>

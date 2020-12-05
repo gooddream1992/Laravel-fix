@@ -29,7 +29,7 @@
 
 </style>
 
-    <div class="col-md-9 right-content">
+    <div class="offset-md-3 col-md-6 right-content">
         <div class="box multi_step_form">
             @foreach($data as $value)
             <button class="accordion">{{ $value->question }}</button>

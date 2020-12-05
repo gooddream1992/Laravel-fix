@@ -8,14 +8,23 @@
 					<div class="profile-list">
 						<div class="row">
 							<?php $__currentLoopData = $new_profiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $profile_details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php 
+                                                
+                                $profile_images = \App\ProfileImage::where([
+                                    ['escortId','=',$profile_details->id],
+                                    ['status','=',5]
+                                ])->get();
+                            ?>
 							<div class="col-lg-3 col-md-6">
-								<div class="profile-box">
+								<div class="profile-box" >
 									<a href="<?php echo e(route('profile-guest',$profile_details->id)); ?>">
-										<?php if($profile_details->photo==NULL): ?>
-											<img style="height: 522px;" class="w-100" src="<?php echo e(asset('public/blankphoto.png')); ?>"> 
-										<?php else: ?> 
-											<img style="height: 522px;" class="w-100" src="<?php echo e(asset('public/uploads/'.$profile_details->photo)); ?>">
-										<?php endif; ?>
+										<?php $__currentLoopData = $profile_images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if(isset($value->image) && !empty($value->image) ): ?>
+												<img src="<?php echo e(asset('public/uploads/' . $value->image)); ?>" class="w-100" style="height: 322px;" />
+											<?php else: ?>
+                                                <img src="<?php echo e(asset('public/blankphoto.png')); ?>" class="w-100" />
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 										<p><?php echo e($profile_details->name); ?></p>
 									</a>
 								</div>

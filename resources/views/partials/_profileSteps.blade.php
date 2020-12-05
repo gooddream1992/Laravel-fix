@@ -4,11 +4,11 @@
 
 // Declare Step Routes Here
 $routes = [
-    ['step' => 1, 'label' => 'ProfileStats',    'name' => 'profile.stats.index'],
-    ['step' => 2, 'label' => 'Biography',       'name' => 'profile.biography.index'],
-    ['step' => 3, 'label' => 'Services',        'name' => 'profile.services.index'],
-    ['step' => 4, 'label' => 'Photos',          'name' => 'profile.photos.index'],
-    
+    ['step' => 1, 'label' => 'ProfileStats',    'name' => 'profile.stats.index',        'param' => $id],
+    ['step' => 2, 'label' => 'Biography',       'name' => 'profile.biography.index',    'param' => $id],
+    ['step' => 3, 'label' => 'Services',        'name' => 'profile.services.index',     'param' => $id],
+    ['step' => 4, 'label' => 'Photos',          'name' => 'profile.photos.index',       'param' => $id],
+    ['step' => 5, 'label' => 'Verification',    'name'=>'profile.verification.index',   'param' => $id]
 ];
 
 $currentStep = 1;
@@ -21,12 +21,15 @@ foreach ($routes as $route) {
 }
 @endphp
 
-<div class="clearfix row ">
+
+
+<div class="clearfix row">
     <div class="col-md-12">
+        
         <ul id="progressbar">
             @foreach ($routes as $route)
-            <a href="{{ !empty($route['name']) ? route($route['name']) : '#' }}">
-            <li class="icon-{{ $route['step'] }} {{ ($route['step'] <= $currentStep) ? 'active' : '' }}">
+            <a href="{{ !empty($route['name']) ? route($route['name'], $route['param']) : '#' }}">
+                <li class="icon-{{ $route['step'] }} {{ ($route['step'] <= $currentStep) ? 'active' : '' }}">
                     <span>{{ $route['label'] }}</span>
                 </li> 
             </a>

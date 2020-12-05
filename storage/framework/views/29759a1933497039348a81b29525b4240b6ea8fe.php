@@ -37,6 +37,15 @@
                         </div>
                         <div class="col-lg-12">
                            <div class="form-group sip_mt">
+                              <div class="selct_2_alska">
+                                 <input name="image" type="file" accept="image/*" value="0">
+                                 <img src="<?php echo e(asset('public/blankphoto.png')); ?>">
+                                 <p class="help-block"><?php echo e(__('Upload City Thumbnail max 1mb')); ?></p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                           <div class="form-group sip_mt">
                               <div class="select_2_alska2">
                               </div>
                               <div class="selct_2_alska">
@@ -147,7 +156,7 @@
                         <tr>
                            <th><?php echo e(__('ID No.')); ?></th>
                            <th><?php echo e(__('Country Name')); ?></th>
-                           
+                           <th><?php echo e(__('Photo')); ?></th>
                            <th><?php echo e(__('Action')); ?></th>
                         </tr>
                      </thead>
@@ -157,10 +166,18 @@
                         <tr>
                            <td><?php echo e($country->id); ?></td>
                            <td><?php echo e($country->country); ?></td>
-                           
+                           <td>
+                              <?php if($country->image==NULL): ?>
+                                 <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;">
+                              <?php else: ?>
+                                 <img src="<?php echo e(asset('public/uploads/'.$country->image)); ?>" style="width: 30px;">
+                              <?php endif; ?>
+                           </td>
                            <td>
                               <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-lg<?php echo e($country->id); ?>">Modify</a>
-                              <a href="<?php echo e(url('country/delete/'.$country->id)); ?>" class="btn btn-xs btn-danger">Delete</a>
+                              <a href="<?php echo e(route('delete.country',$country->id)); ?>" class="btn btn-xs btn-danger">
+                                 Delete
+                              </a>
                               <a href="<?php echo e(route('admin.location.state',$country->id)); ?>" class="btn btn-xs btn-secondary">Manage Cities</a>
                            </td>
                         </tr>
@@ -176,7 +193,7 @@
 </div>
 <!--========================== Modal  Start====================================================-->
 <!-- Modal Start================ -->
-<?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $countries_table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <div class="modal fade" id="modal-lg<?php echo e($country->id); ?>">
    <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -206,6 +223,15 @@
                         </div>
                      </div>
                   </div>
+                  <div class="col-lg-12">
+                           <div class="form-group sip_mt">
+                              <div class="selct_2_alska">
+                                 <input name="image" type="file" accept="image/*" value="0">
+                                 <img src="<?php echo e(asset('public/blankphoto.png')); ?>">
+                                 <p class="help-block"><?php echo e(__('Upload City Thumbnail max 1mb')); ?></p>
+                              </div>
+                           </div>
+                        </div>
                </div>
                <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

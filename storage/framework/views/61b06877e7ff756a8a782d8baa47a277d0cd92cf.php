@@ -27,7 +27,7 @@
 
 </style>
 
-    <div class="col-md-9 right-content">
+    <div class="offset-md-3 col-md-6 right-content">
         <div class="box multi_step_form">
             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <button class="accordion"><?php echo e($value->question); ?></button>

@@ -48,6 +48,10 @@
                               <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-lg-state<?php echo e($state->stateid); ?>">Modify</a>
                               <a href="<?php echo e(url('state/delete/'.$state->stateid)); ?>" class="btn btn-xs btn-danger">Delete</a>
                               <a href="<?php echo e(route('admin.location.city',$state->stateid)); ?>" class="btn btn-xs btn-secondary">Manage Suburb</a>
+                              <a href="<?php echo e(route('admin.seo.city',[$state->stateid,1,$id])); ?>" class="btn btn-xs btn-info">Manage City SEO - Male</a>
+                              <a href="<?php echo e(route('admin.seo.city',[$state->stateid,2,$id])); ?>" class="btn btn-xs btn-primary">Manage City SEO - Female</a>
+                              <a href="<?php echo e(route('admin.seo.city',[$state->stateid,3,$id])); ?>" class="btn btn-xs btn-warning">Manage City SEO - Trans Gender</a>
+                              <a href="<?php echo e(route('admin.seo.city',[$state->stateid,4,$id])); ?>" class="btn btn-xs btn-danger">Manage City SEO - Gay</a>
                            </td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

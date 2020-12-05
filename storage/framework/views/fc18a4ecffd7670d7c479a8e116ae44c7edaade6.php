@@ -165,10 +165,69 @@
     <!-- ./wrapper -->
 
 <script>
+  $(document).ready(function () {
+    getCities();
+  });
+
   $(function () {
     // Summernote
     $('.textarea').summernote()
   })
+
+  function getCities() {
+    $.ajax({
+        url: "<?php echo e(route('get_cities')); ?>",
+        method: 'GET',
+        data: {
+            'country_id': $('#selectCountry').find(':selected').val()
+        },
+        success: function (data) {
+            $('#citySelect').text(' ');
+            for (var k = 0; k < data.cities.length; k++) {
+                $('#citySelect').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+            }
+            
+            let cityOptions = document.getElementById('#citySelect').options;
+            for (i = 0; i < cityOptions.length; i++) {
+                <?php if(isset($city_id)): ?>
+                    if (cityOptions[i].value == <?php echo e($city_id); ?> ) {
+                        cityOptions[i].setAttribute('selected', true)
+                    }
+                <?php endif; ?>
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+  } 
+
+  function getCities2(city_id, id) {
+    console.log($('#selectCountry' + id));
+    $.ajax({
+        url: "<?php echo e(route('get_cities')); ?>",
+        method: 'GET',
+        data: {
+          'country_id': $('#selectCountry' + id).find(':selected').val()
+        },
+        success: function (data) {
+            $('#citySelect' + id).text(' ');
+            for (var k = 0; k < data.cities.length; k++) {
+                $('#citySelect' + id).append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+            }
+            
+            let cityOptions = document.getElementById('#citySelect' + id).options;
+            for (i = 0; i < cityOptions.length; i++) {
+              if (cityOptions[i].value == city_id) {
+                  cityOptions[i].setAttribute('selected', true)
+              }
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+  } 
 </script>
 
 </body>

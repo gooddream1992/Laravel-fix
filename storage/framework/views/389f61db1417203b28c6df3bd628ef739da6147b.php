@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Profile Details'); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -139,13 +138,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <?php $pfblogs =\App\ProfileBlog::all();?>
                           <?php $i=1;?>
                           <?php $__currentLoopData = $pfblogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data5): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <tr>
                             <td>00<?php echo e($i++); ?></td>
                             
-                            <td><?php echo e(\App\User::find($data5->escortId)->name); ?></td>
+                            <td><?php echo e($data5->escortName); ?></td>
                             <td><?php if($data5->status==1): ?> Blog <?php elseif($data5->status==2): ?> Wishlist <?php elseif($data5->status==3): ?> testimonials <?php else: ?> <?php endif; ?></td>
                             <td><?php echo e($data5->title); ?></td>
                             <td><?php if($data5->image==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$data5->image)); ?>" style="width: 30px;"><?php endif; ?></td>
@@ -188,7 +186,7 @@
                                             </div>
                                             <div class="selct_2_alska">
                                               <select class="form-control" name="escortId">
-                                                <option value="<?php echo e($data5->escortId); ?>">Current <?php echo e(\App\User::find($data5->escortId)->name); ?></option>
+                                                <option value="<?php echo e($data5->escortId); ?>">Current <?php echo e($data5->escortName); ?></option>
                                                 <?php $escorts= \App\User::all()->where('roleStatus', 2);?>
                                                 <?php $__currentLoopData = $escorts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $escort): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($escort->id); ?>"><?php echo e($escort->name); ?></option>

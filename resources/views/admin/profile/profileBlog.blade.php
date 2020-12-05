@@ -138,13 +138,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <?php $pfblogs =\App\ProfileBlog::all();?>
                           <?php $i=1;?>
                           @foreach($pfblogs as $data5)
                           <tr>
                             <td>00{{$i++}}</td>
                             
-                            <td>{{\App\User::find($data5->escortId)->name}}</td>
+                            <td>{{ $data5->escortName }}</td>
                             <td>@if($data5->status==1) Blog @elseif($data5->status==2) Wishlist @elseif($data5->status==3) testimonials @else @endif</td>
                             <td>{{$data5->title}}</td>
                             <td>@if($data5->image==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width: 30px;"> @else <img src="{{asset('public/uploads/'.$data5->image)}}" style="width: 30px;">@endif</td>
@@ -186,7 +185,7 @@
                                             </div>
                                             <div class="selct_2_alska">
                                               <select class="form-control" name="escortId">
-                                                <option value="{{$data5->escortId}}">Current {{\App\User::find($data5->escortId)->name}}</option>
+                                                <option value="{{$data5->escortId}}">Current {{$data5->escortName}}</option>
                                                 <?php $escorts= \App\User::all()->where('roleStatus', 2);?>
                                                 @foreach($escorts as $escort)
                                                 <option value="{{$escort->id}}">{{$escort->name}}</option>

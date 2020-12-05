@@ -90,8 +90,8 @@
                 {{ $value->city }}
               </td>
               <td>
-                <a href="{{ route('local.resources.admin.delete',$value->id) }}" class="btn btn-xs btn-danger">Delete</a>
-                <a href="{{ route('local.resources.admin.edit',$value->id) }}" class="btn btn-xs btn-primary">Modify</a>
+                <a href="{{ route('local.resources.admin.delete',$value->data_id) }}" class="btn btn-xs btn-danger">Delete</a>
+                <a href="{{ route('local.resources.admin.edit',$value->data_id) }}" class="btn btn-xs btn-primary">Modify</a>
               </td>
             </tr>
             @endforeach

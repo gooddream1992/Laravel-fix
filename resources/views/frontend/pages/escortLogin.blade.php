@@ -5,9 +5,23 @@
 
 <?php $hedfoots=\App\HeaderFooter::orderBy('id','desc')->first(); 
                                  $footerlogo= $hedfoots->footerLogo;?>
+<style>
+    nav.navbar-inverse {
+    display: none;
+}
+footer .footer1 {
+    display: none;
+}
+footer .footer2 {
+    display: none;
+}
 
+.top-header-bar .header nav.menu .hamburger {
+    display: none;
+}
+</style>
 
-<section class="auth-page sign-in-page" style="background-image: url('{{asset('public/uploads/no-fake-profile-bg.jpg')}}'); background-size:cover;background-position: center;">
+<section class="auth-page sign-in-page auth-login-page" style="background-image: url('{{asset('public/uploads/no-fake-profile-bg.jpg')}}'); background-size:cover;background-position: center;">
             <div class="container">
                 <div class="auth-box">
                     <div class="row">
@@ -47,11 +61,14 @@
                                          <a href="{{ url('forgotpassword') }}">Forgot Password?</a>
                                     </div>
                                 </div>
-                                <div class="form-group mb-0">
+                                <div class="form-group">
                                     <input type="submit" class="btn red-small btn-block c-center" value="Login">
-
-                                    <br><b style="color:white">New Client? </b><a class="btn red-small c-center" href="{{url('escort/signup')}}">Signup</a>
-
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="new-account-user">
+                                      
+                                        <b style="color:white">New Client? </b><a class="btn red-small c-center" style="margin-left:10px;"  href="{{url('escort/signup')}}">Signup</a>
+                                    </div>
                                 </div>
   
                             </form>

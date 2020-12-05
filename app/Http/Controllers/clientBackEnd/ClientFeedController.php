@@ -53,8 +53,8 @@ class ClientFeedController extends Controller {
 					->join('users','users.id','feeds.escortId')
 					->select('feeds.*','users.name')
 					->whereIn('feeds.escortId', $follow_arr)
+					->orderBy('feeds.id','desc')
 					->get();
-	
 				if (count($feed) > 0) 
 				{
 					foreach ($feed as $feed_details) 
@@ -67,11 +67,12 @@ class ClientFeedController extends Controller {
 				{
 					$all_liked_records = DB::table('feed_update')
 					->join('users','users.id','feed_update.cust_id')
+					->select('*','feed_update.id as feed_update_id')
 					->whereIn('feed_update.feed_id', $feed_arr)
+					->orderBy('feed_update.id','desc')
 					->get();
 				}
 			}
-
 			
 		}
 
@@ -89,12 +90,22 @@ class ClientFeedController extends Controller {
 				{
 					$comment_data[$details->feed_id][] = $details->cust_id;	
 					$comment_text[$details->feed_id][] = $details->comment;
-					$comment_photo[$details->feed_id][] = $details->photo;	
+					$comment_id[$details->feed_id][] = $details->feed_update_id;
+					if($details->roleStatus == '2')
+					{
+						$data = DB::table('profile_images')->where('escortId',$details->cust_id)->where('status','5')->first();
+						$image = $data->image;
+					}
+					else
+					{
+						$image = $details->photo;
+					}
+					$comment_photo[$details->feed_id][] = $image;	
 					$comment_name[$details->feed_id][] = $details->name;	
 				}
 			}
 		}
-        return view('client.feed',['feed'=>$feed,'like_data'=>$like_data,'comment_data'=>$comment_data,'comment_text'=>$comment_text,'comment_photo'=>$comment_photo,'comment_name'=>$comment_name]);
+        return view('client.feed',['feed'=>$feed,'like_data'=>$like_data,'comment_data'=>$comment_data,'comment_text'=>$comment_text,'comment_photo'=>$comment_photo,'comment_id'=>$comment_id,'comment_name'=>$comment_name]);
     }
 
 	public function likeUnlike()
@@ -102,13 +113,31 @@ class ClientFeedController extends Controller {
 		$feed_id = $_POST['feedId'];
 		$user_id = Auth::user()->id;
 		
-		$get_all_records = DB::table('feed_update')->where('cust_id',$user_id)->where('feed_id',$feed_id)->get();
+		$get_all_records = DB::table('feed_update')->join('feeds','feeds.id','feed_update.feed_id')->where('feed_update.cust_id',$user_id)->where('feed_update.feed_id',$feed_id)->get();
 		if (count($get_all_records) > 0) 
 		{
+
+			DB::table('notification')->insert([
+				'notification_title'=>Auth::user()->name." unliked your update.",
+				'url'=> "escort/feed",	
+				'type'=> "escort",
+				'client_id' => $user_id,
+				'notification_content'=>Auth::user()->name." unliked your update.",
+				'user_id'=>$get_all_records[0]->escortId
+				]);
 			DB::table('feed_update')->where('cust_id','=',$user_id)->where('feed_id','=',$feed_id)->delete();
 		}
 		else
 		{
+			$get_all_records = DB::table('feeds')->where('id',$feed_id)->get();
+			DB::table('notification')->insert([
+				'notification_title'=>Auth::user()->name." liked your update.",
+				'url'=> "escort/feed",
+				'type'=> "escort",
+				'client_id' => $user_id,
+				'notification_content'=>Auth::user()->name." liked your update.",
+				'user_id'=>$get_all_records[0]->escortId
+				]);
 			DB::table('feed_update')->insert(['cust_id' => $user_id, 'feed_id' => $feed_id,'like'=>'1']);
 		}
 		echo json_encode('1');
@@ -120,6 +149,15 @@ class ClientFeedController extends Controller {
 		$comment = $_POST['comment'];
 		$user_id = Auth::user()->id;
 		DB::table('feed_update')->insert(['cust_id' => $user_id, 'feed_id' => $feed_id,'comment'=>$comment]);
+		$get_all_records = DB::table('feeds')->where('id',$feed_id)->get();
+		DB::table('notification')->insert([
+			'notification_title'=>Auth::user()->name." commented on your update.",
+			'url'=> "escort/feed",
+			'type'=> "escort",
+			'client_id' => $user_id,
+			'notification_content'=>$comment,
+			'user_id'=>$get_all_records[0]->escortId
+			]);
 		echo json_encode('1');
 	}
 }

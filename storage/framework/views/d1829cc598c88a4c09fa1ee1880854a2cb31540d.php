@@ -5,6 +5,11 @@
    .ck-editor__editable p{
       height: 250px;
    }
+   .ck.ck-editor {
+    position: relative;
+    width: 125%;
+}
+
 </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -19,7 +24,7 @@
             <div class="col-md-12 ">
                <div class="form-group">
                   <label class="d-block">Title</label>
-                  <input type="text" class="form-control" name="title">
+                  <input type="text" class="form-control" name="title" style="width: 125%;">
                </div>
                <div class="form-group">
                   <label class="d-block">Description</label> 

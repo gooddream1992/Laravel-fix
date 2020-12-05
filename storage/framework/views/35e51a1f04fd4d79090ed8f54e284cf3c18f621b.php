@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Header and Footer'); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -14,176 +13,7 @@
           </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-          <form role="form" method="POST" action="<?php echo e(url('header/footer/store')); ?>" enctype="multipart/form-data">
-            <?php echo e(csrf_field()); ?>
-
-            
-            <div class="row">
-              
-              <div class="col-md-6">
-                <div class="row">
-
-                  <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Header Logo')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="headerLogo" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Footer Logo')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="footerLogo" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Facebook')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="facebook" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                        <input name="facebookurl" type="text" placeholder="Facebook URL">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Youtube')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="youtube" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                        <input name="youtubeurl" type="text" placeholder="Youtube URL">
-                      </div>
-                    </div>
-                  </div>
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Linked In')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="linkedin" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                        <input name="linkedinurl" type="text" placeholder="Linked In URL">
-                      </div>
-                    </div>
-                  </div>
-
-                
-                 
-
-                  
-                  
-                  
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="row">
-              
-               <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Tweeter')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="tweeter" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                        <input name="tweeterurl" type="text" placeholder="Tweeter URL">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Instagram')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input name="instagram" type="file" accept="image/*" value="0" >
-                        <img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 50%;height:30px;">
-                        <input name="instagramurl" type="text" placeholder="Instagram URL">
-                      </div>
-                    </div>
-                  </div>
-                  
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Footer Title')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input type="text" name="footerTitle">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Copyrights Info')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <input type="text" name="copyrights">
-                      </div>
-                    </div>
-                  </div>
-
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        <label class="FormLabel1"><?php echo e(__('Footer Info')); ?>*</label>
-                      </div>
-                      <div class="selct_2_alska">
-                       <textarea class="form-control" name="footerInfo"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                
-                   <div class="col-lg-12">
-                    <div class="form-group sip_mt">
-                      <div class="select_2_alska2">
-                        
-                      </div>
-                      <div class="selct_2_alska">
-                        <input type="submit" class="btn btn-success" value="Save">
-                      </div>
-                    </div>
-                  </div>
-                 
-                  
-                </div>
-             
-
-
-
-                </div>
-              </div>
-
-  
-          </form>
-
-
-
-
-<div class="row">
+      <div class="row">
               
               <div class="col-md-12">
                 <table id="example" class="table table-striped table-responsive table-bordered" style="width:100%">
@@ -227,7 +57,10 @@
                 <td><?php echo e($hedfoot->footerInfo); ?></td>
                 <td><?php echo e($hedfoot->copyrights); ?></td>
 
-                <td><a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-xl<?php echo e($hedfoot->id); ?>">Modify</a> <a href="<?php echo e(url('header/footer/delete/'.$hedfoot->id)); ?>" class="btn btn-xs btn-danger">Delete</a></td>
+                <td>
+                  <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-xl<?php echo e($hedfoot->id); ?>">Modify</a> 
+                  
+                </td>
              
               
                 

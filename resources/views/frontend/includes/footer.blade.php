@@ -20,6 +20,7 @@
                          $copyrights= $hedfoots->copyrights;
 
                          ?>
+                         {{-- @yield('footer_description') --}}
                         <h3 ><img src="{{asset('public/uploads/'.$footerlogo)}}" class="title-logo"/></h3>
 
                     </div>
@@ -29,7 +30,7 @@
                             <li><a href="{{ route('copyright') }}">Copyright</a></li>   
                             <li><a href="{{ route('disclaimer') }}">Disclaimer</a></li>   
                             <li><a href="{{ route('acceptable.usage') }}">Acceptable Usage</a></li>   
-                            <li><a href="{{url('terms/condition')}}">Terms & Conditions</a></li>   
+                            <!-- <li><a href="{{url('terms/condition')}}">Terms & Conditions</a></li>    -->
                         </ul>
                     </div>
                     <p>{{$footerinfo}}</p>
@@ -54,6 +55,3 @@
     </section>
 </footer>
 
-<!-- <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script> -->
-<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-<script src="https://npmcdn.com/isotope-masonry-horizontal@2/masonry-horizontal.js"></script>

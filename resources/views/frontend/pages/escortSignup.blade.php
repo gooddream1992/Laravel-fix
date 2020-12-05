@@ -2,6 +2,21 @@
     $hedfoots=\App\HeaderFooter::orderBy('id','desc')->first();
     $footerlogo= $hedfoots->footerLogo;
 ?>
+<style>
+    nav.navbar-inverse {
+    display: none;
+}
+footer .footer1 {
+    display: none;
+}
+footer .footer2 {
+    display: none;
+}
+
+.top-header-bar .header nav.menu .hamburger {
+    display: none;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,7 +133,7 @@ margin-bottom: 0;
 }
 </style>
 
-<section class="auth-page sign-in-page" style="background-image: url('{{asset('public/uploads/no-fake-profile-bg.jpg')}}'); background-size:cover;background-position: center;">
+<section class="auth-page sign-in-page auth-signup-page" style="background-image: url('{{asset('public/uploads/no-fake-profile-bg.jpg')}}'); background-size:cover;background-position: center;">
             <div class="container">
                 <div class="auth-box">
                     <div class="row">
@@ -166,6 +181,21 @@ margin-bottom: 0;
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                                {{-- <div class="form-group">
+                                    <label>Independent</label>
+                                    <input type="radio" name="type_IA" value="1" />
+                                    <label>Agency</label>
+                                    <input type="radio" name="type_IA" value="2" />
+                                    @error('type_IA')
+                                    <span style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div> --}}
+                                <div class="form-group number_of_profiles_div" style="display: none">
+                                    <label>Number Of Additional Escort Profiles</label>
+                                    <input type="number" class="form-control" placeholder=""  name="number_of_profiles" id="number_of_profiles"/>
                                 </div>
                                 <div class="form-group">
                                     <label>I am</label>
@@ -217,14 +247,15 @@ margin-bottom: 0;
                   'cpassword':{
                     required:true,
                     equalTo: "#password"
-                  }
+                  },
+                  
 
                 },
                 messages: {
                     'name':"* Please Enter Your Name",
                     'email': "* Please Enter Your Email",
                     'password': "* Please Enter Your Password",
-                    'cpassword':"* Please Enter a Valid Password"
+                    'cpassword':"* Please Enter a Valid Password",
                 }
               });
             });
@@ -238,6 +269,18 @@ margin-bottom: 0;
             $("#text").replaceWith("<b style='color:white' id='text'>Already Client?</b>");
         }
     });
+    // $("input[type='radio'][name='type_IA']").on('change',function(){
+    //     var role = this.value;
+    //     if(role=='2')
+    //     {
+    //         $(".number_of_profiles_div").show();
+    //     }
+    //     else
+    //     {
+    //         $(".number_of_profiles_div").hide();
+    //         $("#number_of_profiles").val('0');
+    //     }
+    // });
  });
 </script>
 </body>

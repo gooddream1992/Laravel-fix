@@ -79,7 +79,7 @@ $description=$sliders->description;  }
                         @foreach($stories4 as $story4)
                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                             <div class="sec-side-title dark">
-                                <div class="red-label-text"><span>Lorem Ipsum</span></div>
+                                <div class="red-label-text"><span>{{ $story4->lable }}</span></div>
                                 <h2 class="inner-sec-title">{{ $story4->title }} </h2>
                                 <p>{{ $story4->description }}</p>
                             </div>
@@ -89,7 +89,7 @@ $description=$sliders->description;  }
                         @foreach($stories5 as $story5)
                         <div class="col-lg-4 col-md-4">
                             <div class="card-box red-bg">
-                                <img src="images/grid-box-icon-1.png" />  
+                                <img src="{{ asset('public/uploads/'.$story5->imageurl) }}" />  
                                 <h4>{{ $story5->title }} </h4>
                                 <p>{{ $story5->description }}</p>
                             </div>
@@ -99,7 +99,7 @@ $description=$sliders->description;  }
                         @foreach($stories6 as $story6)
                         <div class="col-lg-4 col-md-4 ">
                             <div class="card-box black-bg">
-                                <img src="images/grid-box-icon-2.png" />
+                                <img src="{{ asset('public/uploads/'.$story6->imageurl) }}" />
                                 <h4>{{ $story6->title }} </h4>
                                 <p>{{ $story6->description }}</p>
                             </div>
@@ -116,7 +116,7 @@ $description=$sliders->description;  }
               @foreach($stories1 as $story1)
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="join-commuunity-video-box video-box">
+                            <div class="join-commuunity-video-box video-box mb-4">
                                 <img src="{{asset('public/uploads/'.$story1->imageurl)}}" class="w-100" />
                                 <!-- <a href="" class="play-btn"><img src="{{asset('public/images/video-play-icon.png')}}" /></a> -->
                             </div>
@@ -124,7 +124,7 @@ $description=$sliders->description;  }
                         </div>
                         <div class="col-lg-6">
                             <div class="sec-side-title join-commuunity-content">
-                                <div class="red-label-text"><span>Lorem Ipsum</span></div>
+                                <div class="red-label-text"><span>{{ $story1->lable }}</span></div>
                                 <h3 class="">{{$story1->title}}</h3>
                                 {!! $story1->description !!}
                            
@@ -169,7 +169,7 @@ $description=$sliders->description;  }
                                 <a href="#" class="btn box-line-btn">{{$story3->title}}</a>
                             </div>
                            
-                                {!! $story3->description !!}
+                            <p class="mb-4"> {!! $story3->description !!}</p>
                         </div>
                         @endforeach
                         

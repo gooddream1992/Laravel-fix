@@ -55,6 +55,19 @@
                     </div>
                   </div>
                  
+                  <div class="col-lg-6" id="button-lable" style="display: none;">
+                    <div class="form-group sip_mt">
+                       <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Button Lable')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="lable">
+                      </div>
+                    </div>
+                  </div>
+
+
+
                  <div class="col-lg-6" id="Signature" style="display: none;">
                     <div class="form-group sip_mt">
                        <div class="select_2_alska2">
@@ -144,12 +157,18 @@
           {
             $("#Signature").show();
             $("#designation").show();
-          }else{
+            $("#button-lable").show();
+          }else if(this.value == 4){
+            $("#button-lable").show();
             $("#Signature").hide();
             $("#designation").hide();
-            
           }
-      })
+          else{
+            $("#Signature").hide();
+            $("#designation").hide();
+            $("#button-lable").hide();
+          }
+      });
   });
 </script>
 
@@ -161,6 +180,9 @@
                 <th><?php echo e(__('Picture')); ?></th>
                 <th><?php echo e(__('Title')); ?></th>
                 <th><?php echo e(__('Status')); ?></th>
+                <th><?php echo e(__('Signature')); ?></th>
+                <th><?php echo e(__('Designation')); ?></th>
+                <th><?php echo e(__('Button Lable')); ?></th>
                 <th><?php echo e(__('Description')); ?></th>
                 <th><?php echo e(__('Action')); ?></th>
                 </tr>
@@ -174,6 +196,9 @@
                 <td><?php if($data->imageurl==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$data->imageurl)); ?>" style="width: 30px;"><?php endif; ?></td>
                 <td><?php echo e($data->title); ?></td>
                 <td>Section <?php echo e($data->status); ?></td>
+                <td><?php echo e($data->signature); ?></td>
+                <td><?php echo e($data->designation); ?></td>
+                <td><?php echo e($data->lable); ?></td>
                 <td><?php echo $data->description; ?></td>
               
               
@@ -271,6 +296,17 @@
                       </div>
                       <div class="selct_2_alska">
                         <input type="text" name="title" class="form-control" value="<?php echo e($data->title); ?>">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                      <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Button Lable')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="lable" class="form-control" value="<?php echo e($data->lable); ?>">
                       </div>
                     </div>
                   </div>

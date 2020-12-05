@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="{{ asset('assets/profile/style.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/profile/style2.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/profile/icofont/icofont.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/profile/css/main.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('assets/profile/css/main.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('assets/profile/tagsinput/tagsinput.css') }}">
     </head>
 

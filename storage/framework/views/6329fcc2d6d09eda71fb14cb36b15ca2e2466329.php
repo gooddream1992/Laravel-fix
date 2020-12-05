@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Become Escort'); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -56,6 +55,16 @@
                     </div>
                   </div>
                  
+                 <div class="col-lg-12" id="sub-title" style="display: none;">
+                    <div class="form-group sip_mt">
+                       <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Sub Title')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>
@@ -80,7 +89,7 @@
                         <label class="FormLabel1"><?php echo e(__('Upload To')); ?>*</label>
                       </div>
                       <div class="selct_2_alska">
-                        <select class="form-control" name="status">
+                        <select class="form-control" name="status" id="status">
                           <option value="1">Section 01</option>
                           <option value="2">Section 02</option>
                           <option value="3">Section 03</option>
@@ -129,6 +138,7 @@
                 <th><?php echo e(__('ID No.')); ?></th>
                 <th><?php echo e(__('Picture')); ?></th>
                 <th><?php echo e(__('Title')); ?></th>
+                <th><?php echo e(__('Sub Title')); ?></th>
                 <th><?php echo e(__('Status')); ?></th>
                 <th><?php echo e(__('Description')); ?></th>
                 <th><?php echo e(__('Action')); ?></th>
@@ -142,6 +152,7 @@
                 <td>00<?php echo e($i++); ?></td>
                 <td><?php if($data->imageurl==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$data->imageurl)); ?>" style="width: 30px;"><?php endif; ?></td>
                 <td><?php echo e($data->title); ?></td>
+                <td><?php echo e($data->sub_title); ?></td>
                 <td>Section <?php echo e($data->status); ?></td>
                 <td><?php echo $data->description; ?></td>
               
@@ -230,6 +241,16 @@
                     </div>
                   </div>
                   
+                  <div class="col-lg-12" id="sub-title">
+                    <div class="form-group sip_mt">
+                      <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Sub Title')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title" class="form-control" value="<?php echo e($data->sub_title); ?>">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>
@@ -252,7 +273,7 @@
                         <label class="FormLabel1"><?php echo e(__('Upload To')); ?>*</label>
                       </div>
                       <div class="selct_2_alska">
-                        <select class="form-control" name="status"  value="<?php echo e($data->status); ?>">
+                        <select class="form-control" name="status"  value="<?php echo e($data->status); ?>" id="status">
                           <option value="<?php echo e($data->status); ?>">Current Section <?php echo e($data->status); ?></option>
                           <option value="1">Section 01</option>
                           <option value="2">Section 02</option>
@@ -299,7 +320,19 @@
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-
+<script>
+  $(document).ready(function(){
+    $("#status").on('change',function(){
+      var status = this.value;
+      if(status == 6){
+        $("#sub-title").show();
+      }else{
+        $("#sub-title").hide();
+      }
+    });
+    
+  });
+</script>
   
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('masters.editormaster', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/honeydevealakmal/public_html/resources/views/admin/provider/adminBecomeEscort.blade.php ENDPATH**/ ?>

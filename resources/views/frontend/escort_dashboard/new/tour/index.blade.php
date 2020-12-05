@@ -15,22 +15,72 @@
                 <div class="form-box tour-detail-fields">
                     <div class="box-header">
                         <h3 >DOMESTIC TOURS</h3>
-                    </div>
+										</div>
+										
                     <div class="box-body">
                         <div class="row main-row">
                             <?php $description = array();
                                 $tour_ChekeboxId = 123456; 
-                            ?>
-                        	@foreach($profile_tours as $tour_value)
-                        	@if($tour_value->status == "1")
+                            ?>                            
+                            @if (count($dom_profile_tours) > 0)
+                                @foreach($profile_tours as $tour_value)
+                                @if($tour_value->status == "1")
+                                <form action="{{ route('escort.tour.update',$tour_value->id) }}" method="get" class="w-100">
+                                    <div class="col-lg-12">
+                                        <div class="tours-fields-row">
+                                            <div class="form-group">
+                                                <label >City</label>
+                                                <select class="form-control" name="domestic_city">
+                                                    <option value="">--Select City--</option>
+                                                    @foreach($city as $value)
+                                                    <option value="{{ $value->id }}" {{ $tour_value->city == $value->id ? 'selected' : '' }}>{{ $value->state }}</option>
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label >From</label>
+                                                <div class="custom-date-picker">
+                                                    <input class="form-control" type="date" name="domestic_from" value="{{ $tour_value->startDate }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >To</label>
+                                                <div class="custom-date-picker">
+                                                    <input class="form-control" name="domestic_to" value="{{ $tour_value->endDate }}" type="date">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Fully Booked</label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" value="1" class="custom-control-input" id="check-<?php echo $num = ($tour_ChekeboxId++)+1; ?>" name="domestic_booked" @if($tour_value->booked == 1) checked @endif>
+                                                    <label class="custom-control-label" for="check-<?php echo $num; ?>">&nbsp;</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="d-block" >Delete</label>
+                                                <a href="{{ route('escort.tour.delete',$tour_value->id) }}" class="btn delete-dash-button"><i class="icofont-trash"></i></a>
+                                                <!-- <button class="btn delete-dash-button"><i class="icofont-trash"></i></button> -->
+                                                <button type="submit" class="btn delete-dash-button"><i class="icofont-edit"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                <?php $description['description'] = $tour_value->description; ?>
+                                @endif
+                                @endforeach
+                            <form action="{{ route('escort.tour.store') }}" method="post" class="w-100">    
+                            @else                           
+                            <form action="{{ route('escort.tour.store') }}" method="post" class="w-100">
                                 <div class="col-lg-12">
                                     <div class="tours-fields-row">
                                         <div class="form-group">
                                             <label >City</label>
-
+                                            <input type="hidden" name="status" value="1">
                                             <select class="form-control" name="domestic_city[]">
+                                                <option value="">--Select City--</option>
                                                 @foreach($city as $value)
-                                                <option>{{ $value->city }}</option>
+                                                <option value="{{ $value->id }}">{{ $value->state }}</option>
                                                 @endforeach
                                             </select>
 
@@ -38,47 +88,40 @@
                                         <div class="form-group">
                                             <label >From</label>
                                             <div class="custom-date-picker">
-                                                <input class="form-control" type="date" name="domestic_from[]" value="{{ $tour_value->startDate }}">
+                                                <input class="form-control" type="date" name="domestic_from[]">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >To</label>
                                             <div class="custom-date-picker">
-                                                <input class="form-control" name="domestic_to[]" value="{{ $tour_value->endDate }}" type="date">
+                                                <input class="form-control" name="domestic_to[]" type="date">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >Fully Booked</label>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="check-<?php echo $num = ($tour_ChekeboxId++)+1; ?>" name="domestic_booked[]" @if($tour_value->booked == 1) checked @endif>
+                                                <input type="checkbox" class="custom-control-input" id="check-<?php echo $num = ($tour_ChekeboxId++)+1; ?>" name="domestic_booked_two[]" value="1">
                                                 <label class="custom-control-label" for="check-<?php echo $num; ?>">&nbsp;</label>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="d-block" >Delete</label>
-                                            <a href="{{ route('escort.tour.delete',$tour_value->id) }}" class="btn delete-dash-button"><i class="icofont-trash"></i></a>
-                                            <!-- <button class="btn delete-dash-button"><i class="icofont-trash"></i></button> -->
-                                        </div>
                                     </div>
                                 </div>
-                               <?php $description['description'] = $tour_value->description; ?>
                             @endif
-                            @endforeach
-                            
                 			<!-- Add More Fields in html Code Start's Here  -->
-                			<form action="{{ route('escort.tour.store') }}" method="post" class="w-100">
+                			
         					@csrf
 		                	<div id="newRow" class="col-lg-12"></div>
 			                <!-- <div class="col-lg-12">
-			                    <div class="form-group" style="display: none;" id="description-hide">
+			                    <div class="form-group" id="description-hide">
 			                        <label>Description</label>
 			                        <textarea class="form-control" name="domestic_description_two"></textarea>
 			                    </div>
 			                </div> -->
 			                
-			            	<!-- Add More Fields in html Code End's Here  -->            
-                            <div class="col-lg-12">
-                                <div class="form-group">
+										<!-- Add More Fields in html Code End's Here  -->            
+										
+										<div class="col-lg-12">
+											<div class="form-group">
                                     <label>Description *</label>
                                     <textarea class="form-control" name="domestic_description"> @if(isset($description['description'])) {{ $description['description'] }} @endif</textarea>
                                     
@@ -90,14 +133,17 @@
                 
                 <div class="row mt-2">
                 	<div class="col-lg-12">
-                    <button class="submit-btn" style="display: none;" type="submit">Submit</button>
-                    </form>
-                    &nbsp;
-                    &nbsp;
-                    <button id="addRow" type="button" class="btn btn-success dash-button">Add Row <i class="icofont-plus"></i></button>
+                    <button class="submit-btn" type="submit">Submit</button>
+
+                </form>
+                &nbsp;
+                &nbsp;
+                <button id="addRow" type="button" class="btn btn-success dash-button">Add Row <i class="icofont-plus"></i></button>
                 </div>    
                 </div>
             </div>
+
+
             <div class="col-lg-12 col-md-12 mt-4">
                 <div class="form-box tour-detail-fields">
                     <div class="box-header">
@@ -106,52 +152,62 @@
                     <div class="box-body">
 
                         <div class="row">
-                            <?php $description2 = array(); ?>
-                        	@foreach($profile_tours as $tour_value)
-                        	@if($tour_value->status == "2")
-                            <div class="col-lg-12">
-                                <div class="tours-fields-row">
-                                    <div class="form-group">
-                                        <label>City</label>
-                                      <select class="form-control" name="domestic_city[]">
-                                                @foreach($city as $value)
-                                                <option>{{ $value->city }}</option>
-                                                @endforeach
+                            <?php $description2 = array(); $i = 1; $j = 1; ?>
+                                @foreach($int_profile_tours as $tour_value)
+                                 <form action="{{ route('escort.tour.update',$tour_value->id) }}" method="get" class="w-100">
+
+                                <input type="hidden" id="is_int_tour" value="yes">
+                                <div class="col-lg-12">
+                                    <div class="tours-fields-row">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                        <select class="form-control" name="domestic_country" id="selectCountry<?php echo $tour_value->id; ?>">
+                                            @foreach($countries as $value)
+                                            <option value="{{ $value->id }}" {{ $tour_value->country == $value->id ? 'selected' : '' }} >{{ $value->country }}</option>
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="hidden" name="" value="{{ $tour_value->city }}" id="city_name<?php echo $tour_value->id; ?>">
+                                            <select class="form-control" name="domestic_city" id="selectCity<?php echo $tour_value->id; ?>">
+                                            <option value="">--Select City--</option>
                                             </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>From</label>
-                                        <div class="custom-date-picker">
-                                            <input class="form-control" value="{{ $tour_value->startDate }}">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>To</label>
-                                        <div class="custom-date-picker">
-                                            <input class="form-control" value="{{ $tour_value->endDate }}">
+                                        <div class="form-group">
+                                            <label>From</label>
+                                            <div class="custom-date-picker">
+                                                <input type="date" class="form-control" name="domestic_from" value="{{ $tour_value->startDate }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fully Booked</label>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="check-<?php echo $tour_value->id+2; ?>" @if($tour_value->booked == 1) checked @endif>
-                                            <label class="custom-control-label" for="check-<?php echo $tour_value->id+2; ?>">&nbsp;</label>
+                                        <div class="form-group">
+                                            <label>To</label>
+                                            <div class="custom-date-picker">
+                                                <input type="date" class="form-control" name="domestic_to" value="{{ $tour_value->endDate }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                  <!--   <div class="form-group">
-                                        <label class="d-block">Edit</label>
-                                        <button class="btn edit-dash-button"><i class="icofont-ui-edit"></i></button>
-                                    </div> -->
-                                    <div class="form-group">
-                                        <label class="d-block">Delete</label>
-                                        <a href="{{ route('escort.tour.delete',$tour_value->id) }}" class="btn delete-dash-button"><i class="icofont-trash"></i></a>
-                                        <!-- <button class="btn delete-dash-button"><i class="icofont-trash"></i></button> -->
+                                        <div class="form-group">
+                                            <label>Fully Booked</label>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="domestic_booked" value="1" class="custom-control-input" id="check-<?php echo $tour_value->id+2; ?>" @if($tour_value->booked == 1) checked @endif>
+                                                <label class="custom-control-label" for="check-<?php echo $tour_value->id+2; ?>">&nbsp;</label>
+                                            </div>
+                                        </div>
+                                    <!--   <div class="form-group">
+                                            <label class="d-block">Edit</label>
+                                            <button class="btn edit-dash-button"><i class="icofont-ui-edit"></i></button>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label class="d-block">Delete</label>
+                                            <a href="{{ route('escort.tour.delete',$tour_value->id) }}" class="btn delete-dash-button"><i class="icofont-trash"></i></a>
+                                            <!-- <button class="btn delete-dash-button"><i class="icofont-trash"></i></button> -->
+                                            <button type="submit" class="btn delete-dash-button"><i class="icofont-edit"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php $description2['description'] = $tour_value->description; ?>
-                            @endif
-                            @endforeach
+                                <?php $description2['description'] = $tour_value->description; ?>
+                                </form>
+                                @endforeach
                             <!-- Add More Fields in html Code Start's Here  -->
                 			<form action="{{ route('escort.tour.store') }}" method="post" class="w-100">
         					@csrf
@@ -169,7 +225,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12">
-                        <button class="submit-btn submit-inter" style="display: none;" type="submit">Submit</button>
+                        <button class="submit-btn submit-inter" type="submit">Submit</button>
                         </form>
                     &nbsp;
                     &nbsp;
@@ -186,52 +242,13 @@
 
 
 <script>
-        /*$("#addRow").click(function(){
-            $('.submit-btn').show();
-            $('#description-hide').show();
-            var check_key = Math.random();
-                var html = '<div class="tours-fields-row copy-column">';
-					html += '<div class="form-group">';
-					html += '<label>City</label>';
-					html += '<select class="form-control" name="domestic_city[]">';
-					html += '@foreach($city as $value)';
-					html += '<option>{{ $value->city }}</option>';
-					html += '@endforeach';
-					html += '</select>';
-					html += '</div>';
-					html += '<div class="form-group">';
-					html += '<label>From</label>';
-					html += '<div class="custom-date-picker">';
-					html += '<input class="form-control" type="date" name="domestic_from[]">';
-					html += '</div>';
-					html += '</div>';
-					html += '<div class="form-group">';
-					html += '<label>To</label>';
-					html += '<div class="custom-date-picker">';
-					html += '<input class="form-control" name="domestic_to[]" type="date">';
-					html += '</div>';
-					html += '</div>';
-					html += '<div class="form-group">';
-					html += '<label>Fully Booked</label>';
-					html += '<div class="custom-control custom-checkbox">';
-					html += '<input type="checkbox" class="custom-control-input" id="check-'+check_key+'" name="domestic_booked_two[]" value="1">';
-					html += '<label class="custom-control-label" for="check-'+check_key+'">&nbsp;</label>';
-					html += '</div>';
-					html += '</div>';
-					html += '<div class="form-group">';
-					html += '<label class="d-block">Remove Row</label>';
-					html += '<button id="removeRow" type="button" class="btn btn-warning dash-button"><i class="icofont-ui-remove"></i></button>';
-					html += '</div>';
-					html += '</div>';
-                $('#newRow').append(html);
-            });            
-            $(document).on('click', '#removeRow', function () {
-                $('.submit-btn').hide();
-                
-          
-                $(this).closest('.copy-column').remove();
-            }); */
 	$(document).ready(function() {
+        if($("#is_int_tour").val()==undefined)
+        {
+            setTimeout(function () {
+                $("#addRow_internation").trigger('click');
+            },300);
+        }
 	    var addButton = $('#addRow');
 	    var check_key = Math.random();
 	    var maxField = 10;
@@ -249,8 +266,9 @@
 				html += '<div class="form-group">';
 				html += '<label>City *</label>';
 				html += '<select class="form-control" name="domestic_city[]">';
+				html += '<option value="">--Select City--</option>';
 				html += '@foreach($city as $value)';
-				html += '<option>{{ $value->city }}</option>';
+				html += '<option value="{{ $value->id }}">{{ $value->state }}</option>';
 				html += '@endforeach';
 				html += '</select>';
 				html += '</div>';
@@ -280,8 +298,10 @@
 				html += '</div>';
 	            
 	            $(wrapper).append(html);
+
 	        }
 	    });
+
 	    $('#newRow').on('click', '#removeRow', function(e) {
 	        e.preventDefault();
 	        $(this).closest('.copy-column').remove();
@@ -306,26 +326,38 @@
 	            x++;
 				var html = '<div class="tours-fields-row copy-column_international">';
 				html += '<input type="hidden" name="status" value="2">';
+                html += '<div class="form-group">';
+                html += '<label>Country *</label>';
+                html += '<select class="form-control" name="domestic_country[]" id="domestic_country_js'+x+'">';
+                html += '<option value="">Country</option>'
+                html += '@foreach($countries as $value)';
+                html += '<option value="{{ $value->id }}">{{ $value->country }}</option>';
+                html += '@endforeach';
+                html += '</select>';
+                html += '</div>';
+
 				html += '<div class="form-group">';
 				html += '<label>City *</label>';
-				html += '<select class="form-control" name="domestic_city[]">';
-				html += '@foreach($city as $value)';
-				html += '<option>{{ $value->city }}</option>';
-				html += '@endforeach';
+				html += '<select class="form-control selectCity'+ x +'" name="domestic_city[]" id="selectCity'+ x +'">';
+				html += '<option></option>';
+				
 				html += '</select>';
 				html += '</div>';
+
 				html += '<div class="form-group">';
 				html += '<label>From *</label>';
 				html += '<div class="custom-date-picker">';
 				html += '<input class="form-control" type="date" name="domestic_from[]">';
 				html += '</div>';
 				html += '</div>';
+
 				html += '<div class="form-group">';
 				html += '<label>To *</label>';
 				html += '<div class="custom-date-picker">';
 				html += '<input class="form-control" name="domestic_to[]" type="date">';
 				html += '</div>';
 				html += '</div>';
+
 				html += '<div class="form-group">';
 				html += '<label>Fully Booked</label>';
 				html += '<div class="custom-control custom-checkbox">';
@@ -333,12 +365,26 @@
 				html += '<label class="custom-control-label" for="check-'+x+'">&nbsp;</label>';
 				html += '</div>';
 				html += '</div>';
+
 				html += '<div class="form-group">';
 				html += '<label class="d-block">Remove Row</label>';
 				html += '<button id="removeRowinternational" type="button" class="btn btn-warning dash-button"><i class="icofont-ui-remove"></i></button>';
 				html += '</div>';
 				html += '</div>';
+                var y = x;
 	            $(wrapper).append(html);
+                $('#domestic_country_js'+x).on('change', function() {
+                    var country =  this.value;
+                    $.ajax({
+                        url: "{{ route('getCity') }}",
+                        method: 'POST',
+                        data: {"_token": "{{ csrf_token() }}", 'country_id': country },
+                        success: function (data) {
+                            $("#selectCity"+ y).html(data);
+                        }
+                    })
+                   
+                });
 	        }
 	    });
 
@@ -352,5 +398,44 @@
 	        }
 	    });
 	});
+
+<?php $i = 1; foreach($int_profile_tours as $tour_value){ ?>
+$(document).ready(function() {
+    $('#selectCountry<?php echo $tour_value->id; ?>').on('change', function() {
+        var country = this.value;
+        console.log(country);
+        $.ajax({
+            url: "{{ route('getCity') }}",
+            method: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'country_id': country
+            },
+            success: function(data) {
+                
+                $('#selectCity<?php echo $tour_value->id; ?>').html(data);
+            }
+        });
+    });
+
+    var countries = $('#selectCountry<?php echo $tour_value->id; ?>').val();
+    if (countries != '') {
+        var city_name = $('#city_name<?php echo $tour_value->id; ?>').val();
+        $.ajax({
+            url: "{{ route('getCity') }}",
+            method: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'country_id': countries,
+                'city_name': city_name
+            },
+            success: function(data) {
+                $('#selectCity<?php echo $tour_value->id; ?>').html(data);
+            }
+        });
+    }
+
+});
+<?php } ?>    
 </script>
 @endsection

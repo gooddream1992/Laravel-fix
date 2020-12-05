@@ -297,7 +297,7 @@ class FrontPagesController extends Controller
     {
         $escorts = \App\User::all()->where('roleStatus', 2);
         $pfimages = DB::table('profile_images')
-            ->join('users', 'profile_images.escortId', 'users.id')
+            ->leftJoin('users', 'profile_images.escortId', 'users.id')
             ->select('profile_images.*', 'users.name as escortName')
             ->get();
 
@@ -362,7 +362,7 @@ class FrontPagesController extends Controller
     {
         $escorts = \App\User::all()->where('roleStatus', 2);
         $pfdescrs = DB::table('profile_descriptions')
-            ->join('users', 'profile_descriptions.escortId', 'users.id')
+            ->leftJoin('users', 'profile_descriptions.escortId', 'users.id')
             ->select('profile_descriptions.*', 'users.name as escortName')
             ->get();
 
@@ -407,7 +407,7 @@ class FrontPagesController extends Controller
     {
         $escorts = \App\User::all()->where('roleStatus', 2);
         $pflist = DB::table('profile_lists')
-            ->join('users', 'profile_lists.escortId', 'users.id')
+            ->leftJoin('users', 'profile_lists.escortId', 'users.id')
             ->select('profile_lists.*', 'users.name as escortName')
             ->get();
 
@@ -452,7 +452,7 @@ class FrontPagesController extends Controller
     {
         $escorts = \App\User::all()->where('roleStatus', 2);
         $pfrates = DB::table('profile_rates')
-            ->join('users', 'profile_rates.escortId', 'users.id')
+            ->leftJoin('users', 'profile_rates.escortId', 'users.id')
             ->select('profile_rates.*', 'users.name as escortName')
             ->get();
 
@@ -500,7 +500,7 @@ class FrontPagesController extends Controller
     {
         $escorts = \App\User::all()->where('roleStatus', 2);
         $pfavails = DB::table('profile_availabilities')
-            ->join('users', 'profile_availabilities.escortId', 'users.id')
+            ->leftJoin('users', 'profile_availabilities.escortId', 'users.id')
             ->select('profile_availabilities.*', 'users.name as escortName')
             ->get();
 
@@ -549,7 +549,7 @@ class FrontPagesController extends Controller
         $escorts = \App\User::all()->where('roleStatus', 2);
         $states = \App\State::all();
         $pftours = DB::table('profile_tours')
-            ->join('users', 'profile_tours.escortId', 'users.id')
+            ->leftJoin('users', 'profile_tours.escortId', 'users.id')
             ->select('profile_tours.*', 'users.name as escortName')
             ->get();
 
@@ -595,7 +595,12 @@ class FrontPagesController extends Controller
 
     public function profileBlog()
     {
-        return view('admin.profile.profileBlog');
+        $pfblogs = DB::table('profile_blogs')
+            ->leftJoin('users', 'users.id', '=', 'profile_blogs.escortId')
+            ->select('profile_blogs.*', 'users.name as escortName')
+            ->get();
+
+        return view('admin.profile.profileBlog', compact('pfblogs'));
     }
 
     public function profileBlogStore(Request $request)
@@ -913,8 +918,9 @@ class FrontPagesController extends Controller
         $stories->title = $request->title;
         $stories->status = $request->status;
         $stories->description = $request->description;
-            $stories->signature= $request->signature;
-            $stories->designation= $request->designation;
+        $stories->signature= $request->signature;
+        $stories->designation= $request->designation;
+        $stories->lable= $request->lable;
         if ($request->hasFile('imageurl'))
         {
             $images = '9' . time() . '.' . $request
@@ -939,6 +945,7 @@ class FrontPagesController extends Controller
         $stories->description = $request->description;
         $stories->signature= $request->signature;
             $stories->designation= $request->designation;
+            $stories->lable= $request->lable;
         if ($request->hasFile('imageurl'))
         {
             $images = '9' . time() . '.' . $request
@@ -1063,6 +1070,7 @@ class FrontPagesController extends Controller
         $crelations->title = $request->title;
         $crelations->status = $request->status;
         $crelations->description = $request->description;
+        $crelations->sub_title = $request->sub_title;
         if ($request->hasFile('imageurl'))
         {
             $images = '9' . time() . '.' . $request
@@ -1096,6 +1104,7 @@ class FrontPagesController extends Controller
         $crelations->title = $request->title;
         $crelations->status = $request->status;
         $crelations->description = $request->description;
+        $crelations->sub_title = $request->sub_title;
         if ($request->hasFile('imageurl'))
         {
             $images = '9' . time() . '.' . $request

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', __('User List')); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -33,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                   <?php $users =\App\User::all();?>
+                   
                  <?php $i=1;?>
               <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr>
@@ -47,7 +45,10 @@
                 <td><?php echo e($user->country); ?>, <?php echo e($user->city); ?>, <?php echo e($user->suburb); ?>, <?php echo e($user->code); ?></td>
 
                
-                <td><a href="<?php echo e(url('escort/modify/'.$user->id)); ?>" class="btn btn-xs btn-primary">Modify</a> <a href="<?php echo e(url('branches/edit/'.$user->id)); ?>" class="btn btn-xs btn-danger">Delete</a></td>
+                <td>
+                  <a href="<?php echo e(url('escort/modify/'.$user->id)); ?>" class="btn btn-xs btn-primary">Modify</a>
+                  <a href="<?php echo e(route('user.list.delete',[$user->id,$user->name])); ?>" class="btn btn-xs btn-danger">Delete</a>
+                </td>
              
               
                 

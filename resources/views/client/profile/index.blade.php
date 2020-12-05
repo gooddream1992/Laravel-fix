@@ -1,13 +1,8 @@
-   @extends('client.master.layouts')
+@extends('client.master.layouts')
 @section('title', 'Profile')
 @section('header_title', 'Profile')
 @section('home')
 @foreach($client_profile as $profileValue)
-<?php 
-/*echo "<pre>";
-print_r($profileValue);
-exit;*/
-?>
                 <div class="col-md-9 right-content">
                     <div class="box multi_step_form">
                         <form method="post" action="{{ route('client.profile.upgrade') }}" enctype="multipart/form-data">
@@ -31,20 +26,51 @@ exit;*/
                                                         <input type="text" class="form-control" name="age" value="{{ $profileValue->age }}"/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Location</label>
-                                                        <input type="text" class="form-control" />
+                                                        <label>Country</label>
+                                                        <select class="form-control" name="country" id="selectCountry">
+                                                            <option></option>
+                                                            @foreach ($countries as $country)
+                                                            <option value="{{ $country->id }}"
+                                                                {{ (!empty($profileValue->country) && $country->id == $profileValue->country) ? 'selected' : '' }}>
+                                                                {{ $country->country }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="d-block">Sex</label>
-                                                        <div class="radiobuttons">
-                                                            <div class="rdio rdio-primary radio-inline"> 
-                                                                <input value="1" type="radio" name="gender" @if(isset($profileValue->gender) && $profileValue->gender == 1) Checked @endif>
-                                                                <label for="radio1">Male</label>
-                                                            </div>
-                                                            <div class="rdio rdio-primary radio-inline">
-                                                                <input value="2" type="radio" name="gender" @if(isset($profileValue->gender) && $profileValue->gender == "2") Checked @endif>
-                                                                <label for="radio2">Female</label>
-                                                            </div>
+                                                        <label>City</label>
+                                                        <select class="form-control" name="city" id="selectCity">
+                                                            <option>City</option>
+                                                        </select>
+                                                        <input type="hidden" name="" value="{{ $profileValue->state }}" id="city_name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>You Are<!-- Male/female/trans/gay --></label>
+                                                            <select class="form-control" name="gender" id="gender">
+                                                                <option value="">Gender</option>
+                                                                <option value="1" {{ (!empty($profileValue->gender) && $profileValue->gender == 1) ? 'selected' : '' }}>Male</option>
+                                                                <option value="2" {{ (!empty($profileValue->gender) && $profileValue->gender == 2) ? 'selected' : '' }}>Female</option>
+                                                                <option value="3" {{ (!empty($profileValue->gender) && $profileValue->gender == 3) ? 'selected' : '' }}>Trans gender</option>
+                                                                <option value="4" {{ (!empty($profileValue->gender) && $profileValue->gender == 4) ? 'selected' : '' }}>Gay</option>
+                                                            </select> 
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $interested_in = empty($profileValue->interested_in) ? '' : explode(" , ",$profileValue->interested_in);
+                                                    @endphp
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>Interested In<!-- Male/female/trans/gay --></label>
+                                                            <bR>
+                                                            <label>Male<!-- Male/female/trans/gay --></label>
+                                                            <input type="checkbox" name="interested_in_male" value="1" @if(!empty($profileValue->interested_in_male) && $profileValue->interested_in_male == 1) checked @endif>
+                                                            <label>Female<!-- Male/female/trans/gay --></label>
+                                                            <input type="checkbox" name="interested_in_female" value="2" @if(!empty($profileValue->interested_in_female) && $profileValue->interested_in_female == 2) checked @endif>
+                                                            <label>Trans gender<!-- Male/female/trans/gay --></label>
+                                                            <input type="checkbox" name="interested_in_trans" value="3" @if(!empty($profileValue->interested_in_trans) && $profileValue->interested_in_trans == 3) checked @endif>
+                                                            <label>Gay<!-- Male/female/trans/gay --></label>
+                                                            <input type="checkbox" name="interested_in_gay" value="4" @if(!empty($profileValue->interested_in_gay) && $profileValue->interested_in_gay == 4) checked @endif>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -59,11 +85,11 @@ exit;*/
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Nationality</label>
-                                                        <select name="country" class="form-control" id="country">
+                                                        <select name="nationality" class="form-control">
                                                             <option value="">Nationality</option>
-                                                            @foreach($country as $countryValue)
-                                                                <option value="{{ $countryValue->id }}" @if($countryValue->id == $profileValue->country) selected @endif>
-                                                                    {{ $countryValue->country }}
+                                                            @foreach($nationalities as $nationality)
+                                                                <option value="{{ $nationality->id }}" @if($nationality->id == $profileValue->nationality) selected @endif>
+                                                                    {{ $nationality->dropdownTitle }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -71,7 +97,7 @@ exit;*/
                                                     <div class="form-group">
                                                         <label>Single Couple</label>
                                                         <select class="form-control" name="single_couple">
-                                                            <option>Please Select</option>
+                                                            <option value="">Please Select</option>
                                                             <option value="1" @if(isset($profileValue->single_couple) && $profileValue->single_couple == 1) selected @endif>Single</option>
                                                             <option value="2" @if(isset($profileValue->single_couple) && $profileValue->single_couple == 2) selected @endif>Couple</option>
                                                         </select>
@@ -90,21 +116,22 @@ exit;*/
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="cust-profile-upload mt-2 mb-3">
-                                                        <label>Profile Image</label>
-                                                        <div class="file btn btn-lg btn-primary">
+                                                        <label class="text-white">Profile Image</label>
+                                                        <br>
+                                                        <div class="file btn btn-lg btn-dark w-100">
                                                             <i class="icofont-camera" style="color: eecf;"></i>
                                                             <input type="file" name="imageurl"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <div class="cust-profile-upload mt-2 mb-3">
-                                                            @if(!empty($profileValue->photo))
-                                                                <img src="{{asset('public/uploads/'.$profileValue->photo)}}" class="w-100" style="width: 50px; height: 300px;" />
-                                                                <input type="hidden" name="imageurl" value="@if(isset($profileValue->photo)) {{ $profileValue->photo }} @endif">
-                                                            @else
-                                                                <img src="{{asset('public/client_library/image/no_image_found.png')}}" class="w-100" style="width: 50px; height: 300px;" />
-                                                            @endif
+                                                    <div class="mt-2 mb-3 px-5">
+                                                        @if(!empty($profileValue->photo))
+                                                            <img src="{{asset('public/uploads/'.$profileValue->photo)}}" width="300px" />
+                                                            <input type="hidden" name="imageurl" value="@if(isset($profileValue->photo)) {{ $profileValue->photo }} @endif">
+                                                        @else
+                                                            <img src="{{asset('public/client_library/image/no_image_found.png')}}" width="300px" />
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +166,7 @@ exit;*/
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="submit-btn large">Create Profile</button>
+                                    <button class="submit-btn large">Update Profile</button>
                                 </div>
                             </div>
                         </form>
@@ -148,4 +175,63 @@ exit;*/
             </section>
         </div>
         @endforeach
+
+        <script>
+            $(document).ready(function () {
+                $('#selectCountry').on('change',function(){
+                    var country = this.value;
+                    $.ajax({
+                        url: "{{ route('getCity') }}",
+                        method: 'POST',
+                        data: { "_token": "{{ csrf_token() }}",'country_id':country },
+                        success: function (data) {
+                            console.log(data);
+                             $('#selectCity').html(data);
+                        } 
+                    });
+                });
+
+                var countries = $('#selectCountry').val();
+                if(countries != ''){
+                    var city_name = $('#city_name').val();
+                    $.ajax({
+                        url: "{{ route('getCity') }}",
+                        method: 'POST',
+                        data: { "_token": "{{ csrf_token() }}",'country_id':countries,'city_name':city_name },
+                        success: function (data) {
+                             $('#selectCity').html(data);
+                        } 
+                    });    
+                }
+                
+            });
+            
+
+            // function getCities() {
+            //     $.ajax({
+            //         url: "{{ route('get_cities') }}",
+            //         method: 'GET',
+            //         data: { 'country_id': $('#selectCountry').find(':selected').val() },
+            //         success: function (data) {
+            //             $('#selectCity').text(' ');
+            //             for (var k = 0; k < data.cities.length; k++) {
+            //                 $('#selectCity').append('<option value="' + data.cities[k].city + '">' + data.cities[k].city + '</option>');
+            //             }
+                        
+            //             let cityOptions = document.querySelector('#selectCity').options;
+            //             for (i = 0; i < cityOptions.length; i++) {
+            //                 @if (isset($city_id))
+            //                     if (cityOptions[i].value == {{ $city_id }} ) {
+            //                         cityOptions[i].setAttribute('selected', true)
+            //                     }
+            //                 @endif
+            //             }
+            //         },
+            //         error: function (err) {
+            //             console.log(err);
+            //         }
+            //     })
+            // }
+
+        </script>
         @endsection

@@ -9,14 +9,23 @@
 					<div class="profile-list">
 						<div class="row">
 							@foreach ($new_profiles as $profile_details)
+							@php 
+                                                
+                                $profile_images = \App\ProfileImage::where([
+                                    ['escortId','=',$profile_details->id],
+                                    ['status','=',5]
+                                ])->get();
+                            @endphp
 							<div class="col-lg-3 col-md-6">
-								<div class="profile-box">
+								<div class="profile-box" >
 									<a href="{{ route('profile-guest',$profile_details->id) }}">
-										@if($profile_details->photo==NULL)
-											<img style="height: 522px;" class="w-100" src="{{asset('public/blankphoto.png')}}"> 
-										@else 
-											<img style="height: 522px;" class="w-100" src="{{asset('public/uploads/'.$profile_details->photo)}}">
-										@endif
+										@foreach($profile_images as $value)
+                                            @if(isset($value->image) && !empty($value->image) )
+												<img src="{{asset('public/uploads/' . $value->image)}}" class="w-100" style="height: 322px;" />
+											@else
+                                                <img src="{{asset('public/blankphoto.png')}}" class="w-100" />
+                                            @endif
+                                        @endforeach
 										<p>{{ $profile_details->name }}</p>
 									</a>
 								</div>

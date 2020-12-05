@@ -66,6 +66,7 @@
 
             document.addEventListener("DOMContentLoaded", function(){
                 getCities()
+                getCities2()
             })
 
             function getCities() {
@@ -76,9 +77,58 @@
                         'country_id': $('#selectCountry').find(':selected').val()
                     },
                     success: function (data) {
+                        let cityId = undefined
+                        <?php if(session()->has('city_id')): ?>
+                            cityId = <?php echo e(session()->get('city_id')); ?>
+
+                        <?php endif; ?>
                         $('#citySelect').text(' ');
+                        $('#citySelect').append('<option value="" selected>--Select City--</option>');
                         for (var k = 0; k < data.cities.length; k++) {
-                            $('#citySelect').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            if (cityId == undefined) {
+                                $('#citySelect').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            } else {
+                                // let selected = ''
+                                // if (cityId == data.cities[k].id) {
+                                //     selected = 'selected'
+                                // } 
+                                $('#citySelect').append('<option value="' + data.cities[k].id + '" >' + data.cities[k].city + '</option>');
+                                // $('#citySelect').append('<option value="' + data.cities[k].id + '"' + selected +'>' + data.cities[k].city + '</option>');
+                            }
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            } 
+
+            function getCities2() {
+                $.ajax({
+                    url: "<?php echo e(route('get_cities')); ?>",
+                    method: 'GET',
+                    data: {
+                        'country_id': $('#selectCountry2').find(':selected').val()
+                    },
+                    success: function (data) {
+                        let cityId = undefined
+                        <?php if(session()->has('city_id')): ?>
+                            cityId = <?php echo e(session()->get('city_id')); ?>
+
+                        <?php endif; ?>
+                        $('#citySelect2').text(' ');
+                        $('#citySelect2').append('<option value="">--Select City--</option>');
+                        for (var k = 0; k < data.cities.length; k++) {
+                            if (cityId == undefined) {
+                                $('#citySelect2').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            } else {
+                                // let selected = ''
+                                // if (cityId == data.cities[k].id) {
+                                //     selected = 'selected'
+                                // } 
+                                $('#citySelect2').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                                // $('#citySelect2').append('<option value="' + data.cities[k].id + '"' + selected +'>' + data.cities[k].city + '</option>');
+                            }
                         }
                     },
                     error: function (err) {
@@ -121,7 +171,6 @@
 
 
    
-
 
 
 
@@ -192,8 +241,8 @@
 
                         <div class="profile-banner-detail" style="display: none;" id="profileBanner<?php echo e($caro->id); ?>">
                             <h3><?php echo e($caro->name); ?></h3>
-                            <h5><?php $citycount=\App\City::all()->where('id', $caro->suburb);?>
-                               <?php if($citycount->count()<1): ?> Not Found <?php else: ?> <?php echo e(\App\City::find($caro->suburb)->city); ?> <?php endif; ?></h5>
+                            <h5><?php // $citycount=\App\City::all()->where('id', $caro->suburb);?>
+                               <?php if($caro->suburb==''): ?> Not Found <?php else: ?> <?php echo e($caro->suburb); ?> <?php endif; ?></h5>
                             <table class="escort-profile-details" >
                                 <tr>
                                     <td>Age</td>
@@ -249,10 +298,15 @@
                                             <li>
                                                 <div class="form-group">
                                                     <select class="form-control" name="country_id" onchange="getCities()" id="selectCountry">
-                                                        <?php $countries = \App\Country::all(); ?>
+                                                        <?php 
+                                                            $countries = \App\Country::all(); 
+                                                            $country_id = null;
+                                                            if (session()->has('country_id')) $country_id = session()->get('country_id');
+                                                        ?>
 
                                                         <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <option value="<?php echo e($country->id); ?>">
+                                                            <option value="<?php echo e($country->id); ?>"
+                                                                <?php echo e((!is_null($country_id) && $country_id == $country->id) ? 'selected' : ''); ?>>
                                                                 <?php echo e($country->country); ?>
 
                                                             </option>
@@ -264,27 +318,25 @@
                                             
                                             <li>
                                                 <div class="form-group">
-                                                    <select class="form-control" name="city_id" id="citySelect"> 
-                                                        <?php $cities = \App\City::all(); ?>
-
-                                                        <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <option value="<?php echo e($city->id); ?>">
-                                                                <?php echo e($city->city); ?>
-
-                                                            </option>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <select class="form-control" name="city_id" id="citySelect" value="2807"> 
+                                                        <option></option>
                                                     </select>
                                                 </div>
                                             </li> 
 
                                             
                                             <li>
+                                                <?php
+                                                    $gender = '';
+                                                    if(session()->has('gender')) $gender = session()->get('gender');
+                                                ?>
                                                 <div class="form-group">
                                                     <select class="form-control" name="gender">
-                                                        <option value="1">Male</option>
-                                                        <option value="2">Female</option>
-                                                        <option value="3">Trans Gender</option> 
-                                                        <option value="4">Gay</option>
+                                                        <option value="">--Select Gender--</option>
+                                                        <option value="1" <?php echo e((!empty($gender) && $gender == 1) ? 'selected' : ''); ?>>Male</option>
+                                                        <option value="2" <?php echo e((!empty($gender) && $gender == 2) ? 'selected' : ''); ?>>Female</option>
+                                                        <option value="3" <?php echo e((!empty($gender) && $gender == 3) ? 'selected' : ''); ?>>Trans Gender</option> 
+                                                        <option value="4" <?php echo e((!empty($gender) && $gender == 4) ? 'selected' : ''); ?>>Gay</option>
                                                     </select>
                                                 </div>
                                             </li> 
@@ -295,6 +347,7 @@
                                                     
                                                     
                                                     <select class="form-control" name="service_type">
+                                                        <option value="">--Select Service--</option>
                                                         <option value="1">Escort</option>
                                                         <option value="2">BDSM</option>
                                                         <option value="3">Massage</option>
@@ -400,22 +453,22 @@
                             <a href="<?php echo e(url('profile-guest/'.$escort->id)); ?>"> 
                             <div class="our-escort-box is-available">
                                
-                                <?php if($escort->photo==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="height:235px;" class="w-100"sss> <?php else: ?>  <img src="<?php echo e(asset('public/uploads/'.$escort->photo)); ?>" style="height: 424px;" class="w-100"/><?php endif; ?>
+                                <?php if($escort->photo==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="height:235px;" class="w-100"sss> <?php else: ?>  <img src="<?php echo e(asset('public/uploads/'.$escort->photo)); ?>" style="height: auto;" class="w-100"/><?php endif; ?>
 
                                 <div class="overlay-top">
                                     <div class="text">
                                         <h4><?php echo e($escort->name); ?></h4>
-                                        <span class="location"><?php $statecount=\App\State::all()->where('id', $escort->city);?><?php if($statecount->count()<1): ?> Not Found <?php else: ?> <?php echo e(\App\State::find($escort->city)->state); ?> <?php endif; ?></span>
+                                        <span class="location"><?php $statecount=\App\State::all()->where('id', $escort->state);?><?php if($statecount->count()<1): ?> Not Found <?php else: ?> <?php echo e(\App\State::find($escort->state)->state); ?> <?php endif; ?></span>
                                     </div>
                                 </div>
                                 <div class="overlay-bottom">
                                     <div class="text">
-                                        <h3><?php $statecount=\App\State::all()->where('id', $escort->city);?><?php if($statecount->count()<1): ?> Not Found <?php else: ?> <?php echo e(\App\State::find($escort->city)->state); ?> <?php endif; ?>  - <?php echo e(date('d')); ?><sup>th</sup> <?php echo e(date('M')); ?></h3>
                                         <table class="escort-profile-details">
                                             <tr>
                                                 <td>Suburb</td>
-                                                <td><?php $citycount=\App\City::all()->where('id', $escort->suburb);?>
-                           <?php if($citycount->count()<1): ?> Not Found <?php else: ?> <?php echo e(\App\City::find($escort->suburb)->city); ?> <?php endif; ?></td>
+                                                <td>
+                                                    <?php // $citycount=\App\City::all()->where('id', $escort->suburb);?>
+                           <?php if($escort->city==''): ?> Not Found <?php else: ?> <?php echo e($escort->city); ?> <?php endif; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Service Area</td>
@@ -481,7 +534,7 @@
                             <?php $__currentLoopData = $provresrcs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $resourc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="box-title c-center">
                                 <h2><?php echo e($resourc->titleHead); ?></h2>
-                                <?php echo e($resourc->intro); ?>
+                                <?php echo $resourc->intro; ?>
 
                             </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -555,7 +608,7 @@
                           <?php $__currentLoopData = $professionals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $professonal): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="box-title c-center dark">
                                 <h2><?php echo e($professonal->titleHead); ?></h2>
-                                <p><?php echo e($professonal->intro); ?></p>
+                                <p><?php echo $professonal->intro; ?></p>
                             </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
@@ -678,7 +731,7 @@
 
                          <?php $__currentLoopData = $professionals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $professonal): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="<?php echo e(url('terms/condition')); ?>">
+                            <a href="<?php echo e(url('faq')); ?>">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         <?php if($professonal->icon8==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="height:235px;" class="w-100"sss> <?php else: ?>  <img src="<?php echo e(asset('public/uploads/'.$professonal->icon8)); ?>" style="height:235px;" class="w-100"/><?php endif; ?>
@@ -802,19 +855,17 @@
                         </div>
                     </div>
                     <div class="row justify-content-lg-center justify-content-md-center justify-content-center">
-                   <?php $country=\App\Country::all();?>
-                        <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cntry): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                   <?php $state=\App\State::limit(50)->get();?>
+                        <?php $__currentLoopData = $state; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="location-box">
-                                <?php if($cntry->image==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" class="w-100"sss> <?php else: ?>  <img src="<?php echo e(asset('public/uploads/'.$cntry->image)); ?>" class="w-100"/><?php endif; ?>
-                                <a href="#" class="city-btn"><?php echo e($cntry->country); ?></a>
+                                <?php if($state->image==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" class="w-100"sss> <?php else: ?>  <img src="<?php echo e(asset('public/uploads/'.$state->image)); ?>" class="w-100"/><?php endif; ?>
+                                <a href="<?php echo e(url('country/list/escort/'.$state->country_id)); ?>" class="state-btn"><?php echo e($state->state); ?></a>
                             </div>
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         
-                        <div class="col-lg-12 view-more-area c-center ">
-                            <button class="btn black-btn"  data-toggle="modal" data-target="#citySearch">view more cities</button> 
-                        </div>
+                        
                     </div>
                 </div>
             </section>
@@ -1002,12 +1053,16 @@
 
                                                         <div class="form-group">
 
-                                                         <select class="form-control" name="country_id" onchange="selectcountry()" id="selectCountry">
-                        <?php $countries=\App\Country::all();?>
-                        <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($country->id); ?>"><?php echo e($country->country); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
+                                                        <select class="form-control" name="country_id" onchange="getCities2()" id="selectCountry2">
+                                                        <?php $countries=\App\Country::all();?>
+                                                        <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($country->id); ?>"
+                                                                <?php echo e((!is_null($country_id) && $country_id == $country->id) ? 'selected' : ''); ?>>
+                                                                <?php echo e($country->country); ?>
+
+                                                            </option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
 
                                                         </div>
 
@@ -1015,18 +1070,19 @@
 
                                                     <li>
 
+                                                        <?php
+                                                        $gender = '';
+                                                            if(session()->has('gender')) $gender = session()->get('gender');
+                                                        ?>
                                                         <div class="form-group">
-
                                                             <select class="form-control" name="gender">
-
-                                                                <option value="1">Male</option>
-
-                                                                <option value="2">Female</option>
-
+                                                                <option value="">--Select Gender--</option>
+                                                                <option value="1" <?php echo e((!empty($gender) && $gender == 1) ? 'selected' : ''); ?>>Male</option>
+                                                                <option value="2" <?php echo e((!empty($gender) && $gender == 2) ? 'selected' : ''); ?>>Female</option>
+                                                                <option value="3" <?php echo e((!empty($gender) && $gender == 3) ? 'selected' : ''); ?>>Trans Gender</option> 
+                                                                <option value="4" <?php echo e((!empty($gender) && $gender == 4) ? 'selected' : ''); ?>>Gay</option>
                                                             </select>
-
                                                         </div>
-
                                                     </li>
 
                                                     <li>
@@ -1094,12 +1150,9 @@
                                                     <li>
 
                                                         <div class="form-group">
- <select class="form-control" name="state_id" onchange="selectstate()" id="stateSelect">
-                                          <?php $States=\App\State::all();?>
-                        <?php $__currentLoopData = $States; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($state->id); ?>"><?php echo e($state->state); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
+                                                    <select class="form-control" name="state_id" onchange="selectstate()" id="citySelect2">
+                                                        <option></option>
+                                                    </select>
 
                                                         </div>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\escortBackEnd;
 use Auth;
 use DB;
 use App\User;
+use Session;
 use App\City;
+use App\State;
 use App\Country;
 use App\ProfileRate;
 use App\ServiceOffer;
@@ -84,24 +86,29 @@ class EscortProfileController extends Controller
      * 
      */
     public function getUserId($id = null) {
-        if (!is_null($id)) {
-            if (User::find(Auth::user()->id)->roleStatus == 1) {
-                return $id;
-            }
-        } else {
-            return Auth::user()->id;
+        if ($id && (User::find(Auth::user()->id)->roleStatus == 1)) {
+            return $id;
         }
+        return Auth::user()->id;
     }
 
     /**
      * STEP 1 - Profile Stats 
      * Route name : profile.stats.index
      */
-    public function getProfileStats($id = null)
-    {   
-        $id = $this->getUserId($id);
+    public function getProfileStats($id = null) {
+        $user = User::find($id);
+        if($id!=null)
+        {
+            Auth::login($user);
+            if(!Session::has('main_login_type'))
+            {
+                Session::put('main_login_type', Auth::user()->roleStatus);
+            }
+        }
+        $id = ($id==null) ? $this->getUserId($id) : $id;
 
-        $cities = City::all();
+        $cities = State::select('id', 'country_id', 'state as city')->get();
         $countries = Country::all();
         $escort = User::find($id);
 
@@ -114,13 +121,13 @@ class EscortProfileController extends Controller
         ];
 
         $escort_dropdowns = [];
-
+        $social_media = DB::table('social_media')->select('*')->get();
         foreach ($dropdown_status as $name => $status) {
             $escort_dropdowns[$name] = EscortDropdown::where('status', $status)->get();
         }
 
         return view('frontend.escort_dashboard.new.profile.profileStats', 
-            compact('id', 'escort', 'countries', 'cities', 'escort_dropdowns'));
+            compact('id', 'escort', 'countries', 'cities', 'escort_dropdowns','social_media'));
     }
 
 
@@ -133,24 +140,34 @@ class EscortProfileController extends Controller
      */
     public function updateProfileStats(Request $request, $id = null)
     {
-        $id = $this->getUserId($id);
-
-        User::find($id)->update([
+        // $id = $this->getUserId($id);
+        $id = ($id==null) ? $this->getUserId($id) : $id;
+        $socail_media1 = $request->social_mediaVal1; 
+        $socail_media2 = $request->social_mediaVal2;
+        $socail_media3 = $request->social_mediaVal3;
+        $social1 = $request->social1;
+        $social2 = $request->social2;
+        $social3 = $request->social3;
+        // echo $request->service_provider;
+        // exit;
+        DB::table('users')->where('id','=',$id)->update([
             // Basic Information
             'name'      => $request->name,
             'email'     => $request->email,
             'phone'     => $request->phone,
             'country'   => $request->country,
-            'city'      => $request->city,
+            'state'     => $request->city,
 
             // Social Information
-            'whatsup'   => $request->whatsapp,
-            'snapchat'  => $request->snapchat,
-            'instagram' => $request->instagram,
-            'website'   => $request->website,
+            'snapchat'   => $social1,
+            'facebook'  => $social2,
+            'whatsup'   => $social3,
+            'sm_label_one'   => $socail_media1,
+            'sm_label_two'  => $socail_media2,
+            'sm_label_three'   => $socail_media3,
 
             // Other Information
-            'state'     => $request->suburb,
+            'city'      => $request->suburb,
             'gender'    => $request->gender,
             'straight'  => $request->straight,
             'height'    => $request->height,
@@ -167,9 +184,45 @@ class EscortProfileController extends Controller
             
             'pet'       => $request->services_offering,
             'drink'     => $request->drink,
-            'food'      => $request->food,
+            // 'food'      => $request->food,
+            'serviceArea' =>$request->serviceArea,
             'service'   => $request->service_provider,
-        ]);
+            'website'   => $request->website
+         ] );
+        // User::find($id)->update([
+        //     // Basic Information
+        //     'name'      => $request->name,
+        //     'email'     => $request->email,
+        //     'phone'     => $request->phone,
+        //     'country'   => $request->country,
+        //     'city'      => $request->city,
+
+        //     // Social Information
+        //     $socail_media1   => $social1,
+        //     $socail_media2  => $social2,
+        //     $socail_media3   => $social3,
+
+        //     // Other Information
+        //     'state'     => $request->suburb,
+        //     'gender'    => $request->gender,
+        //     'straight'  => $request->straight,
+        //     'height'    => $request->height,
+
+        //     'age'       => $request->age,
+        //     'hair'      => $request->hair,
+        //     'eyes'      => $request->eyes,
+        //     'dress'     => $request->dress,
+            
+        //     'bust'          => $request->bust,
+        //     'bodyShape'     => $request->body_shape,
+        //     'nationality'   => $request->nationality,
+        //     'personal_type' => $request->personality_type,
+            
+        //     'pet'       => $request->services_offering,
+        //     'drink'     => $request->drink,
+        //     'food'      => $request->food,
+        //     'service'   => $request->service_provider,
+        // ]);
 
         return back()->with('message', 'Profile Stats updated successfully');
     }
@@ -179,17 +232,20 @@ class EscortProfileController extends Controller
      * STEP 2 - Biography 
      * Route name : profile.biography.index
      */
-    public function getProfileBiography()
+    public function getProfileBiography($id = null)
     {
+        $id = $this->getUserId($id);
+
         $about_me = ProfileDescription::where('escortId', Auth::user()->id)
             ->where('status', 2)->pluck('description')->first();
 
+        
         $favourite = ProfileFavourite::where('escortId', Auth::user()->id)->first();
 
         $wishlist = ProfileWishlist::where('escortId', Auth::user()->id)->get();
 
         return view('frontend.escort_dashboard.new.profile.profileBiography', 
-            compact('about_me', 'favourite', 'wishlist'));
+            compact('id', 'about_me', 'favourite', 'wishlist'));
     }
 
 
@@ -200,10 +256,12 @@ class EscortProfileController extends Controller
      * 
      * @return  \Illuminate\Http\Response
      */
-    public function updateProfileBiography(Request $request)
+    public function updateProfileBiography(Request $request, $id = null)
     {
-        $id = Auth::user()->id;
-
+        // $id = $this->getUserId($id);
+        $id = ($id==null) ? $this->getUserId($id) : $id;
+        // echo $request->about_me;
+        // exit;
         // About Me
         $profile_description = ProfileDescription::where('escortId', $id)->where('status', 2)->first();
         if ($profile_description) {
@@ -295,6 +353,13 @@ class EscortProfileController extends Controller
                         continue;
                     }
                 }
+
+                DB::table('notification')->insert([
+                    'notification_title'=>Auth::user()->name." updated their wishlist.",
+                    'url'=> "profile/".$id,
+                    'notification_content'=>Auth::user()->name." updated their wishlist.",
+                    'user_id'=>$id
+                ]);
             }
         }
 
@@ -306,9 +371,9 @@ class EscortProfileController extends Controller
      * STEP 3 - Services
      * Route name : profile.services.index
      */
-    public function getProfileServices()
+    public function getProfileServices($id = null)
     {
-        $id = Auth::user()->id;
+        $id = $this->getUserId($id);
 
         // Availability
         $week_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -352,13 +417,14 @@ class EscortProfileController extends Controller
                 ->where('status', $status)->latest()->get();
 
             foreach($profile_rates as $profile_rate) {
-                $profile_rate->hours = str_replace(' Hours', '', $profile_rate->time);
+                $profile_rate->hours = $profile_rate->time;
+                // $profile_rate->hours = str_replace(' Hours', '', $profile_rate->time);
                 $rates[$call_type][] = $profile_rate;
             }
         }
         
         return view('frontend.escort_dashboard.new.profile.profileServices', 
-            compact('week_days', 'availability', 'services_available', 'services_offered',
+            compact('id', 'week_days', 'availability', 'services_available', 'services_offered',
                 'service_tags','tags_description', 'rates'));
     }
 
@@ -370,15 +436,21 @@ class EscortProfileController extends Controller
      * 
      * @return  \Illuminate\Http\Response
      */
-    public function updateProfileServices(Request $request)
+    public function updateProfileServices(Request $request, $id = null)
     {
-        $id = Auth::user()->id;
-
+        
+        // $id = $this->getUserId($id);
+        $id = ($id==null) ? $this->getUserId($id) : $id;
+        // echo "<pre>";
+        // print_r($request->availability);
+        // exit;
         // Availability
         foreach ($request->availability as $day => $dayData) {
             $available24 = (array_key_exists('available24', $dayData) && $dayData['available24'] == 'on') ? true : false;
-
-            $from = $available24 ? '1:00' : $dayData['from'];
+            // echo "<prE>";
+            // print_r($available24);
+            $from = $available24 ? '1:00' : $dayData['from']; 
+            //echo "<br>";
             $from_indicator = $available24 ? 'AM' : $dayData['from_indicator'];
             $until = $available24 ? '1:00' : $dayData['until'];
             $until_indicator = $available24 ? 'AM' : $dayData['until_indicator'];
@@ -402,11 +474,20 @@ class EscortProfileController extends Controller
                     'description'   => $dayData['description'],
                 ]);
             }
-        }
 
+
+        }
+                // DB::table('notification')->insert([
+                //     'notification_title'=>Auth::user()->name." changed their availability.",
+                //     'url'=> "profile/".$id,
+                //     'notification_content'=>Auth::user()->name." changed their availability.",
+                //     'user_id'=>$id
+                // ]);
+        //exit;
         // Services Offered
         $retain = [];
-        foreach ($request->services_selected as $service => $status) {
+        $selected_services = isset($request->services_selected) && !empty($request->services_selected) ? $request->services_selected : array();
+        foreach ($selected_services as $service => $status) {
             if ($status == 'on') {
                 array_push($retain, $service);
                 ServiceOfferAssign::firstOrCreate([
@@ -448,7 +529,7 @@ class EscortProfileController extends Controller
                     if (array_key_exists('id', $rate)) {                       
                         array_push($retain_ids, $rate['id']);
                         ProfileRate::find($rate['id'])->update([
-                            'time'          => $rate['hours'] . ' Hours',
+                            'time'          => ($rate['hours'] !='wyo') ? $rate['hours'] : $rate['hours_own'],
                             'price'         => $rate['price'],
                             'description'   => $rate['description'],
                         ]);
@@ -456,7 +537,7 @@ class EscortProfileController extends Controller
                         $new = ProfileRate::create([
                             'escortId'      => $id,
                             'status'        => $rate['status'],
-                            'time'          => $rate['hours'] . ' Hours',
+                            'time'          => ($rate['hours'] !='wyo') ? $rate['hours'] : $rate['hours_own'],
                             'price'         => $rate['price'],
                             'description'   => $rate['description']
                         ])->id;
@@ -464,6 +545,13 @@ class EscortProfileController extends Controller
                     }
                 }
             }
+
+            // DB::table('notification')->insert([
+            //     'notification_title'=>Auth::user()->name." updated their rates",
+            //     'url'=> "profile/".$id,
+            //     'notification_content'=>Auth::user()->name." updated their rates",
+            //     'user_id'=>$id
+            // ]);
         }
 
         $remove = ProfileRate::where('escortId', $id)
@@ -477,12 +565,14 @@ class EscortProfileController extends Controller
     /**
      * STEP 4 - Photos
      * Route name : profile.photos.index
+     * 
+     * @param  Integer $id
      */
-    public function getProfilePhotos()
+    public function getProfilePhotos($id = null)
     {
-        $id = Auth::user()->id;
+        $id = $this->getUserId($id);
 
-        $status = ['slider' => 1, 'gallery' => 2, 'video' => 3, 'selfie' => 4];
+        $status = ['slider' => 1, 'gallery' => 2, 'video' => 3, 'selfie' => 4, 'thumbnail' => 5];
         $images = [];
 
         foreach ($status as $name => $code) {
@@ -490,11 +580,12 @@ class EscortProfileController extends Controller
                 ->where('status', $code)
                 ->orderBy('updated_at', 'desc')
                 ->get();
+                
         }
 
         $thumbnail = User::find($id);
-
-        return view('frontend.escort_dashboard.new.profile.profilePhotos', compact('images', 'thumbnail'));
+        
+        return view('frontend.escort_dashboard.new.profile.profilePhotos', compact('id', 'images', 'thumbnail'));
     }
 
         
@@ -503,14 +594,15 @@ class EscortProfileController extends Controller
      * Show Selected Photo
      *
      * @param  Integer $id
+     * @param  Integer $imageId
      * 
      * @return \Illuminate\Http\Response
      */
-    public function showProfilePhoto($id)
+    public function showProfilePhoto($id = null, $imageId)
     {
-        $image = ProfileImage::find($id);
+        $image = ProfileImage::find($imageId);
 
-        return view('frontend.escort_dashboard.new.profile.profilePhotosUpdate', compact('image'));
+        return view('frontend.escort_dashboard.new.profile.profilePhotosUpdate', compact('id', 'image'));
     }
 
     
@@ -519,33 +611,79 @@ class EscortProfileController extends Controller
      * Route name : profile.photos.store
      *
      * @param  \Illuminate\Http\Request $request
+     * @param  Integer $id
      */
-    public function storeProfilePhoto(Request $request)
+    public function storeProfilePhoto(Request $request, $id = null)
     {
-        $id = Auth::user()->id;
+        $id = $this->getUserId($id);
 
-        if ( ! is_null($request->status) && $request->hasFile('uploaded_image')) {
-            $image = '9' . time() . '.' . $request->uploaded_image->getClientOriginalExtension();
-            $request->uploaded_image->move('public/uploads' , $image);
-            
+        $files = $request->file('uploaded_image');
+        
+        if ( ! is_null($request->status) && $request->hasFile('uploaded_image')) {            
             if ($request->status == 'thumbnail') {
-                $old_image = User::find($id)->photo;
-                File::delete(base_path('/public/uploads/' . $old_image));
-                
-                User::find($id)->update(['photo' => $image]);
+                if(isset($request->old_photo) && !empty($request->old_photo)){
+                    DB::table('profile_images')->where([
+                        ['escortId','=',$id],
+                        ['status','=',5]
+                    ])->delete();
+                    File::delete(base_path('/public/uploads/'.$request->old_photo));
+                }                
+                // User::find($id)->update(['photo' => $old_image]);
+                $i = 0;
+
+                foreach($files as $value){
+                    $image = $i++ . time() . '.' . $value->getClientOriginalExtension();                   
+                    $value->move('public/uploads' , $image);
+                    ProfileImage::create([
+                        'escortId'  => $id,
+                        'status'    => 5,
+                        'image'     => $image
+                    ]);
+                }
             } else {
-                ProfileImage::create([
-                    'escortId'  => $id,
-                    'status'    => $request->status,
-                    'image'     => $image
-                ]);
+                $i = 0;
+
+                foreach($files as $value){
+                    $image = $i++ . time() . '.' . $value->getClientOriginalExtension();                   
+                    $value->move('public/uploads' , $image);
+                    ProfileImage::create([
+                        'escortId'  => $id,
+                        'status'    => $request->status,
+                        'image'     => $image
+                    ]);
+                }
+                
+            }
+
+            
+            $upload_type = "";
+            if($request->status=='1')
+            {
+                $upload_type="Slider";
+            }
+            if($request->status=='2')
+            {
+                $upload_type="Gallery Image";
+            }
+            if($request->status=='3')
+            {
+                $upload_type="Video";
+            }
+            if($request->status=='4')
+            {
+                $upload_type="Selfie";
+            }
+            if($request->status=='thumbnail')
+            {
+                $upload_type="Thumbnail";
             }
             DB::table('notification')->insert([
-                'notification_title'=>Auth::user()->name." uploaded a new profile image",
-                'notification_content'=>Auth::user()->name." uploaded a new profile image",
+                'notification_title'=>Auth::user()->name." uploaded a new ".$upload_type,
+                'url'=> "profile/".$id,
+                'notification_content'=>Auth::user()->name." uploaded a new ".$upload_type,
                 'user_id'=>$id
             ]);
-            return redirect()->back()->with('message', 'Image uploaded successfully');
+            return back()->with('message', 'Image uploaded successfully');
         }
 
         return back()->with('message', 'Failed to upload image!');
@@ -563,6 +701,7 @@ class EscortProfileController extends Controller
      */
     public function updateProfilePhoto(Request $request, $id)
     {
+
         if ($request->hasFile('uploaded_image')) {
             $old_image = ProfileImage::find($id)->image;
             
@@ -573,7 +712,7 @@ class EscortProfileController extends Controller
 
             File::delete(base_path('/public/uploads/' . $old_image));
 
-            return redirect()->route('profile.photos.index')->with('message', 'Image updated successfully');
+            return back()->with('message', 'Image updated successfully');
         }        
         return back()->with('message', 'Failed to update image!');
     }
@@ -583,18 +722,23 @@ class EscortProfileController extends Controller
      * STEP 4 - Photos
      * Route name : profile.photos.delete
      *
-     * @param  Integer $id
+     * @param  Integer $id User ID
+     * @param  Integer $imageId Image ID
      */
-    public function deleteProfilePhoto($id)
+    public function deleteProfilePhoto($id = null, $imageId)
     {
-        $image = ProfileImage::find($id);
+        // User id for redirection only
+        $id = $this->getUserId($id);
+        
+        $image = ProfileImage::find($imageId);
         File::delete(base_path('/public/uploads/' . $image->image));
         $image->delete();
 
-        return redirect()->route('profile.photos.index')->with('message', 'Image deleted successfully');
+        return redirect()->route('profile.photos.index', $id)->with('message', 'Image deleted successfully');
     }
 
-    
+
+    // DISABLED ON CLIENT'S REQUEST
     /**
      * STEP 5 - Verification
      * Route name : profile.verification.index
@@ -607,10 +751,11 @@ class EscortProfileController extends Controller
         $country = Country::find($escort->country);
         $city = City::find($escort->city);
 
-        return view('frontend.escort_dashboard.new.profile.profileVerification', compact('escort', 'country', 'city'));
+        return view('frontend.escort_dashboard.new.profile.profileVerification', compact('escort', 'country', 'city','id'));
     }
 
     
+    // DISABLED ON CLIENT'S REQUEST
     /**
      * STEP 5 - Verifcation
      * Route name : profile.verification.update
@@ -618,14 +763,65 @@ class EscortProfileController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function updateVerification(Request $request, $id)
-    {   
-        if ($request->has('terms_conditions') && $request->terms_conditions == 'on') {
-            User::find($id)->update(['activation' => 1]);
-            return back()->with('message', 'Account activated successfully');
+    public function updateVerification(Request $request, $id) {
+
+        if(!empty($request->verification)){
+            $old_photo = Auth::user()->verification_photo;
+            if(isset($old_photo)){
+                // unlink("public/verification/".$old_photo);    
+            }          
+
+            $img = $request->verification;
+            $folderPath = "public/verification/";
+
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file = $folderPath . time() . '.'.$image_type;
+            $image = time() . '.'.$image_type;
+            file_put_contents($file, $image_base64);
+            DB::table('users')->where('id','=',$id)->update(
+                            ['verification_photo'=>$image,'request'=>'0']
+               );
+        }
+        
+        // exit;
+        
+        $files = $request->file('verification_self');
+        if($request->hasFile('verification_self')) {
+            $old_photo = Auth::user()->verification_photo;
+            if(isset($old_photo)){
+                // unlink("public/verification/".$old_photo);    
+            }          
+            $image = time() . '.' . $request->verification_self->getClientOriginalExtension();            
+            $request->verification_self->move('public/verification' , $image);
+            DB::table('users')->where('id','=',$id)->update(
+                ['verification_photo'=>$image,'request'=>'0']
+            );
         }
 
-        return back()->with('error', 'Failed to activate account');
+        return redirect()->back()->with('message','Your Verification Photo Uploaded Successfully! ');
     }
+
     // SMPEDIT 13-10-2020 END
+
+    public function delete($userId, $id,$imageId){
+        $userId =  $this->getUserId($userId);
+        
+        $file = "public/uploads/".$imageId; 
+        DB::table('profile_images')->where([
+            ['id','=',$id],
+            ['escortId','=',$userId]
+            ])->delete();
+            unlink($file);
+            return redirect()->route('profile.photos.index', $userId)->with('message', 'Image deleted successfully');
+    }
+
+    public function moveLoginAdmin()
+    {
+        $user = User::find('1');
+        Auth::login($user);
+        return redirect()->route('admin.escort.profile.request');
+    }
 }

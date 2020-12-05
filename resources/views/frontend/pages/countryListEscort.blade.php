@@ -1,16 +1,47 @@
 @extends('masters.frontmaster')
+<?php
+$seo = array();
+if (count($seo_text) > 0) {
+    foreach ($seo_text as $value) {
+        $val = isset($value->description) && $value->description != '' ? $value->description : '';
+        if ($val != '')  {
+            $seo = array(
+                'seo' => $val
+            );
+        } else {
+            $seo = array(
+                'seo' => ''
+            );
+        }
+    }
+}
+else {
+    $seo = array(
+        'seo' => ''
+    );
+}
+$sss = $seo['seo'];
 
+$current_url = url()->current();
+$trim_url = ltrim($current_url,"https://honeydeve.alakmalak.ca/country");
+$ex_url = explode("/",$trim_url);
+?>
 @section('title', __('Index'))
+@section('footer_description',$sss)
 
 @section('main')
     <section class="home-slider">
         <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <?php $slider=\App\Slider::orderBy('id','desc')->where('category', 1)->first(); 
-                    $slider1= $slider->slider; 
-                    $slider2= $slider->slider1; 
-                    $slider3= $slider->slider2;  ?>
+                    <?php
+
+                        $slider = \App\Slider::orderBy('id', 'desc')->where('category', 1)->first();
+                        $slider1 = $slider->slider;
+                        $slider2 = $slider->slider1;
+                        $slider3 = $slider->slider2;
+
+                    ?>
                     <img class="first-slide" src="{{asset('public/uploads/'.$slider1)}}" alt="First slide">
                 </div>
                 <div class="carousel-item">
@@ -43,9 +74,9 @@
                                             <select class="form-control" name="country_id" id="selectCountry" onchange="getCities()">
                                                 @php $countries=\App\Country::all(); @endphp
                                                 
-                                                @foreach($countries as $country)
-                                                    <option value="{{ $country->id }}" {{ ($country->id == $country_id) ? 'selected' : '' }}>
-                                                        {{ $country->country }}
+                                                @foreach($countries as $country_details)
+                                                    <option value="{{ $country_details->id }}" {{ ($country_details->id == $country_id) ? 'selected' : '' }}>
+                                                        {{ $country_details->country }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -56,11 +87,11 @@
                                     <li>
                                         <div class="form-group">
                                             <select class="form-control" name="city_id" id="citySelect"> 
-                                                @php $cities = \App\City::where('country_id', $country_id)->get(); @endphp
+                                                @php $cities = \App\State::where('country_id', $country_id)->get(); @endphp
 
                                                 @foreach($cities as $city)
                                                     <option value="{{$city->id}}">
-                                                        {{$city->city}}
+                                                        {{$city->state}}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -71,8 +102,11 @@
                                     <li>
                                         <div class="form-group">
                                             <select class="form-control" name="gender">
+                                                <option value="">--Select Gender--</option>
                                                 <option value="1">Male</option>
                                                 <option value="2">Female</option>
+                                                <option value="3">Trans Gender</option>
+                                                <option value="4">Gay</option>
                                             </select>
                                         </div>
                                     </li> 
@@ -82,6 +116,7 @@
                                         <div class="form-group">
                                             {{-- SMPEDIT 15-10-2020 --}}
                                             <select class="form-control" name="service_type">
+                                                <option value="">--Select Service Type--</option>
                                                 <option value="1">Escort</option>
                                                 <option value="2">BDSM</option>
                                                 <option value="3">Massage</option>
@@ -142,13 +177,7 @@
                                             <button type="submit" class="btn custom-red-small btn-block">Search</button>
                                         </div>
                                     </li> 
-
                                 </ul>
-
-                                {{-- Advance Search --}}
-                                <button type="button" class="btn custom-red-small btn-advance-search" data-toggle="modal" data-target="#advanceSearch">
-                                    Advanced search {{-- SMPEDIT 15-10-2020 --}}
-                                </button>
 
                             </div>
 
@@ -163,360 +192,383 @@
         </div>
 
     </section>
+    <section class="advance-search-section thin m-visible desk-hidden">
+        <div class="container">
+            <div class="row justify-content-lg-center justify-content-md-center ">
+                <div class="col-lg-12">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                    Listing Search <i class="fas fa-chevron-down right"></i>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="advance-search-sec-form">
+                                        <form method="POST" action="{{ url('filter/search/escort') }}">
+                                            @csrf
+                                            <div class="form-box">
+                                                <ul class="fields">
+                                                    {{-- Country --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="country_id" id="selectCountry" onchange="getCities()">
+                                                                @php $countries=\App\Country::all(); @endphp
+                                                                
+                                                                @foreach($countries as $country_details)
+                                                                    <option value="{{ $country_details->id }}" {{ ($country_details->id == $country_id) ? 'selected' : '' }}>
+                                                                        {{ $country_details->country }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </li> 
+                                                    {{-- City --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="city_id" id="citySelectMob"> 
+                                                                @php $cities = \App\State::where('country_id', $country_id)->get(); @endphp
+                                                                @foreach($cities as $city)
+                                                                    <option value="{{$city->id}}">
+                                                                        {{$city->state}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </li> 
+                                                    {{-- Gender --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="gender">
+                                                                <option value="">--Select Gender--</option>
+                                                                <option value="1">Male</option>
+                                                                <option value="2">Female</option>
+                                                                <option value="3">Trans Gender</option>
+                                                                <option value="4">Gay</option>
+                                                            </select>
+                                                        </div>
+                                                    </li> 
+                                                    {{-- Service Type --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <select class="form-control" name="service_type">
+                                                                <option value="">--Select Service Type--</option>
+                                                                <option value="1">Escort</option>
+                                                                <option value="2">BDSM</option>
+                                                                <option value="3">Massage</option>
+                                                            </select>
+                                                        </div>
+                                                    </li> 
+                                                    {{-- Keyword --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <input name="keyword" type="text" class="form-control" placeholder="Keyword" />
+                                                        </div>
+                                                    </li> 
+                                                    {{-- Touring Escorts --}}
+                                                    <li class="custom-toggle">
+                                                        <button type="button" class="btn btn-danger custom-toggle-btn mb-3 w-100" id="touring_escorts_btn_mob"
+                                                            onclick="customToggle('touring_escorts', 'touring_escorts_btn_mob');">
+                                                                Touring Escorts
+                                                        </button>
+                                                        <input type="hidden" id="touring_escorts" name="touring_escorts" value="false" />
+                                                    </li> 
+                                                    {{-- Reviews --}}
+                                                    <li class="custom-toggle">
+                                                        <button type="button" class="btn btn-danger custom-toggle-btn mb-3 w-100" id="with_reviews_btn_mob"
+                                                            onclick="customToggle('with_reviews', 'with_reviews_btn_mob');">
+                                                                Reviews
+                                                        </button>
+                                                        <input type="hidden" id="with_reviews" name="with_reviews" value="false" />
+                                                    </li> 
+                                                    {{-- Couples Service --}}
+                                                    <li class="custom-toggle">
+                                                        <button type="button" class="btn btn-danger custom-toggle-btn mb-3 w-100" id="couples_service_btn_mob"
+                                                            onclick="customToggle('couples_service', 'couples_service_btn_mob');">
+                                                                Couples Service
+                                                        </button>
+                                                        <input type="hidden" id="couples_service" name="couples_service" value="false" />
+                                                    </li> 
+                                                    {{-- Available Now --}}
+                                                    <li class="custom-toggle">
+                                                        <button type="button" class="btn btn-danger custom-toggle-btn mb-3 w-100" id="available_now_btn_mob"
+                                                            onclick="customToggle('available_now', 'available_now_btn_mob');">
+                                                                Available Now
+                                                        </button>
+                                                        <input type="hidden" id="available_now" name="available_now" value="false" />
+                                                    </li> 
+                                                    {{-- Search --}}
+                                                    <li>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn custom-red-small btn-block">Search</button>
+                                                        </div>
+                                                    </li> 
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     {{-- / Search Section End --}} {{-- / SMPEDIT 30-09-2020 End --}} 
 
-    <!--Advance search modal start-->
-    <div class="modal fade" id="advanceSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-        <div class="modal-dialog  modal-lg" role="document">
-
-            <div class="modal-content ">
-
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="exampleModalLabel">Advanced Search</h5> {{-- SMPEDIT 15-10-2020 --}}
-
-                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-
-                    <button type="button" class="btn" data-dismiss="modal">&times;</button>
-
-                </div>
-
-                <div class="modal-body">
-
-                            <form method="POST" action="{{ url('advance/search/escort') }}">
-                                @csrf
-
-
-                        <div class="container">
-
-                            <div class="row">
-
-                                <div class="col-lg-12">
-
-                                    <div class="advance-search-sec-form">
-
-                                        <div class="form-box">
-
-                                            <ul class="fields">
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="country_id" onchange="selectcountry()" id="selectCountry">
-                    <?php $countries=\App\Country::all();?>
-                    @foreach($countries as $country)
-                    <option value="{{$country->id}}">{{$country->country}}</option>
-                    @endforeach
-                            </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="gender">
-
-                                                            <option value="1">Male</option>
-
-                                                            <option value="2">Female</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                </li>
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <input type="text" class="form-control" placeholder="Height">
-
-                                                    </div>
-
-                                                </li>
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <input type="text" class="form-control" placeholder="Dress Size">
-
-                                                    </div>
-
-                                                </li>
-
-
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="age">
-
-                                                            <option>Age</option>
-
-                                                            <option value="18">18</option>
-
-                                                            <option value="20">20</option>
-
-                                                            <option value="22">22</option>
-
-                                                            <option value="24">24</option>
-
-                                                            <option value="26">26</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                        <select class="form-control" name="nationality">
-                    <?php $nationalities=\App\EscortDropdown::all()->where('status', 4);?>
-                    @foreach($nationalities as $nation)
-                    <option value="{{$nation->id}}">{{$nation->dropdownTitle}}</option>
-                    @endforeach
-                            </select>
-
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-        <select class="form-control" name="state_id" onchange="selectstate()" id="stateSelect">
-                                                <?php $States=\App\State::all();?>
-                    @foreach($States as $state)
-                    <option value="{{$state->id}}">{{$state->state}}</option>
-                    @endforeach
-                            </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="sextuality">
-                    <?php $sextualities=\App\EscortDropdown::all()->where('status', 3);?>
-                    @foreach($sextualities as $sex)
-                    <option value="{{$sex->id}}">{{$sex->dropdownTitle}}</option>
-                    @endforeach
-                            </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="bodyShape">
-                    <?php $bodyshpaes=\App\EscortDropdown::all()->where('status', 2);?>
-                    @foreach($bodyshpaes as $shape)
-                    <option value="{{$shape->id}}">{{$shape->dropdownTitle}}</option>
-                    @endforeach
-                            </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="hair">
-                    <?php $hairs=\App\EscortDropdown::all()->where('status', 5);?>
-                    @foreach($hairs as $hair)
-                    <option value="{{$hair->id}}">{{$hair->dropdownTitle}}</option>
-                    @endforeach
-                            </select>
-
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <select class="form-control" name="eye">
-                    <?php $eyes=\App\EscortDropdown::all()->where('status', 1);?>
-                    @foreach($eyes as $eye)
-                    <option value="{{$eye->id}}">{{$eye->dropdownTitle}}</option>
-                    @endforeach
-                            </select>
-                                                    </div>
-
-                                                </li> 
-
-                                                <li>
-
-                                                    <div class="form-group">
-
-                                                        <input type="text" class="form-control" placeholder="Price">
-
-                                                    </div>
-
-                                                </li>
-
-                                            </ul>
-
-                                        </div>
-
-
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row justify-content-lg-center">
-
-                                <div class="col-lg-9 c-center">
-
-                                    <div class="search-availability-bar">
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >Touring Escorts</button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >View Available Now</button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >View Available Today    </button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >In Call</button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >Out Call</button>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-lg-9 c-center mt-3">
-
-                                    <h4>Services Offered </h4>
-
-                                    <ul class="advance-search-check-list">
-                                        <?php $services=\App\ServiceOffer::all();?>
-                                        @foreach($services as $service)
-
-                                        <li><div class="custom-control custom-checkbox"><input type="checkbox" value="{{$service->id}}" class="custom-control-input" id="customCheck1{{$service->id}}" name="example1"><label class="custom-control-label" for="customCheck1{{$service->id}}">{{$service->service}}</label></div></li>
-
-                                        @endforeach
-
-                                        
-
-                                    </ul>
-
-                                </div>
-
-                                <div class="col-lg-6 c-center">
-
-                                    <div class="search-availability-bar equal-btns">
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >Agency</button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >Independent</button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" >Establishment</button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row justify-content-lg-center">
-
-                                <div class="col-lg-5 c-center mt-3 mb-3">
-
-                                    <div class="clearfix">
-
-                                        <div class="form-group price-detail left">
-
-                                            <input type="text" class="form-control" placeholder="From" />
-
-                                            <input type="text" class="form-control" placeholder="To" />
-
-                                        </div>
-
-                                        <div class="right ">
-
-                                            <button class="red-small">Filter</button>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div> <!--Advance search modal End-->
-
     {{-- Escorts --}}
-    <section class="home-escorts" style="height: 100% !important;">
+                <?php
+                    $escorts = \App\User::where([['roleStatus', 2], ['country', $country_id], ['request', '=', 1]])->get();
+                ?>
+    <section class="home-escorts m-visible desk-hidden">
         <div class="container">
-            <div class="row justify-content-lg-center justify-content-md-center escort-row">
-
-
-                <?php $escorts= \App\User::all()->where('roleStatus', 2)->where('country', $country_id);?> {{-- SMPEDIT 01-10-2020 --}}
-
-                @foreach($escorts as $escort)
-                <div class="col-lg-3 col-6">
-                        <a href="{{url('profile/'.$escort->id)}}">
-                    <div class="our-escort-box is-available">
-                        
-                        @if($escort->photo==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$escort->photo)}}" class="w-100"/>@endif
+            <div class="row escort-row">
+                <div class="escort-data"></div>
+                @foreach($escorts as $key => $escort)
+                @php
+                    $name = str_replace(" ","-",$escort->name);
+                @endphp
+                <div class="col-lg-3 col-6 escort-hide-show">
+                    <div class="our-escort-box is-available" onclick="$('.escort-overview-detail').hide(); $('.'+{{ $escort->id }}).show();">
+                       @php
+                        $profile_image = NULL;
+                        $profile_image_arr = DB::table('profile_images')->where('status','5')->where('escortId',$escort->id)->get();
+                        if(count($profile_image_arr) > 0)
+                        {
+                            $profile_image = $profile_image_arr[0]->image;
+                        }
+                       @endphp
+                        @if($profile_image==NULL)
+                            <img src="{{asset('public/blankphoto.png')}}" class="w-100 fix-es-box"> 
+                        @else  
+                            <img src="{{asset('public/uploads/'.$profile_image)}}" class="w-100 fix-es-box"/>@endif
 
                         <div class="overlay-top">
                             <div class="text">
                                 <h4>{{$escort->name}}</h4>
-                                <span class="location"><?php $statecount=\App\State::all()->where('id', $escort->city);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->city)->state}} @endif</span>
+                                <span class="location">
+                                    {{ isset($escort->state) ? $escort->state : '' }}
+                                    <!-- @if(!isset($escort->city))
+                                        {{-- Not Found --}}
+                                    @else
+                                        {{ $escort->state }}
+                                    @endif -->                                            	
+                                    </span>
                             </div>
                         </div>
-                        <div class="overlay-bottom">
+                        <div class="availability">
+                            @if(isset($escort->activation) && $escort->activation == 1)
+                                <h5>
+                                    Available Now
+                                </h5>
+                            @endif
+                        </div>                                
+                    </div>
+                </div>
+                @if ($key!='0' && $key % 2 != 0)
+                    <div class="escort-overview-detail left-detail-arrow {{ $escorts[$key-1]->id }}" style="display: none">
+                        <div class="escort-box">
+                            <div class="box-head">
+                                <h4>{{ $escorts[$key-1]->name }}</h4>
+                                {{-- <h5>Melbourn</h5> --}}
+                            </div>
+                            <table class="escort-profile-details">
+                                <tr>
+                                    <td>Suburb</td>
+                                    <td>
+                                        {{ isset($escorts[$key-1]->city) ? $escorts[$key-1]->city : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Service Area</td>
+                                    <td>
+                                        @if($escorts[$key-1]->serviceArea==1)
+                                            In Call
+                                        @elseif($escorts[$key-1]->serviceArea==2)
+                                            Out Call
+                                        @elseif($escorts[$key-1]->serviceArea==3)
+                                            In call & Out Call
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    @php
+                                        $profile_Rate_one = \App\ProfileRate::where('escortId','=',$escorts[$key-1]->id)->where('price','!=','')->get();
+                                        $profile_Rate_both = \App\ProfileRate::where('escortId','=',$escorts[$key-1]->id)->where('price','!=','')->select('price')->get();
+                                        if(!empty($profile_Rate_both->toArray())){
+                                            $profile_Rate_both = min(json_decode(json_encode(($profile_Rate_both)),true));
+                                        }
+                                        
+                                    @endphp
+                                    <td>
+                                        @if(count($profile_Rate_one) < 2)
+                                            @foreach($profile_Rate_one as $val)
+                                                    {{ $val->price }}
+                                            @endforeach
+                                        @endif
+                                        
+                                        @if(count($profile_Rate_one) > 1)
+                                            {{ !empty($profile_Rate_both['price']) ? $profile_Rate_both['price'] : '' }}
+                                        @endif
+                                        PH
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>{{$escorts[$key-1]->height}} "</td>
+                                </tr>
+                            </table>
+                            <div class="profile-action">
+                                <a href="{{ '/profile/'.$escorts[$key-1]->id.'/'.str_replace(' ','-',$escorts[$key-1]->name) }}" class="btn btn-block red-small mt-2"> Visit Profile </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="escort-overview-detail right-detail-arrow {{ $escorts[$key]->id }}" style="display: none">
+                        <div class="escort-box">
+                            <div class="box-head">
+                                <h4>{{ $escorts[$key]->name }}</h4>
+                                {{-- <h5>Melbourn</h5> --}}
+                            </div>
+                            <table class="escort-profile-details">
+                                <tr>
+                                    <td>Suburb</td>
+                                    <td>
+                                        {{ isset($escorts[$key]->city) ? $escorts[$key]->city : '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Service Area</td>
+                                    <td>
+                                        @if($escorts[$key]->serviceArea==1)
+                                            In Call
+                                        @elseif($escorts[$key]->serviceArea==2)
+                                            Out Call
+                                        @elseif($escorts[$key]->serviceArea==3)
+                                            In call & Out Call
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    @php
+                                        $profile_Rate_one = \App\ProfileRate::where('escortId','=',$escorts[$key]->id)->where('price','!=','')->get();
+                                        $profile_Rate_both = \App\ProfileRate::where('escortId','=',$escorts[$key]->id)->where('price','!=','')->select('price')->get();
+                                        if(!empty($profile_Rate_both->toArray())){
+                                            $profile_Rate_both = min(json_decode(json_encode(($profile_Rate_both)),true));
+                                        }
+                                        
+                                    @endphp
+                                    <td>
+                                        @if(count($profile_Rate_one) < 2)
+                                            @foreach($profile_Rate_one as $val)
+                                                    {{ $val->price }}
+                                            @endforeach
+                                        @endif
+                                        
+                                        @if(count($profile_Rate_one) > 1)
+                                            {{ !empty($profile_Rate_both['price']) ? $profile_Rate_both['price'] : '' }}
+                                        @endif
+                                        PH
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>{{$escorts[$key]->height}} "</td>
+                                </tr>
+                            </table>
+                            <div class="profile-action">
+                                <a href="{{ '/profile/'.$escorts[$key]->id.'/'.str_replace(' ','-',$escorts[$key]->name) }}" class="btn btn-block red-small mt-2"> Visit Profile </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="home-escorts m-hidden">
+        <div class="container">
+            <div class="row escort-row">
+                <div class="escort-data"></div>
+                @foreach($escorts as $escort)
+                @php
+                    $name = str_replace(" ","-",$escort->name);
+                @endphp
+                <div class="col-lg-3 col-6 escort-hide-show">
+                     <a href="{{ url('/profile/'.$escort->id.'/'.$name)}}">
+                    <div class="our-escort-box is-available">
+                       @php
+                        $profile_image = NULL;
+                        $profile_image_arr = DB::table('profile_images')->where('status','5')->where('escortId',$escort->id)->get();
+                        if(count($profile_image_arr) > 0)
+                        {
+                            $profile_image = $profile_image_arr[0]->image;
+                        }
+                       @endphp
+                        @if($profile_image==NULL)
+                            <img src="{{asset('public/blankphoto.png')}}" class="w-100 fix-es-box"> 
+                        @else  
+                            <img src="{{asset('public/uploads/'.$profile_image)}}" class="w-100 fix-es-box"/>@endif
+
+                        <div class="overlay-top">
                             <div class="text">
-                                <h3><?php $statecount=\App\State::all()->where('id', $escort->city);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->city)->state}} @endif  - {{date('d')}}<sup>th</sup> {{date('M')}}</h3>
+                                <h4>{{$escort->name}}</h4>
+                                <span class="location">
+                                    {{ isset($escort->state) ? $escort->state : '' }}
+                                    <!-- @if(!isset($escort->city))
+                                        {{-- Not Found --}}
+                                    @else
+                                        {{ $escort->state }}
+                                    @endif -->                                            	
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="overlay-bottom bottom-without-tour">
+                            <div class="text">                                        
                                 <table class="escort-profile-details">
                                     <tr>
                                         <td>Suburb</td>
-                                        <td><?php $citycount=\App\City::all()->where('id', $escort->suburb);?>
-                    @if($citycount->count()<1) Not Found @else {{\App\City::find($escort->suburb)->city}} @endif</td>
+                                        <td>
+                                            {{ isset($escort->city) ? $escort->city : '' }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Service Area</td>
-                                        <td>@if($escort->serviceArea==1) In Call @else Out Call @endif</td>
+                                        <td>
+                                            @if($escort->serviceArea==1)
+                                                In Call
+                                            @elseif($escort->serviceArea==2)
+                                                Out Call
+                                            @elseif($escort->serviceArea==3)
+                                                In call & Out Call
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Price</td>
-                                        <td>${{$escort->price}}</td>
+                                        @php
+                                            $profile_Rate_one = \App\ProfileRate::where('escortId','=',$escort->id)->where('price','!=','')->get();
+                                            $profile_Rate_both = \App\ProfileRate::where('escortId','=',$escort->id)->where('price','!=','')->select('price')->get();
+                                            if(!empty($profile_Rate_both->toArray())){
+                                                $profile_Rate_both = min(json_decode(json_encode(($profile_Rate_both)),true));
+                                            }
+                                            
+                                        @endphp
+                                        <td>
+                                            @if(count($profile_Rate_one) < 2)
+                                                @foreach($profile_Rate_one as $val)
+                                                        {{ $val->price }}
+                                                @endforeach
+                                            @endif
+                                            
+                                            @if(count($profile_Rate_one) > 1)
+                                                {{ !empty($profile_Rate_both['price']) ? $profile_Rate_both['price'] : '' }}
+                                            @endif
+                                            PH
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Height</td>
@@ -525,47 +577,48 @@
                                 </table>
                             </div>
                         </div>
-                        @if($escort->activation==1)
+                        
                         <div class="availability">
-                            <h5>Available Now</h5>
-                        </div>
-                        @else
-                        @endif
+                            @if(isset($escort->activation) && $escort->activation == 1)
+                                <h5>
+                                    Available Now
+                                </h5>
+                            @endif
+                        </div>                                
                     </div>
                 </a>
                 </div>
-
                 @endforeach
             </div>
         </div>
-
-    </section> {{-- / Escorts End --}}
+    </section>
 
     {{-- SMPEDIT 01-10-2020 --}}
     @php $indpnts= \App\Independent::all(); @endphp
     @foreach($indpnts as $indpnt)
-        <section class="home-nofake-profile" style="background-image: url('{{asset('public/uploads/'.$indpnt->bgimage)}}'); background-size:cover;background-position: center;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="{{asset('public/uploads/'.$indpnt->icon)}}" class="verified-symbol">
-                        <div class="escort-verification-content">
-                            <h4>{{$indpnt->topHead}} <br>for the</h4>
-                            <h2>{{$indpnt->title}}</h2>
-                            {!!  $indpnt->description  !!}
-                            <h4>Join Us</h4>
-                            <ul>
-                                <li><a href="#" class="btn black-btn">Client register</a></li>
-                                <li><a href="#" class="btn black-btn">escort register</a></li>
-                                <li><a href="#" class="btn black-btn">Find Out More</a></li>
-                            </ul>
-                            <p><a href="">Click here</a> to read why you should join with us</p>
+            <section class="home-nofake-profile" style="background-image: url('{{asset('public/uploads/'.$indpnt->bgimage)}}'); background-size:cover;background-position: center;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="{{asset('public/uploads/'.$indpnt->icon)}}" class="verified-symbol">
+                            <div class="escort-verification-content">
+                                <h4>{{$indpnt->topHead}} <br>for the</h4>
+                                <h2>{{$indpnt->title}}</h2>
+                               {!!  $indpnt->description  !!}
+                                <h4>Join Us</h4>
+                                <ul>
+                                    <li><a href="{{ url('/client/membership') }}" class="btn black-btn">Client register</a></li>
+                                    <li><a href="{{url('bacome/escort')}}" class="btn black-btn">escort register</a></li>
+                                    <!-- <li><a href="{{url('escort/signup')}}" class="btn black-btn">escort register</a></li> -->
+                                   <!--  <li><a href="{{url('/')}}" class="btn black-btn">Find Out More</a></li> -->
+                                </ul>
+                               <!--  <p><a href="{{url('terms/condition')}}">Click here</a> to read why you should join with us</p> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    @endforeach
+            </section>
+            @endforeach
 
     <section class="home-service-provider">
         <div class="container">
@@ -575,7 +628,7 @@
                     @foreach($provresrcs as $resourc)
                         <div class="box-title c-center">
                             <h2>{{$resourc->titleHead}}</h2>
-                            {{$resourc->intro}}
+                            {{-- {!! $resourc->intro!!} --}}
                         </div>
                     @endforeach
                 </div>
@@ -650,7 +703,7 @@
                 <div class="row justify-content-lg-center justify-content-md-center justify-content-center ">
                     @foreach($professionals as $professonal)
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="{{url('multi/page')}}">
+                            <a href="{{url('multi/page?url=mul-reviews&country='.$ex_url[0])}}">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         @if($professonal->icon1==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$professonal->icon1)}}" class="w-100"/>@endif
@@ -682,7 +735,7 @@
 
                     @foreach($professionals as $professonal)
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="{{url('multi/page')}}">
+                            <a href="{{url('multi/page?url=mul-tours&country='.$ex_url[0])}}">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         @if($professonal->icon3==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$professonal->icon3)}}" class="w-100"/>@endif
@@ -698,7 +751,7 @@
 
                     @foreach($professionals as $professonal)
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="{{url('multi/page')}}">
+                            <a href="{{url('multi/page?url=mul-blogs&country='.$ex_url[0])}}">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         @if($professonal->icon4==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$professonal->icon4)}}" class="w-100"/>@endif
@@ -730,7 +783,7 @@
 
                     @foreach($professionals as $professonal)
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="{{url('multi/page')}}">
+                            <a href="{{url('multi/page?url=mul-client-logs&country='.$ex_url[0])}}">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         @if($professonal->icon6==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$professonal->icon6)}}" class="w-100"/>@endif
@@ -814,28 +867,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-lg-center justify-content-md-center ">
-                    <div class="col-lg-7">
-                        <div class="red-box">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 c-center">
-                                    <div class="red-box-inner">
-                                        <img src="{{asset('public/uploads/signup-icon.png')}}" />
-                                        <button class="btn black-btn">Escort sign up</button>
-                                        <button class="btn black-btn">Client sign up </button>
+               <div class="row justify-content-lg-center justify-content-md-center ">
+                        <div class="col-lg-7">
+                            <div class="red-box">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 c-center">
+                                        <div class="red-box-inner">
+                                            <img src="{{asset('public/uploads/signup-icon.png')}}" />
+                                            <a href="{{ url('bacome/escort') }}" class="btn black-btn">Escort sign up</a>
+                                            <a href="{{url('client/membership')}}" class="btn black-btn">Client sign up</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 c-center">
-                                    <div class="red-box-inner">
-                                        <img src="{{asset('public/uploads/search-xlarge-icon.png')}}" />
-                                        <button class="btn black-btn height-btn"  data-toggle="modal" data-target="#citySearch">City Full<br>Search</button>
-                                        <!--<button class="btn black-btn">Full Search</button>-->
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 c-center">
+                                        <div class="red-box-inner">
+                                            <img src="{{asset('public/uploads/search-xlarge-icon.png')}}" />
+                                      
+                                            <button class="btn black-btn "  data-toggle="modal" data-target="#social-media-popup">Social Media</button>
+                                            <button class="btn black-btn"  data-toggle="modal" data-target="#contact-blog">Blog for Us</button>
+                                            <!--<button class="btn black-btn">Full Search</button>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
     @endforeach
@@ -871,8 +926,8 @@
         <div class="container">
             <div class="row justify-content-lg-center justify-content-md-center ">
                 <div class="col-lg-8">
-                        <?php $hedfoots=\App\HeaderFooter::orderBy('id','desc')->first(); 
-                            $footerinfo= $hedfoots->footerInfo; ?>
+                        <?php $hedfoots = \App\HeaderFooter::orderBy('id', 'desc')->first();
+                        $footerinfo = $hedfoots->footerInfo; ?>
 
                     <div class="box-title c-center">
                         <h2>Locations</h2>
@@ -881,12 +936,16 @@
                 </div>
             </div>
             <div class="row justify-content-lg-center justify-content-md-center justify-content-center">
-            <?php $country=\App\Country::all();?>
-                @foreach($country as $cntry)
+            <?php // $country=\App\Country::all(); ?>
+                @foreach($countries_list as $cntry)
                 <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="location-box">
-                        @if($cntry->image==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$cntry->image)}}" class="w-100"/>@endif
-                        <a href="{{url('country/list/escort/'.$cntry->id)}}" class="city-btn">{{$cntry->country}}</a>
+                        @if($cntry->image==NULL)
+                            <img src="{{asset('public/blankphoto.png')}}" class="w-100"sss>
+                        @else
+                            <img src="{{asset('public/uploads/'.$cntry->image)}}" class="w-100"/>
+                        @endif
+                        <a href="{{url('country/'.$country.'/'.str_replace(' ','-',$cntry->state))}}" class="city-btn">{{$cntry->state}}</a>
                     </div>
                 </div>
                 @endforeach

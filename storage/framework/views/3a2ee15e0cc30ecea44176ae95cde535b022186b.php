@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Client Relationship'); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -56,6 +55,17 @@
                     </div>
                   </div>
                  
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                       <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Sub Title')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title">
+                      </div>
+                    </div>
+                  </div>
+
                   
                 </div>
               </div>
@@ -88,6 +98,8 @@
                           <option value="5">Section 05</option>
                           <option value="6">Section 06</option>
                           <option value="7">Section 07</option>
+                          <option value="8">Section 08</option>
+                          <option value="9">Section 09</option>
                         </select>
                       </div>
                     </div>
@@ -121,6 +133,7 @@
                 <th><?php echo e(__('ID No.')); ?></th>
                 <th><?php echo e(__('Picture')); ?></th>
                 <th><?php echo e(__('Title')); ?></th>
+                <th><?php echo e(__('Sub Title')); ?></th>
                 <th><?php echo e(__('Status')); ?></th>
                 <th><?php echo e(__('Description')); ?></th>
                 <th><?php echo e(__('Action')); ?></th>
@@ -134,6 +147,7 @@
                 <td>00<?php echo e($i++); ?></td>
                 <td><?php if($data->imageurl==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$data->imageurl)); ?>" style="width: 30px;"><?php endif; ?></td>
                 <td><?php echo e($data->title); ?></td>
+                <td><?php echo e($data->sub_title); ?></td>
                 <td>Section <?php echo e($data->status); ?></td>
                 <td><?php echo $data->description; ?></td>
               
@@ -324,6 +338,16 @@
                     </div>
                   </div>
                   
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                      <div class="select_2_alska2">
+                        <label class="FormLabel1"><?php echo e(__('Sub Title')); ?>*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title" class="form-control" value="<?php echo e($data->sub_title); ?>">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>

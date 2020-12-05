@@ -81,23 +81,40 @@
                        <select class="form-control" name="section">
                         <option value="">Section</option>
                          <option value="healthcare">Healthcare</option>
-                         <option value="Legal Advice">Legal Advice</option>
+                         <option value="Legal Advice">Mentors</option>
                          <option value="Photographers">Photographers</option>
                        </select>
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                     <div class="select_2_alska2">
+                        <label class="FormLabel1">{{ __('Country') }}*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <select name="country" class="form-control country">
+                          <option value="">Country</option>
+                          @foreach($country as $country_list)
+                          <option value="{{ $country_list->id }}">{{ $country_list->country }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
                    <div class="col-lg-12">
                     <div class="form-group sip_mt">
                      <div class="select_2_alska2">
                         <label class="FormLabel1">{{ __('City') }}*</label>
                       </div>
                       <div class="selct_2_alska">
-                        <select name="city_id" class="form-control">
+                        <select name="city_id" class="form-control" id="city">
                           <option value="">City</option>
-                          @foreach($city as $city_list)
+                          {{-- @foreach($city as $city_list)
                           <option value="{{ $city_list->id }}">{{ $city_list->city }}</option>
-                          @endforeach
+                          @endforeach --}}
                         </select>
                       </div>
                     </div>
@@ -157,5 +174,34 @@
            
             });
   });
+
+  $(document).ready(function () {
+                $('.country').on('change',function(){
+                    var country = this.value;
+                    $.ajax({
+                        url: "{{ route('getCity') }}",
+                        method: 'POST',
+                        data: { "_token": "{{ csrf_token() }}",'country_id':country },
+                        success: function (data) {
+                            console.log(data);
+                             $('#city').html(data);
+                        } 
+                    });
+                });
+
+                var countries = $('.country').val();
+                if(countries != ''){
+                    var city_name = $('#city_name').val();
+                    $.ajax({
+                        url: "{{ route('getCity') }}",
+                        method: 'POST',
+                        data: { "_token": "{{ csrf_token() }}",'country_id':countries,'city_name':city_name },
+                        success: function (data) {
+                             $('#city').html(data);
+                        } 
+                    });    
+                }
+                
+            });
 </script>
 @endsection

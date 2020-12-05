@@ -66,6 +66,7 @@
 
             document.addEventListener("DOMContentLoaded", function(){
                 getCities()
+                getCities2()
             })
 
             function getCities() {
@@ -76,9 +77,56 @@
                         'country_id': $('#selectCountry').find(':selected').val()
                     },
                     success: function (data) {
+                        let cityId = undefined
+                        @if (session()->has('city_id'))
+                            cityId = {{ session()->get('city_id') }}
+                        @endif
                         $('#citySelect').text(' ');
+                        $('#citySelect').append('<option value="" selected>--Select City--</option>');
                         for (var k = 0; k < data.cities.length; k++) {
-                            $('#citySelect').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            if (cityId == undefined) {
+                                $('#citySelect').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            } else {
+                                // let selected = ''
+                                // if (cityId == data.cities[k].id) {
+                                //     selected = 'selected'
+                                // } 
+                                $('#citySelect').append('<option value="' + data.cities[k].id + '" >' + data.cities[k].city + '</option>');
+                                // $('#citySelect').append('<option value="' + data.cities[k].id + '"' + selected +'>' + data.cities[k].city + '</option>');
+                            }
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            } 
+
+            function getCities2() {
+                $.ajax({
+                    url: "{{route('get_cities')}}",
+                    method: 'GET',
+                    data: {
+                        'country_id': $('#selectCountry2').find(':selected').val()
+                    },
+                    success: function (data) {
+                        let cityId = undefined
+                        @if (session()->has('city_id'))
+                            cityId = {{ session()->get('city_id') }}
+                        @endif
+                        $('#citySelect2').text(' ');
+                        $('#citySelect2').append('<option value="">--Select City--</option>');
+                        for (var k = 0; k < data.cities.length; k++) {
+                            if (cityId == undefined) {
+                                $('#citySelect2').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                            } else {
+                                // let selected = ''
+                                // if (cityId == data.cities[k].id) {
+                                //     selected = 'selected'
+                                // } 
+                                $('#citySelect2').append('<option value="' + data.cities[k].id + '">' + data.cities[k].city + '</option>');
+                                // $('#citySelect2').append('<option value="' + data.cities[k].id + '"' + selected +'>' + data.cities[k].city + '</option>');
+                            }
                         }
                     },
                     error: function (err) {
@@ -121,7 +169,6 @@
 
 
    
-
 
 
 
@@ -197,8 +244,8 @@
 
                         <div class="profile-banner-detail" style="display: none;" id="profileBanner{{$caro->id}}">
                             <h3>{{$caro->name}}</h3>
-                            <h5><?php $citycount=\App\City::all()->where('id', $caro->suburb);?>
-                               @if($citycount->count()<1) Not Found @else {{\App\City::find($caro->suburb)->city}} @endif</h5>
+                            <h5><?php // $citycount=\App\City::all()->where('id', $caro->suburb);?>
+                               @if($caro->suburb=='') Not Found @else {{ $caro->suburb }} @endif</h5>
                             <table class="escort-profile-details" >
                                 <tr>
                                     <td>Age</td>
@@ -254,10 +301,15 @@
                                             <li>
                                                 <div class="form-group">
                                                     <select class="form-control" name="country_id" onchange="getCities()" id="selectCountry">
-                                                        @php $countries = \App\Country::all(); @endphp
+                                                        @php 
+                                                            $countries = \App\Country::all(); 
+                                                            $country_id = null;
+                                                            if (session()->has('country_id')) $country_id = session()->get('country_id');
+                                                        @endphp
 
                                                         @foreach($countries as $country)
-                                                            <option value="{{$country->id}}">
+                                                            <option value="{{$country->id}}"
+                                                                {{ (!is_null($country_id) && $country_id == $country->id) ? 'selected' : '' }}>
                                                                 {{$country->country}}
                                                             </option>
                                                         @endforeach
@@ -268,26 +320,25 @@
                                             {{-- City --}}
                                             <li>
                                                 <div class="form-group">
-                                                    <select class="form-control" name="city_id" id="citySelect"> 
-                                                        @php $cities = \App\City::all(); @endphp
-
-                                                        @foreach($cities as $city)
-                                                            <option value="{{ $city->id }}">
-                                                                {{ $city->city }}
-                                                            </option>
-                                                        @endforeach
+                                                    <select class="form-control" name="city_id" id="citySelect" value="2807"> 
+                                                        <option></option>
                                                     </select>
                                                 </div>
                                             </li> 
 
                                             {{-- Gender --}}
                                             <li>
+                                                @php
+                                                    $gender = '';
+                                                    if(session()->has('gender')) $gender = session()->get('gender');
+                                                @endphp
                                                 <div class="form-group">
                                                     <select class="form-control" name="gender">
-                                                        <option value="1">Male</option>
-                                                        <option value="2">Female</option>
-                                                        <option value="3">Trans Gender</option> {{-- SMPEDIT 15-10-2020 --}}
-                                                        <option value="4">Gay</option>
+                                                        <option value="">--Select Gender--</option>
+                                                        <option value="1" {{ (!empty($gender) && $gender == 1) ? 'selected' : '' }}>Male</option>
+                                                        <option value="2" {{ (!empty($gender) && $gender == 2) ? 'selected' : '' }}>Female</option>
+                                                        <option value="3" {{ (!empty($gender) && $gender == 3) ? 'selected' : '' }}>Trans Gender</option> {{-- SMPEDIT 15-10-2020 --}}
+                                                        <option value="4" {{ (!empty($gender) && $gender == 4) ? 'selected' : '' }}>Gay</option>
                                                     </select>
                                                 </div>
                                             </li> 
@@ -300,6 +351,7 @@
                                                         <input name="service_type" type="text" class="form-control" placeholder="Service Type" />
                                                     </div> --}}
                                                     <select class="form-control" name="service_type">
+                                                        <option value="">--Select Service--</option>
                                                         <option value="1">Escort</option>
                                                         <option value="2">BDSM</option>
                                                         <option value="3">Massage</option>
@@ -405,22 +457,22 @@
                             <a href="{{url('profile-guest/'.$escort->id)}}"> {{-- SMPEDIT 28-09-2020 --}}
                             <div class="our-escort-box is-available">
                                
-                                @if($escort->photo==NULL)<img src="{{asset('public/blankphoto.png')}}" style="height:235px;" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$escort->photo)}}" style="height: 424px;" class="w-100"/>@endif
+                                @if($escort->photo==NULL)<img src="{{asset('public/blankphoto.png')}}" style="height:235px;" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$escort->photo)}}" style="height: auto;" class="w-100"/>@endif
 
                                 <div class="overlay-top">
                                     <div class="text">
                                         <h4>{{$escort->name}}</h4>
-                                        <span class="location"><?php $statecount=\App\State::all()->where('id', $escort->city);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->city)->state}} @endif</span>
+                                        <span class="location"><?php $statecount=\App\State::all()->where('id', $escort->state);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->state)->state}} @endif</span>
                                     </div>
                                 </div>
                                 <div class="overlay-bottom">
                                     <div class="text">
-                                        <h3><?php $statecount=\App\State::all()->where('id', $escort->city);?>@if($statecount->count()<1) Not Found @else {{\App\State::find($escort->city)->state}} @endif  - {{date('d')}}<sup>th</sup> {{date('M')}}</h3>
                                         <table class="escort-profile-details">
                                             <tr>
                                                 <td>Suburb</td>
-                                                <td><?php $citycount=\App\City::all()->where('id', $escort->suburb);?>
-                           @if($citycount->count()<1) Not Found @else {{\App\City::find($escort->suburb)->city}} @endif</td>
+                                                <td>
+                                                    <?php // $citycount=\App\City::all()->where('id', $escort->suburb);?>
+                           @if($escort->city=='') Not Found @else {{ $escort->city }} @endif</td>
                                             </tr>
                                             <tr>
                                                 <td>Service Area</td>
@@ -485,7 +537,7 @@
                             @foreach($provresrcs as $resourc)
                             <div class="box-title c-center">
                                 <h2>{{$resourc->titleHead}}</h2>
-                                {{$resourc->intro}}
+                                {!! $resourc->intro !!}
                             </div>
                             @endforeach
                         </div>
@@ -558,7 +610,7 @@
                           @foreach($professionals as $professonal)
                             <div class="box-title c-center dark">
                                 <h2>{{$professonal->titleHead}}</h2>
-                                <p>{{$professonal->intro}}</p>
+                                <p>{!! $professonal->intro !!}</p>
                             </div>
                             @endforeach
                         </div>
@@ -681,7 +733,7 @@
 
                          @foreach($professionals as $professonal)
                         <div class="col-lg-4 col-md-6 col-6 col-6">
-                            <a href="{{url('terms/condition')}}">
+                            <a href="{{url('faq')}}">
                                 <div class="platform-box">
                                     <div class="img-area">
                                         @if($professonal->icon8==NULL)<img src="{{asset('public/blankphoto.png')}}" style="height:235px;" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$professonal->icon8)}}" style="height:235px;" class="w-100"/>@endif
@@ -804,19 +856,19 @@
                         </div>
                     </div>
                     <div class="row justify-content-lg-center justify-content-md-center justify-content-center">
-                   <?php $country=\App\Country::all();?>
-                        @foreach($country as $cntry)
+                   <?php $state=\App\State::limit(50)->get();?>
+                        @foreach($state as $state)
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="location-box">
-                                @if($cntry->image==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$cntry->image)}}" class="w-100"/>@endif
-                                <a href="#" class="city-btn">{{$cntry->country}}</a>
+                                @if($state->image==NULL)<img src="{{asset('public/blankphoto.png')}}" class="w-100"sss> @else  <img src="{{asset('public/uploads/'.$state->image)}}" class="w-100"/>@endif
+                                <a href="{{url('country/list/escort/'.$state->country_id)}}" class="state-btn">{{$state->state}}</a>
                             </div>
                         </div>
                         @endforeach
                         
-                        <div class="col-lg-12 view-more-area c-center ">
+                        {{-- <div class="col-lg-12 view-more-area c-center ">
                             <button class="btn black-btn"  data-toggle="modal" data-target="#citySearch">view more cities</button> 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </section>
@@ -1004,12 +1056,15 @@
 
                                                         <div class="form-group">
 
-                                                         <select class="form-control" name="country_id" onchange="selectcountry()" id="selectCountry">
-                        <?php $countries=\App\Country::all();?>
-                        @foreach($countries as $country)
-                        <option value="{{$country->id}}">{{$country->country}}</option>
-                        @endforeach
-                                </select>
+                                                        <select class="form-control" name="country_id" onchange="getCities2()" id="selectCountry2">
+                                                        <?php $countries=\App\Country::all();?>
+                                                        @foreach($countries as $country)
+                                                            <option value="{{$country->id}}"
+                                                                {{ (!is_null($country_id) && $country_id == $country->id) ? 'selected' : '' }}>
+                                                                {{$country->country}}
+                                                            </option>
+                                                        @endforeach
+                                                        </select>
 
                                                         </div>
 
@@ -1017,18 +1072,19 @@
 
                                                     <li>
 
+                                                        @php
+                                                        $gender = '';
+                                                            if(session()->has('gender')) $gender = session()->get('gender');
+                                                        @endphp
                                                         <div class="form-group">
-
                                                             <select class="form-control" name="gender">
-
-                                                                <option value="1">Male</option>
-
-                                                                <option value="2">Female</option>
-
+                                                                <option value="">--Select Gender--</option>
+                                                                <option value="1" {{ (!empty($gender) && $gender == 1) ? 'selected' : '' }}>Male</option>
+                                                                <option value="2" {{ (!empty($gender) && $gender == 2) ? 'selected' : '' }}>Female</option>
+                                                                <option value="3" {{ (!empty($gender) && $gender == 3) ? 'selected' : '' }}>Trans Gender</option> {{-- SMPEDIT 15-10-2020 --}}
+                                                                <option value="4" {{ (!empty($gender) && $gender == 4) ? 'selected' : '' }}>Gay</option>
                                                             </select>
-
                                                         </div>
-
                                                     </li>
 
                                                     <li>
@@ -1096,12 +1152,9 @@
                                                     <li>
 
                                                         <div class="form-group">
- <select class="form-control" name="state_id" onchange="selectstate()" id="stateSelect">
-                                          <?php $States=\App\State::all();?>
-                        @foreach($States as $state)
-                        <option value="{{$state->id}}">{{$state->state}}</option>
-                        @endforeach
-                                </select>
+                                                    <select class="form-control" name="state_id" onchange="selectstate()" id="citySelect2">
+                                                        <option></option>
+                                                    </select>
 
                                                         </div>
 

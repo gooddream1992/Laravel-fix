@@ -27,7 +27,9 @@ float: right;
               
               <tr>
                 <td>
-                  <input type="file" name="icon">
+                  <input type="file" name="icon" id="icon">
+                  <br>
+                  <b>Icon Size Should be 64x64</b>
                 </td>
               </tr>
               <tr>
@@ -37,7 +39,7 @@ float: right;
               </tr>
               <tr>
                 <td>
-                  <input type="submit" name="submit" value="Save" class="btn btn-success">                      
+                  <input type="submit" name="submit" value="Save" class="btn btn-success" id="submit">
                 </td>
               </tr>                    
             </form>
@@ -77,4 +79,15 @@ float: right;
     </div>
   </section>
 </div>
+<script>
+$(document).ready(function(){
+  $("#submit").on('click',function(){
+    var imgWidth = $('#icon').width();
+    var imgHeight = $('#icon').height();
+    if(imgWidth > 64 || imgHeight > 64){
+      alert('Your Icon is too big, it must be less than 64x64');
+  });
+}
+});
+</Script>
 @endsection

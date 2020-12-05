@@ -84,7 +84,8 @@
                        <select class="form-control" name="section">
                         <option value="">Section</option>
                          <option value="healthcare" <?php if(isset($data->section) && $data->section == "healthcare"): ?> selected <?php endif; ?>>Healthcare</option>
-                         <option value="Legal Advice"  <?php if(isset($data->section) && $data->section == "Legal Advice"): ?> selected <?php endif; ?>>Legal Advice</option>
+                         <option value="Legal Advice"  <?php if(isset($data->section) && $data->section == "Legal Advice"): ?> selected <?php endif; ?>>Mentors</option>
+                         <!-- <option value="Legal Advice"  <?php if(isset($data->section) && $data->section == "Legal Advice"): ?> selected <?php endif; ?>>Legal Advice</option> -->
                          <option value="Photographers" <?php if(isset($data->section) && $data->section == "Photographers"): ?> selected <?php endif; ?>>Photographers</option>
                        </select>
                       </div>

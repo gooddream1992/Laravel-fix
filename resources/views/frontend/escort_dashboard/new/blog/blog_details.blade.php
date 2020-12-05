@@ -71,7 +71,7 @@
         @else
         <img src="{{ asset('public/client_library/image/no_image_found.png')  }}" alt="" class="fakeimg" style="height:65%;">
         @endif
-      <p>{{ $blog->description }}</p>
+      <p>{!! $blog->description !!}</p> {{-- SMPEDIT 21-10-2020 --}}
     </div>
     <div class="row">
     <a href="{{ route('escort.blog.edit',$blog->id) }}" class="btn btn-primary" style="width: 140px; align-content: center;">

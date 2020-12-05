@@ -47,12 +47,15 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            
+
             <li class="nav-item">
               <a href="{{ route('admin.social.media') }}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
                 <p>Social Media</p>
               </a>
             </li>
+
              <li class="nav-item">
               <a href="{{url('new/user')}}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
@@ -98,7 +101,32 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('testimonial.list') }}" class="nav-link">
+                <i class="fas fa-arrow-circle-right nav-icon"></i>
+                <p>Testimonial Request</p>
+              </a>
+            </li>
 
+            <li class="nav-item">
+              <a href="{{ route('testimonial.delete-page') }}" class="nav-link">
+                <i class="fas fa-arrow-circle-right nav-icon"></i>
+                <p>Reviews</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.escort.profile.request') }}" class="nav-link">
+                <i class="fas fa-arrow-circle-right nav-icon"></i>
+                <p>Escort Profile Request</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('admin.escort.request.deny.reason') }}" class="nav-link">
+                <i class="fas fa-arrow-circle-right nav-icon"></i>
+                <p>Escort Profile Deny</p>
+              </a>
+            </li>
              <li class="nav-item">
               <a href="{{url('escort/dropdown')}}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
@@ -113,12 +141,12 @@
               </a>
             </li>
 
-             <li class="nav-item">
+             <!-- <li class="nav-item">
               <a href="{{url('service/offer/assign/list')}}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
                 <p>Service Offer Assign List</p>
               </a>
-            </li>
+            </li>--> 
             
             <li class="nav-item">
               <a href="{{url('new/escort')}}" class="nav-link">
@@ -134,7 +162,7 @@
               </a>
             </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
               <a href="{{url('profile')}}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
                 <p>Profile Image</p>
@@ -171,7 +199,7 @@
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
                 <p>Profile Tour</p>
               </a>
-            </li>        
+            </li>       -->  
             
             <li class="nav-item">
               <a href="{{ route('faq.client.escort.view') }}" class="nav-link">
@@ -416,6 +444,13 @@
               <a href="{{url('admin/blog')}}" class="nav-link">
                 <i class="fas fa-arrow-circle-right nav-icon"></i>
                 <p>Client Bloging Corner</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.blogging.index') }}" class="nav-link">
+                <i class="fas fa-arrow-circle-right nav-icon"></i>
+                <p>Admin Bloging Corner</p>
               </a>
             </li>
           

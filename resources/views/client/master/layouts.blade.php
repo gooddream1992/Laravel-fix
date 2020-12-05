@@ -36,15 +36,16 @@
                 <div class="notification-area">
                     <a href="{{ route('client.notification') }}">
                         <img src="{{ asset('public/client_library/image/bell-icon.png') }}">
+                            <!-- $notifications = DB::table('notification')->where('user_id',Auth::user()->id)->get(); -->
                         @php
                             $notifications = DB::table('notification')->where('user_id',Auth::user()->id)->get();
                         @endphp
-                        <span>@php count($notifications) @endphp</span>
+                        <span>@php echo count($notifications) @endphp</span>
                     </a>
                 </div>
                 <div class="dropdown show user">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('public/client_library/image/user-icon.png') }}">
+                        <img src="{{ (Auth::user()->photo!='') ? asset('public/uploads/'.Auth::user()->photo) : asset('public/client_library/image/user-icon.png') }}" style="height: 47px;width:47px;">
                         <div class="name">{{ Auth::user()->name }} <span>Client</span></div>
                         <i class="icofont-caret-down"></i>
                     </a>
@@ -134,10 +135,22 @@
                                         <span>Notifications</span>
                                     </a>
                                 </li>
+                                <li class="nav-item {{ request()->route()->getName() === 'client.escort-tours' ? ' active ' : '' }}">
+                                    <a class="nav-link" href="{{ route('client.escort-tours') }}">
+                                        <div class="dash-menu-icon dash-icon-11"></div>
+                                        <span>Touring Escorts</span>
+                                    </a>
+                                </li>
                                 <li class="nav-item {{ request()->route()->getName() === 'client.newprofiles' ? ' active ' : '' }}">
                                     <a class="nav-link" href="{{ route('client.newprofiles') }}">
                                         <div class="dash-menu-icon dash-icon-11"></div>
                                         <span>New Profiles</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{ request()->route()->getName() === 'client.available-now' ? ' active ' : '' }}">
+                                    <a class="nav-link" href="{{ route('client.available-now') }}">
+                                        <div class="dash-menu-icon dash-icon-11"></div>
+                                        <span>Available Now</span>
                                     </a>
                                 </li>
                                 <li class="nav-item {{ request()->route()->getName() === 'client.ticket' ? ' active ' : '' }}">
@@ -205,6 +218,16 @@
         </script>
         <script>
             $y(document).ready(function () {
+
+                $y.ajax({
+                type: "get",
+                url: "{{ route('client.notifications.data') }}",
+                data: "data",
+                dataType: "json",
+                success: function (response) {
+                    $(".notification-area span").html(response);
+                }
+            });
                 if (!$y.browser.opera) {
                     // select element styling
                     $y('select.select').each(function () {

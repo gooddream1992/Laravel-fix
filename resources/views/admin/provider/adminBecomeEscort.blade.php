@@ -55,6 +55,16 @@
                     </div>
                   </div>
                  
+                 <div class="col-lg-12" id="sub-title" style="display: none;">
+                    <div class="form-group sip_mt">
+                       <div class="select_2_alska2">
+                        <label class="FormLabel1">{{ __('Sub Title') }}*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>
@@ -79,7 +89,7 @@
                         <label class="FormLabel1">{{ __('Upload To') }}*</label>
                       </div>
                       <div class="selct_2_alska">
-                        <select class="form-control" name="status">
+                        <select class="form-control" name="status" id="status">
                           <option value="1">Section 01</option>
                           <option value="2">Section 02</option>
                           <option value="3">Section 03</option>
@@ -128,6 +138,7 @@
                 <th>{{ __('ID No.') }}</th>
                 <th>{{ __('Picture') }}</th>
                 <th>{{ __('Title') }}</th>
+                <th>{{ __('Sub Title') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Description') }}</th>
                 <th>{{ __('Action') }}</th>
@@ -141,6 +152,7 @@
                 <td>00{{$i++}}</td>
                 <td>@if($data->imageurl==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width: 30px;"> @else <img src="{{asset('public/uploads/'.$data->imageurl)}}" style="width: 30px;">@endif</td>
                 <td>{{$data->title}}</td>
+                <td>{{$data->sub_title}}</td>
                 <td>Section {{$data->status}}</td>
                 <td>{!! $data->description !!}</td>
               
@@ -228,6 +240,16 @@
                     </div>
                   </div>
                   
+                  <div class="col-lg-12" id="sub-title">
+                    <div class="form-group sip_mt">
+                      <div class="select_2_alska2">
+                        <label class="FormLabel1">{{ __('Sub Title') }}*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title" class="form-control" value="{{$data->sub_title}}">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>
@@ -250,7 +272,7 @@
                         <label class="FormLabel1">{{ __('Upload To') }}*</label>
                       </div>
                       <div class="selct_2_alska">
-                        <select class="form-control" name="status"  value="{{$data->status}}">
+                        <select class="form-control" name="status"  value="{{$data->status}}" id="status">
                           <option value="{{$data->status}}">Current Section {{$data->status}}</option>
                           <option value="1">Section 01</option>
                           <option value="2">Section 02</option>
@@ -297,6 +319,18 @@
   @endforeach
 
 
-
+<script>
+  $(document).ready(function(){
+    $("#status").on('change',function(){
+      var status = this.value;
+      if(status == 6){
+        $("#sub-title").show();
+      }else{
+        $("#sub-title").hide();
+      }
+    });
+    
+  });
+</script>
   
 @endsection

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'New Escort'); ?>
 <?php $__env->startSection('main'); ?>
 <div class="content-wrapper">
@@ -68,6 +67,7 @@
                         <option value="5">Our Story</option>
                         <option value="6">FAQ</option>
                         <option value="7">Client Membership</option>
+                        <option value="8">Blog</option>
                       </select>
                       </div>
                     </div>
@@ -143,7 +143,26 @@
               <?php $__currentLoopData = $sliders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr>
                 <td><?php echo e($slider->id); ?></td>
-                <td> <?php if($slider->category==1): ?> Home <?php elseif($slider->category==2): ?> Explore Cities <?php elseif($slider->category==3): ?> Terms & Condition <?php elseif($slider->category==4): ?>  Business Etiquette <?php elseif($slider->category==5): ?> Our Story <?php elseif($slider->category==6): ?> FAQ <?php elseif($slider->category==7): ?> Client Membership <?php else: ?> <?php endif; ?></td>
+                <td>
+                  <?php if($slider->category==1): ?>
+                    Home
+                  <?php elseif($slider->category==2): ?>
+                    Explore Cities
+                  <?php elseif($slider->category==3): ?>
+                    Terms & Condition
+                  <?php elseif($slider->category==4): ?>
+                    Business Etiquette
+                  <?php elseif($slider->category==5): ?>
+                    Our Story
+                  <?php elseif($slider->category==6): ?>
+                    FAQ
+                  <?php elseif($slider->category==7): ?>
+                    Client Membership
+                  <?php elseif($slider->category==8): ?>
+                    Blog
+                  <?php else: ?>
+                  <?php endif; ?>
+                </td>
                 <td><?php echo e($slider->title); ?></td>
                 <td><?php echo e($slider->description); ?></td>
                 <td><?php if($slider->slider==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width: 30px;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$slider->slider)); ?>" style="width: 30px;"><?php endif; ?></td>
@@ -250,6 +269,7 @@
                         <option value="5">Our Story</option>
                         <option value="6">FAQ</option>
                         <option value="7">Client Membership</option>
+                        <option value="8">Blog</option>
                       </select>
                       </div>
                     </div>

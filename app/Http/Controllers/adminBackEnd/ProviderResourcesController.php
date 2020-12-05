@@ -1,16 +1,18 @@
 <?php
-  namespace App\Http\Controllers\adminBackEnd;
-  use Illuminate\Http\Request;
-  use App\Http\Controllers\Controller;
-  use Auth;
-  use App\User;
-  
-  use\App\SexTrafficking;
-  use\App\LocalResource;
-  use\App\PurchaseMarketing;
-  use\App\BecomeEscort;
-  use\App\Blog;
-  use DB;
+namespace App\Http\Controllers\adminBackEnd;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Auth;
+use App\User;
+
+use\App\SexTrafficking;
+use\App\LocalResource;
+use\App\PurchaseMarketing;
+use\App\BecomeEscort;
+use\App\Blog;
+use App\Country;
+use App\State;
+use DB;
 
 class ProviderResourcesController extends Controller
 {
@@ -183,6 +185,7 @@ public function adminBecomeEscortStore(Request $request)
 //return $request;
 $becomescorts=new BecomeEscort;
 $becomescorts->title=$request->title;
+$becomescorts->sub_title=$request->sub_title;
 $becomescorts->status=$request->status;
 $becomescorts->description=$request->description;
 if ($request->hasFile('imageurl')) {
@@ -200,6 +203,7 @@ public function adminBecomeEscortUpdate(Request $request)
 //return $request;
 $becomescorts= BecomeEscort::find($request->id);
 $becomescorts->title=$request->title;
+$becomescorts->sub_title=$request->sub_title;
 $becomescorts->status=$request->status;
 $becomescorts->description=$request->description;
 if ($request->hasFile('imageurl')) {
@@ -271,8 +275,69 @@ return back()->with('message', 'News & Blog Updated Successfully!');
 
 public function adminBlogDelete($id)
 {
-//return $request;
-$blogs= Blog::find($id)->delete();
-return back()->with('message', 'News & Blog Deleted Successfully!');
+  //return $request;
+  $blogs= Blog::find($id)->delete();
+  return back()->with('message', 'News & Blog Deleted Successfully!');
+}
+
+
+public function adminBlogging()
+{
+  $countries = Country::all();
+  return view('admin.provider.adminBloggingCenter', compact('countries'));
+}
+
+public function adminBloggingStore(Request $request)
+{
+  $blogs = new Blog;
+  $blogs->country_id = $request->country_id;
+  $blogs->state_id = $request->state_id;
+  $blogs->gender = $request->gender;
+  $blogs->role = 1;
+  $blogs->publishBy = 1;
+  $blogs->title = $request->title;
+  $blogs->status = $request->status;
+  $blogs->description = $request->description;
+  $blogs->publicationStatus = $request->publicationStatus;
+
+  if ($request->hasFile('imageurl')) {
+    $images = '9'.time().'.'.$request->imageurl->getClientOriginalExtension();
+    $request->imageurl->move(('public/uploads'), $images);
+    $blogs->imageurl=$images;
+  }
+
+  
+  $blogs->save();
+  return back()->with('message', 'Admin Blog Save Successfully!');
+}
+
+
+
+public function adminBloggingUpdate(Request $request, $id)
+{
+  $blogs= Blog::find($id);
+  $blogs->title=$request->title;
+  $blogs->country_id = $request->country_id;
+  $blogs->state_id = $request->state_id;
+  $blogs->gender = $request->gender;
+  $blogs->status=$request->status;
+  $blogs->publishBy=1;
+  $blogs->publicationStatus=$request->publicationStatus;
+  $blogs->description=$request->description;
+  if ($request->hasFile('imageurl')) {
+    $images = '9'.time().'.'.$request->imageurl->getClientOriginalExtension();
+    $request->imageurl->move(('public/uploads'), $images);
+    $blogs->imageurl=$images;
+  }
+  $blogs->save();
+  return back()->with('message', 'Admin Blog Updated Successfully!');
+}
+
+
+
+public function adminBloggingDelete($id)
+{
+  Blog::find($id)->delete();
+  return back()->with('message', 'Admin Blog Deleted Successfully!');
 }
 }

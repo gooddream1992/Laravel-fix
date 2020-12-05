@@ -4,7 +4,7 @@
 
 @section('content')
 <div>
-    <a href="{{ route('profile.photos.index') }}" class="submit-btn px-3 py-2">
+    <a href="{{ route('profile.photos.index', $id) }}" class="submit-btn px-3 py-2">
         <i class="icofont-double-left"></i>
         Go Back
     </a>
@@ -24,7 +24,7 @@
             <button class="submit-btn px-3 py-0 ml-3" type="submit">Update Image</button>
         </form>
 
-        <form method="POST" action="{{ route('profile.photos.delete', $image->id) }}">
+        <form method="POST" action="{{ route('profile.photos.delete', [$id, $image->id]) }}">
             @csrf
             <button class="submit-btn px-3 py-0" type="submit">Delete Image</button>
         </form>

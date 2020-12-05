@@ -88,13 +88,12 @@ $description=$sliders->description;  }
                                 <h2><?php echo e($relation3->title); ?></h2>
                                 <?php echo $relation3->description; ?>
 
-                                <button class="btn red-small">Read More</button>
 
                             </div>
                         </div>
                         <?php $crelations4 =\App\ClientRelationship::all()->where('status', 4);?>
               <?php $__currentLoopData = $crelations4; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relation4): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col-lg-4 col-md-12  order-lg-1 order-md-2">
+                        <div class="col-lg-4 col-md-12  order-lg-1 order-md-2 align-self-center"> 
                             <img src="<?php echo e(asset('public/uploads/'.$relation4->imageurl)); ?>" class="img-fluid" />
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -104,59 +103,48 @@ $description=$sliders->description;  }
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             
+            <?php $crelations8 =\App\ClientRelationship::all()->where('status', 8);
+            ?>
+            
             <section class="red-tab-sec">
                 <div class="group-red-box">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="box-title dark c-center">
-                                    <h2>What do you want to Ensure ?</h2>
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                                    <?php
+                                        $title = array();
+                                        $sub_title = array();
+                                    ?>
+                                    <?php $__currentLoopData = $crelations8; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value8): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php
+                                            $title['title']  = $value8->title;
+                                            $sub_title['sub_title'] = $value8->sub_title;
+                                        ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    
+                                    <h2><?php echo e($title['title']); ?></h2>
+                                    <h2></h2>
+                                    
+                                    <p><?php echo e($sub_title['sub_title']); ?></p>
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-10">
                                 <ul class="red-icon-list">
+                                    <?php $__currentLoopData = $crelations8; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relation8): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li>
                                         <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-1.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
+                                            <div class="circle-icon"><img src="<?php echo asset('public/uploads/'.$relation8->imageurl) ?>" class="img-fluid"/></div>
+                                            <h4><?php echo $relation8->description; ?></h4>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-2.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-3.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-4.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-5.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-6.png')); ?>" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </section>
@@ -174,11 +162,10 @@ $description=$sliders->description;  }
                               <h2><?php echo e($relation5->title); ?></h2>
                                 <?php echo $relation5->description; ?>
 
-                                <button class="btn red-small">Read More</button>
 
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-12  ">
+                        <div class="col-lg-4 col-md-12 align-self-center ">
                             <img src="<?php echo e(asset('public/uploads/'.$relation5->imageurl)); ?>" class="img-fluid" />
                         </div>
                     </div>
@@ -205,22 +192,32 @@ $description=$sliders->description;  }
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             
+            <?php
+                $crelations9 =\App\ClientRelationship::all()->where('status', 9);
+                $title9 = array();
+                $image = array();
+            ?>
+            <?php $__currentLoopData = $crelations9; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relation9): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php 
+                    $title9['title'] = $relation9->title;
+                    $image['image'] = $relation9->imageurl;
+                ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <section class="know-the-rules row-am">
                 <div class="container">
                     <div class="row justify-content-lg-center justify-content-md-center">
                         <div class="col-lg-6 col-md-12  d-flex align-items-center">
-                            <img src="<?php echo e(asset('public/images/know-rules.jpg')); ?>" class="img-fluid" />
+                            <img src="<?php echo e(asset('public/uploads/'.$image['image'])); ?>" class="img-fluid" />
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="inner-text-content">
-                                <h2>Follow Rules</h2>
+                                
+                                <h2><?php echo e($title9['title']); ?></h2>
                                 <ul class="rules-list">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</li>
-                                    <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </li>
-                                    <li>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</li>
-                                    <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </li>
-                                    <li>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
+                                    <?php $__currentLoopData = $crelations9; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relation9): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><?php echo $relation9->description; ?></li>
+                                    
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
                         </div>

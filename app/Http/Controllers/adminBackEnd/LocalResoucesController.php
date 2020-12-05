@@ -26,8 +26,12 @@ class LocalResoucesController extends Controller
 
 
   public function index(){
+    $country = DB::table('countries')->select('*')->get();
+    // echo "<pre>";
+    // print_r($country);
+    // exit;
     $city = DB::table('cities')->select('*')->get();
-    return view('admin.localResources.index',['city'=>$city]);
+    return view('admin.localResources.index',['city'=>$city,'country'=>$country]);
   }
   public function store(Request $request){
     $name = $request->name;
@@ -47,7 +51,7 @@ class LocalResoucesController extends Controller
   public function view(){
     $data = DB::table('local_resorces_data')
     ->join('cities','local_resorces_data.suburb','cities.id')
-    ->select('*')->paginate(10);
+    ->select('*','local_resorces_data.id as data_id')->paginate(10);
     return view('admin.localResources.view',['data'=>$data]);
   }
   public function delete($id){

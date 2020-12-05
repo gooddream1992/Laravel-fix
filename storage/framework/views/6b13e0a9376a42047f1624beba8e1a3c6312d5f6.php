@@ -31,15 +31,15 @@
                             <input type="checkbox" autocomplete="off" id="availibility-check">Not Available
                         </label>
                     </div>-->
-                    <?php
-
-                     ?>
+                    
+                    
                     <span id="count"></span><br>
                     <span class="custom-toggle switch">
-                        <label for="switch-id">Online &nbsp;</label>
-                        <input type="checkbox" class="switch" id="switch-id" <?php if(Auth::user()->activation == 0): ?> checked <?php endif; ?>>
+                        <label for="switch-id" data-toggle="modal" data-target="#availability-modal">Online &nbsp;</label>
+                        <input type="checkbox" class="switch" id="switch-id" <?php if(Auth::user()->activation == 0){?> checked data-toggle="modal" data-target="#availability-modal" <?php } ?> >
                         <label for="switch-id">Offline</label>
                     </span>
+                
                 </li>
                 
                 <li class="nav-item <?php echo e(request()->route()->getName() === 'escort.friend-list' ? ' active ' : ''); ?>">
@@ -48,8 +48,16 @@
                         <span>Friendship List</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
+                <?php if(Auth::user()->type_IA !='' && Auth::user()->type_IA != NULL && Auth::user()->type_IA != '1'): ?>
+                <li class="nav-item <?php echo e(request()->route()->getName() === 'escort.my-profiles' ? ' active ' : ''); ?>">
+                    <a class="nav-link" href="<?php echo e(route('escort.my-profiles')); ?>">
+                        <div class="dash-menu-icon dash-icon-3"></div>
+                        <span>My Profiles</span>
+                    </a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item <?php echo e(request()->route()->getName() === 'escort.report' ? ' active ' : ''); ?>">
+                    <a class="nav-link" href="<?php echo e(route('escort.report')); ?>">
                         <div class="dash-menu-icon dash-icon-4"></div>
                         <span>Report</span>
                     </a>
@@ -98,12 +106,18 @@
                 </li>
                 <li class="nav-item <?php echo e(request()->route()->getName() === 'escort.tour' ? ' active ' : ''); ?>">
                     <a class="nav-link" href="<?php echo e(route('escort.tour')); ?>">
-                        <div class="dash-menu-icon dash-icon-6"></div>
+                        <div class="dash-menu-icon dash-icon-14"></div>
                         <span>Tours</span>
                     </a>
                 </li>
-                <!--<li class="nav-item"><a class="nav-link" href="#"><div class="dash-menu-icon dash-icon-5"></div> <span>Friend Request</span></a></li>-->
                 
+                <!--<li class="nav-item"><a class="nav-link" href="#"><div class="dash-menu-icon dash-icon-5"></div> <span>Friend Request</span></a></li>-->
+                <li class="nav-item <?php echo e(request()->route()->getName() === 'manage-account' ? ' active ' : ''); ?>">
+                    <a class="nav-link" href="<?php echo e(route('manage-account')); ?>">
+                        <div class="dash-menu-icon dash-icon-12"></div>
+                        <span>Manage Account</span>
+                    </a>
+                </li>
                 <li class="logout-menu">
                     <a class="logout-btn" href="<?php echo e(route('client.logout')); ?>">
                         <span>
@@ -118,38 +132,20 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<?php
-$dtime = Auth::user()->timer;
-$tz_object = new DateTimeZone('Asia/Kolkata');
-$datetime = new DateTime();
-$datetime->setTimezone($tz_object);
-$yt= $datetime->format('Y');
-$mt= $datetime->format('m');
-$dt= $datetime->format('d');
-$hours= $datetime->format('H');
-$minutes= $datetime->format('i');
-$seconds= $datetime->format('s');
-$now = $yt."-".$mt."-".$dt." ".$hours.":".$minutes.":".$seconds;
-$cenvertedTime = date('Y-m-d H:i:s',strtotime('+6 hour',strtotime($now))); 
-?>
-<input type="hidden" name="profile_id" value="<?php echo e(Auth::user()->id); ?>" id="profile_id">
-<input type="hidden" name="todayDT" value="<?php echo $cenvertedTime; ?>" id="todayDT">
-<input type="hidden" name="datetime" value="<?php echo e(Auth::user()->timer); ?>" id='datetime'>
-  <span style="color: white;">
-<?php
-    /*$today =  date('Y-M-d H:i:s');*/
-    $startTime = date("Y-m-d H:i:s");
-    $added_dt = date('Y-m-d H:i:s',strtotime('+11 hour +30 minutes',strtotime($startTime)));
-?>
-</span>
 
+
+<input type="hidden" name="datetime" value="<?php echo e(Auth::user()->timer); ?>" id='datetime'>
 <script>
     var indiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+    console.log(indiaTime);
      <?php if(Auth::user()->activation == 1){  ?>
       var datetime = $("#datetime").val();
       var deadline = new Date(datetime).getTime(); 
+
       var x = setInterval(function() { 
-      var now = new Date().getTime();
+        var indiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+      var now = new Date(indiaTime).getTime();
+      console.log(now);
       var t = deadline - now; 
       var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
@@ -164,28 +160,81 @@ $cenvertedTime = date('Y-m-d H:i:s',strtotime('+6 hour',strtotime($now)));
   <?php } ?>
 
 var switchStatus = true;
-var profile_id = $("#profile_id").val();
-var todayDT = $("#todayDT").val();
-$("#switch-id").on('change', function() {
+
+$("#switch-id").on('change', function() {    
     if ($(this).is(':checked') == true) {
         switchStatus = 0;
-        var text = "Now Your Profile will Be Not Available!";
-    } else {
-        switchStatus = 1;
-        var text = "Now Your Profile will Be Available!";
     }
     $.ajax({
-        url:"<?php echo e(route('escort.profile.activation.ajax')); ?>",
+        url:"<?php echo e(route('escort.profile.deactivation.ajax')); ?>",
         type:"POST",
         data:{
         "_token": "<?php echo e(csrf_token()); ?>",
-        'profile_id':profile_id,
         'switchStatus':switchStatus,
-        'todayDT':todayDT
         },success: function(data){
           location.reload(true);
         }
     });
 
 });
-</script><?php /**PATH /home/honeydevealakmal/public_html/resources/views/partials/_profileSidenav.blade.php ENDPATH**/ ?>
+</script>
+
+<form action="<?php echo e(route('escort.profile.activation.ajax')); ?>" method="post">
+    
+ <?php echo csrf_field(); ?>
+<!--Availibility modal--> 
+        <div class="modal fade" id="availability-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">You are going<br> online now</h5>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h3>Choose your available hours</h3>
+                        <div class="number-tile-group">
+                            <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="1">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">1</p>
+                                </div>
+                                </div>
+                                <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="2">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">2</p>
+                                </div>
+                                </div>
+                                <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="3">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">3</p>
+                                </div>
+                                </div>
+                                <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="4">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">4</p>
+                                </div>
+                                </div>
+                                <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="5">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">5</p>
+                                </div>
+                                </div>
+                                <div class="input-container">
+                                <input class="num-check-button" type="radio" name="check1" value="6">
+                                <div class="num-tile">
+                                    <p class="num-tile-label">6</p>
+                                </div>
+                                </div>
+                        </div>
+
+                        <button class="submit-btn large" id="go-online" type="submit">Go online </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Availibility modal End--> 
+</form><?php /**PATH /home/honeydevealakmal/public_html/resources/views/partials/_profileSidenav.blade.php ENDPATH**/ ?>

@@ -1,5 +1,6 @@
 <?php $__env->startSection('title', 'Friends List'); ?>
 <?php $__env->startSection('home'); ?>
+
 <div class="col-md-9 right-content">
   	<div class="box multi_step_form">
       	<form>
@@ -12,13 +13,25 @@
 								<div class="friend-rqst-box">
 									<div class="profile-img">
 										
-										<?php if($follow_details->photo==NULL): ?><img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width:50px;height: 50px;border-radius: 50%;"> <?php else: ?> <img src="<?php echo e(asset('public/uploads/'.$follow_details->photo)); ?>" style="width:50px;height: 50px;border-radius: 50%;"><?php endif; ?>
+										<?php
+											$profileImage = \App\ProfileImage::where([
+												['status','=','5'],
+												['escortId','=',$follow_details->escortId]
+											])->first();											
+										?>
+
+										<?php if($profileImage->image==NULL): ?>
+											<img src="<?php echo e(asset('public/blankphoto.png')); ?>" style="width:50px;height: 50px;border-radius: 50%;">
+										<?php else: ?>
+
+											<img src="<?php echo e(asset('public/uploads/'.$profileImage->image)); ?>" style="width:50px;height: 50px;border-radius: 50%;">
+										<?php endif; ?>
 									</div>
 									<div class="profile-content">
 											<p><?=date('d.m.Y',strtotime($follow_details->created_at))?></p>
 											<h4><?php echo e($follow_details->name); ?></h4>
 									</div>
-									<button type="button" onclick="unfriend('<?php echo e($follow_details->custId); ?>','<?php echo e($follow_details->escortId); ?>','<?php echo e($follow_details->name); ?>')" class="accept-rqst-btn">Unfriend</button>
+									<button type="button" onclick="unfriend('<?php echo e($follow_details->cust_id); ?>','<?php echo e($follow_details->escortId); ?>','<?php echo e($follow_details->name); ?>')" class="accept-rqst-btn">Unfriend</button>
 								</div>
 							</div>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

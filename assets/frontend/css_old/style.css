@@ -1,0 +1,12 @@
+@import "bootstrap.min.css";
+@import "fonts.css";
+@import "fonts/trajan-pro/style.css";
+@import "animate.css"; 
+@import "menu3.css"; /* Designer Only */
+@import "carousel.css";
+@import "general.css"; /* Designer Only */
+@import "main.css"; /* Designer Only */
+
+/*Developer CSS*/
+
+@import "responsive.css"; /* Designer Only */

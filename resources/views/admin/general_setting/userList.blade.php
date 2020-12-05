@@ -33,7 +33,7 @@
                 </tr>
               </thead>
               <tbody>
-                   <?php $users =\App\User::all();?>
+                   
                  <?php $i=1;?>
               @foreach($users as $user)
               <tr>
@@ -47,7 +47,10 @@
                 <td>{{$user->country}}, {{$user->city}}, {{$user->suburb}}, {{$user->code}}</td>
 
                
-                <td><a href="{{url('escort/modify/'.$user->id)}}" class="btn btn-xs btn-primary">Modify</a> <a href="{{url('branches/edit/'.$user->id)}}" class="btn btn-xs btn-danger">Delete</a></td>
+                <td>
+                  <a href="{{url('escort/modify/'.$user->id)}}" class="btn btn-xs btn-primary">Modify</a>
+                  <a href="{{ route('user.list.delete',[$user->id,$user->name]) }}" class="btn btn-xs btn-danger">Delete</a>
+                </td>
              
               
                 

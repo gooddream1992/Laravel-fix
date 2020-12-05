@@ -46,12 +46,15 @@ class ClientBlogController extends Controller {
             if ($request->hasFile('imageurl')) {
                 $photo = time().'.'.$request->imageurl->getClientOriginalExtension();
                 $destinationPath = 'public/client_library/upload/blog/'; // upload path
-                $request->imageurl->move($destinationPath,$photo);
+                if(isset($photo) && $photo!='')
+                {
+                  $request->imageurl->move($destinationPath,$photo);
+                }
             }
             DB::table('blogs')->insert([
                 'title'=>$title,
                 'description'=>$description,
-                'imageurl'=>$photo,
+                'imageurl'=>isset($photo) && $photo!='' ? $photo : 'blankphoto.png',
                 'role'=> $user_role->roleStatus,
                 'publishBy'=> $user_role->id
             ]);

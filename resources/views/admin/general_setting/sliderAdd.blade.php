@@ -67,6 +67,7 @@
                         <option value="5">Our Story</option>
                         <option value="6">FAQ</option>
                         <option value="7">Client Membership</option>
+                        <option value="8">Blog</option>
                       </select>
                       </div>
                     </div>
@@ -142,7 +143,26 @@
               @foreach($sliders as $slider)
               <tr>
                 <td>{{$slider->id}}</td>
-                <td> @if($slider->category==1) Home @elseif($slider->category==2) Explore Cities @elseif($slider->category==3) Terms & Condition @elseif($slider->category==4)  Business Etiquette @elseif($slider->category==5) Our Story @elseif($slider->category==6) FAQ @elseif($slider->category==7) Client Membership @else @endif</td>
+                <td>
+                  @if($slider->category==1)
+                    Home
+                  @elseif($slider->category==2)
+                    Explore Cities
+                  @elseif($slider->category==3)
+                    Terms & Condition
+                  @elseif($slider->category==4)
+                    Business Etiquette
+                  @elseif($slider->category==5)
+                    Our Story
+                  @elseif($slider->category==6)
+                    FAQ
+                  @elseif($slider->category==7)
+                    Client Membership
+                  @elseif($slider->category==8)
+                    Blog
+                  @else
+                  @endif
+                </td>
                 <td>{{$slider->title}}</td>
                 <td>{{$slider->description}}</td>
                 <td>@if($slider->slider==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width: 30px;"> @else <img src="{{asset('public/uploads/'.$slider->slider)}}" style="width: 30px;">@endif</td>
@@ -248,6 +268,7 @@
                         <option value="5">Our Story</option>
                         <option value="6">FAQ</option>
                         <option value="7">Client Membership</option>
+                        <option value="8">Blog</option>
                       </select>
                       </div>
                     </div>

@@ -37,6 +37,15 @@
                         </div>
                         <div class="col-lg-12">
                            <div class="form-group sip_mt">
+                              <div class="selct_2_alska">
+                                 <input name="image" type="file" accept="image/*" value="0">
+                                 <img src="{{asset('public/blankphoto.png')}}">
+                                 <p class="help-block">{{ __('Upload City Thumbnail max 1mb') }}</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                           <div class="form-group sip_mt">
                               <div class="select_2_alska2">
                               </div>
                               <div class="selct_2_alska">
@@ -145,7 +154,7 @@
                         <tr>
                            <th>{{ __('ID No.') }}</th>
                            <th>{{ __('Country Name') }}</th>
-                           {{-- <th>{{ __('Photo') }}</th> --}}
+                           <th>{{ __('Photo') }}</th>
                            <th>{{ __('Action') }}</th>
                         </tr>
                      </thead>
@@ -155,10 +164,18 @@
                         <tr>
                            <td>{{$country->id}}</td>
                            <td>{{$country->country}}</td>
-                           {{-- <td>@if($country->image==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width: 30px;"> @else <img src="{{asset('public/uploads/'.$country->image)}}" style="width: 30px;">@endif</td> --}}
+                           <td>
+                              @if($country->image==NULL)
+                                 <img src="{{asset('public/blankphoto.png')}}" style="width: 30px;">
+                              @else
+                                 <img src="{{asset('public/uploads/'.$country->image)}}" style="width: 30px;">
+                              @endif
+                           </td>
                            <td>
                               <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-lg{{$country->id }}">Modify</a>
-                              <a href="{{url('country/delete/'.$country->id)}}" class="btn btn-xs btn-danger">Delete</a>
+                              <a href="{{ route('delete.country',$country->id) }}" class="btn btn-xs btn-danger">
+                                 Delete
+                              </a>
                               <a href="{{ route('admin.location.state',$country->id) }}" class="btn btn-xs btn-secondary">Manage Cities</a>
                            </td>
                         </tr>
@@ -173,7 +190,7 @@
 </div>
 <!--========================== Modal  Start====================================================-->
 <!-- Modal Start================ -->
-@foreach($countries as $country)
+@foreach($countries_table as $country)
 <div class="modal fade" id="modal-lg{{$country->id}}">
    <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -202,6 +219,15 @@
                         </div>
                      </div>
                   </div>
+                  <div class="col-lg-12">
+                           <div class="form-group sip_mt">
+                              <div class="selct_2_alska">
+                                 <input name="image" type="file" accept="image/*" value="0">
+                                 <img src="{{asset('public/blankphoto.png')}}">
+                                 <p class="help-block">{{ __('Upload City Thumbnail max 1mb') }}</p>
+                              </div>
+                           </div>
+                        </div>
                </div>
                <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

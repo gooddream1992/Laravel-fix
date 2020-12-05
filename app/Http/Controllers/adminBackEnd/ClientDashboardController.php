@@ -95,6 +95,16 @@ public function followStore(Request $request){
   $follows->status=$request->status;
   $follows->save();
 
+  $id = Auth::user()->id;
+  DB::table('notification')->insert([
+    'notification_title'=>Auth::user()->name." started following you.",
+    'url'=> "profile/".$id,
+    'type'=> "escort",
+    'client_id' => $id,
+    'notification_content'=>Auth::user()->name." started following you.",
+    'user_id'=>$request->escortId
+    ]);
+
 
   return back()->with('message', 'Followed Successfully!');
 }
@@ -106,7 +116,15 @@ public function followUpdate(Request $request){
   $follows= Follow::find($request->id);
   $follows->status=$request->status;
   $follows->save();
-
+  $id = Auth::user()->id;
+  DB::table('notification')->insert([
+    'notification_title'=>Auth::user()->name." unfollowed you.",
+    'url'=> "profile/".$id,
+    'type'=> "escort",
+    'client_id' => $id,
+    'notification_content'=>Auth::user()->name." unfollowed you.",
+    'user_id'=>$follows->escortId
+    ]);
 
   return back()->with('message', 'Unfollowed Successfully!');
 }

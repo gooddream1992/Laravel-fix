@@ -51,7 +51,6 @@
                         <div class="inner-text-content text-white">
                             <h1><?php echo e($section[3]->title); ?></h1>
                             <p><?php echo $section[3]->description; ?></p>
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12  order-lg-1 order-md-2">
@@ -75,7 +74,6 @@
                             <h3><?php echo e($section[4]->title); ?></h3>
                             <p><?php echo $section[4]->description; ?></p> 
 
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -90,7 +88,6 @@
                         <div class="zigzag-red-box">
                             <h3><?php echo e($section[5]->title); ?></h3>
                             <p><?php echo $section[5]->description; ?></p> 
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -114,13 +111,17 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <ul class="red-icon-list">
+                                <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li>
                                     <div class="icon-box">
-                                        <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-1.png')); ?>" class="img-fluid"/></div>
-                                        <h4>Some Title Here</h4>
+                                        <div class="circle-icon">
+                                            <img src="<?php echo e(asset('public/uploads/'.$value->imageurl)); ?>" class="img-fluid"/>
+                                        </div>
+                                        <h4><?php echo e($value->sub_title); ?></h4>
                                     </div>
                                 </li>
-                                <li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <!-- <li>
                                     <div class="icon-box">
                                         <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-2.png')); ?>" class="img-fluid"/></div>
                                         <h4>Some Title Here</h4>
@@ -149,7 +150,7 @@
                                         <div class="circle-icon"><img src="<?php echo e(asset('public/images/red-circle-icon-6.png')); ?>" class="img-fluid"/></div>
                                         <h4>Some Title Here</h4>
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -191,8 +192,8 @@
                         <div class="large-title box-title dark c-center">
                             <h2><?php echo e($section[8]->title); ?></h2>
                             <p><?php echo $section[8]->description; ?></p>
-
-                            <button class="btn red-small mt-3">I agree</button>
+                        <a href="<?php echo e(url('escort/signup')); ?>" class="btn red-small mt-3">I agree</a>
+                            
                         </div>
                     </div> 
                 </div>

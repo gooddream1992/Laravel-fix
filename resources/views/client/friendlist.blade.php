@@ -1,6 +1,7 @@
 @extends('client.master.layouts')
 @section('title', 'Friends List')
 @section('home')
+
 <div class="col-md-9 right-content">
   	<div class="box multi_step_form">
       	<form>
@@ -13,13 +14,25 @@
 								<div class="friend-rqst-box">
 									<div class="profile-img">
 										{{-- <img src="images/feed-profile-1.png"> --}}
-										@if($follow_details->photo==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width:50px;height: 50px;border-radius: 50%;"> @else <img src="{{asset('public/uploads/'.$follow_details->photo)}}" style="width:50px;height: 50px;border-radius: 50%;">@endif
+										@php
+											$profileImage = \App\ProfileImage::where([
+												['status','=','5'],
+												['escortId','=',$follow_details->escortId]
+											])->first();											
+										@endphp
+
+										@if($profileImage->image==NULL)
+											<img src="{{asset('public/blankphoto.png')}}" style="width:50px;height: 50px;border-radius: 50%;">
+										@else
+
+											<img src="{{asset('public/uploads/'.$profileImage->image)}}" style="width:50px;height: 50px;border-radius: 50%;">
+										@endif
 									</div>
 									<div class="profile-content">
 											<p><?=date('d.m.Y',strtotime($follow_details->created_at))?></p>
 											<h4>{{ $follow_details->name }}</h4>
 									</div>
-									<button type="button" onclick="unfriend('{{ $follow_details->custId }}','{{ $follow_details->escortId }}','{{ $follow_details->name }}')" class="accept-rqst-btn">Unfriend</button>
+									<button type="button" onclick="unfriend('{{ $follow_details->cust_id }}','{{ $follow_details->escortId }}','{{ $follow_details->name }}')" class="accept-rqst-btn">Unfriend</button>
 								</div>
 							</div>
 							@endforeach

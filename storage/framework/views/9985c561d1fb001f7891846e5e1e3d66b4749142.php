@@ -7,7 +7,7 @@
                <?php $__currentLoopData = $health; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $escort): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                <li>
                   <div class="img-box">
-                     <a href="<?php echo e($escort->title); ?>" target="_blank">
+                     <a href="http://<?php echo e($escort->title); ?>" target="_blank">
                      <img src="<?php echo e(asset('public/localresources/'.$escort->image)); ?>" class="img-fluid"/>
                      <div class="top-content"><?php echo e($escort->name); ?></div>
                      </a>
@@ -25,7 +25,7 @@
                <?php $__currentLoopData = $legal; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $escort): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                <li>
                   <div class="img-box">
-                     <a href="<?php echo e($escort->title); ?>" target="_blank">
+                     <a href="http://<?php echo e($escort->title); ?>" target="_blank">
                      <img src="<?php echo e(asset('public/localresources/'.$escort->image)); ?>" class="img-fluid"/>
                      <div class="top-content"><?php echo e($escort->name); ?></div>
                      </a>
@@ -43,11 +43,11 @@
                <?php $__currentLoopData = $photographers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $escort): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                <li>
                   <div class="img-box">
-                     <a href="<?php echo e($escort->title); ?>" target="_blank">
+                     <a href="http://<?php echo e($escort->title); ?>" target="_blank">
                      <img src="<?php echo e(asset('public/localresources/'.$escort->image)); ?>" class="img-fluid"/>
                      <div class="top-content"><?php echo e($escort->name); ?></div>
                      </a>
-                      <div class="bottom-content"><?php echo e($escort->title); ?></div>
+                      <div class="bottom-content"><?php echo e($escort->city); ?></div>
                   </div>
                </li>
                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

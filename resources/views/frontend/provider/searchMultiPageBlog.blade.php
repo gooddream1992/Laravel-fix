@@ -3,9 +3,9 @@
 @section('title', __('Multi page'))
 @section('main')
 
-	 <?php $blogs3 =\App\Blog::all()->where('status', 3);?>
+	    <?php $blogs3 =\App\Blog::all()->where('status', 3);?>
           @foreach($blogs3 as $blog3)
-<section class=" innerpage-banner">
+            <section class=" innerpage-banner">
             <img src="{{asset('public/uploads/'.$blog3->imageurl)}}" class="w-100 inner-ban-img" alt="banner image" />
             <div class="container">
                 <div class="ban-text text-left">

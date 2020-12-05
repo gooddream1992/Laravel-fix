@@ -2,16 +2,16 @@
 .header .menu{position: relative; z-index: 10}
 .header .menu ul {margin: 0; padding: 0;}
 .header .menu ul li {display: inline-block; list-style: none; margin: 0;position: relative;font-size: 15px;}
-.header .menu ul li a {color: #fff !important; text-decoration: none !important; display: block !important; padding: 8px 10px !important;text-transform: uppercase !important;font-weight: 500 !important;}
+.header .menu ul li a {color: #fff; text-decoration: none; display: block; padding: 8px 15px;text-transform: uppercase;font-weight: 500;}
 .header .menu ul li ul.submenu {background-color: #757575; display: none; position: absolute; width: 190px;right: 0; -moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.05);  -webkit-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.05); box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.05);}
 .header .menu ul li ul.submenu li {display: block; width: 100%;}
-.header .menu ul li ul.submenu li a {color: #fff !important; line-height: 25px !important;padding: 8px 12px !important;}
+.header .menu ul li ul.submenu li a {color: #fff; line-height: 25px;padding: 8px 12px;}
 .header .menu ul li ul.submenu li a:hover {color: #fff; background-color: #000;}
-.header .menu ul li:hover {color: #f8060a !important;  }
-.header .menu ul li:hover a{color: #f8060a !important;  }
-.header .menu ul li a.red-small{padding: 8px 20px !important;}
-.header .menu ul li:hover a.red-small{color: #fff !important;}
-.header .menu ul li:hover a.red-small:hover{color: #f8060a !important;  }
+.header .menu ul li:hover {color: #f8060a;  }
+.header .menu ul li:hover a{color: #f8060a;  }
+.header .menu ul li a.red-small{padding: 8px 20px;}
+.header .menu ul li:hover a.red-small{color: #fff;}
+.header .menu ul li:hover a.red-small:hover{color: #f8060a;  }
 .header .menu ul li:hover ul.submenu {display: block;box-shadow: 3px 0px 6px 0px rgba(255,255,255,0.6);}
 .header .menu ul li .flexbox-container{margin-left: 10px;}
 .header .menu ul li i.icon-arrow {display: none;}
@@ -37,7 +37,7 @@
 .top-header-bar .header nav.menu.active ul li.showSubmenu .submenu .subOption a {padding: 15px 40px;}
 .top-header-bar .header nav.menu.active ul li.showSubmenu .submenu .subOption a:hover {background: #65c2ed;}
 .top-header-bar .header nav.menu.active ul li.showSubmenu i.icon-arrow {-moz-transform: rotate(180deg); -ms-transform: rotate(180deg);-webkit-transform: rotate(180deg); transform: rotate(180deg);}
-.top-header-bar .header nav.menu .hamburger {display: inline-block;position: absolute;top: 12px;/*top: 22px;*/ right: 10px; color: #fff; cursor: pointer; z-index: 2; }
+.top-header-bar .header nav.menu .hamburger {display: inline-block;position: absolute;top: 12px;/*top: 22px;*/ left: 10px; color: #fff; cursor: pointer; z-index: 2; }
 
 .top-header-bar .header nav.menu .hamburger span,
 .top-header-bar .header nav.menu .hamburger span:before,

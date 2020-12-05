@@ -66,11 +66,11 @@ $description=$sliders->description;  }
         <div id="content">
             <section class="umbrella-man">
                 <div class="container">
-                    <div class="row justify-content-lg-center justify-content-md-center">
-                        
-            <?php $business =\App\BusinessEtiquete::all()->where('status', 1);?>
-               
-              <?php $__currentLoopData = $business; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                    <?php $business =\App\BusinessEtiquete::all()->where('status', 1);?>
+                    
+                    <?php $__currentLoopData = $business; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="row justify-content-lg-center justify-content-md-center">
 
                         <div class="col-lg-7 col-md-12  order-lg-2 order-md-1">
                             <div class="inner-text-content">
@@ -83,24 +83,32 @@ $description=$sliders->description;  }
                         <div class="col-lg-5 col-md-12 d-flex align-items-center order-lg-1 order-md-2">
                             <img src="<?php echo e(asset('public/uploads/'.$data->imageurl)); ?>" class="img-fluid" />
                         </div>
-                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
+                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </section>
             <section class="red-tab-sec">
                 <ul class="nav nav-pills  nav-pills nav-justified" id="pills-tab" role="tablist">
                     <?php $__currentLoopData = $business_etiquetes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php if(!empty($value->toggle)): ?>
-                        <?php if($key%2==0): ?>
-                    <li class="nav-item">
-                        <a class="nav-link single active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span class="sprint-user-icons"></span><?php echo e($value->toggle); ?></a>
-                    </li>
-                    <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span class="sprint-user-icons"></span><?php echo e($value->toggle); ?></a>
-                    </li>
-                    <?php endif; ?>
-                    <?php endif; ?>
+                        <?php if(!empty($value->toggle)): ?>
+                            <?php if($key%2==0): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link single active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                        <span class="sprint-user-icons"></span>
+                                        <?php echo e($value->toggle); ?>
+
+                                    </a>
+                                </li>
+                                <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                        <span class="sprint-user-icons"></span>
+                                        <?php echo e($value->toggle); ?>
+
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <!-- <li class="nav-item">
                         <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span class="sprint-user-icons"></span>Some Title Here</a>

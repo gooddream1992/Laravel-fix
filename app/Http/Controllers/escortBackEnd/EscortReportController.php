@@ -33,24 +33,51 @@ class EscortReportController extends Controller {
 	{
 		$user_role = Auth::user();
 		$user_id = Auth::user()->id;
-		$reports = DB::table('report')
-					->join('users','users.id','report.escortId')
-					->where('cust_id',Auth::user()->id)
-					->get();
-        return view('frontend/escort_dashboard/new.report.report',['reports'=>$reports]);
+        return view('frontend/escort_dashboard/new.report.report');
 	}
 	
-	public function doReport()
+	public function storeReport()
 	{
-		$escort_id = $_POST['escortId'];
+		$user_id = $_POST['escortId'];
 		$report = $_POST['report'];
-		$user_id = Auth::user()->id;
-		DB::table('feed_update')->insert(['cust_id' => $user_id, 'escortId' => $escort_id,'report_msg'=>$report]);
+		$escort_id = Auth::user()->id;
+		DB::table('report')->insert(['cust_id' => $user_id, 'escortId' => $escort_id,'report_msg'=>$report]);
 		echo json_encode('1');
   }
   
   public function GetClientByNumber()
   {
-    $response = '<ul><li>Testing One</li><li>Testing Two</li><li>Testing Three</li><li>Testing Four</li></ul>';
+    $keyword = $_POST['keyword'];
+
+		$reports = DB::table('report')
+				->where('cust_id',$keyword)
+				->get();
+	$response_html = '<label class="d-block">Reports</label>
+	<div class="report-content">
+		<ul>';
+		if(count($reports) > 0)
+		{
+			foreach ($reports as $report_details)
+			{
+				$response_html .= '
+				<li>
+				<h5>'.
+				$report_details->cust_id.' : '.$report_details->reported_on.' <span>- '.$report_details->report_msg.'</span>
+				</h5>
+				</li>';
+			}
+		}
+		else
+		{
+			$response_html .= '
+			<li>
+				<h5>
+					No Reports Found.
+				</h5>
+			</li>';
+		}
+	$response_html .= '</ul>
+	</div>';
+    echo json_encode(array('response_html'=>$response_html));
   }
 }

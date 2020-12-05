@@ -55,6 +55,17 @@
                     </div>
                   </div>
                  
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                       <div class="select_2_alska2">
+                        <label class="FormLabel1">{{ __('Sub Title') }}*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title">
+                      </div>
+                    </div>
+                  </div>
+
                   
                 </div>
               </div>
@@ -87,6 +98,8 @@
                           <option value="5">Section 05</option>
                           <option value="6">Section 06</option>
                           <option value="7">Section 07</option>
+                          <option value="8">Section 08</option>
+                          <option value="9">Section 09</option>
                         </select>
                       </div>
                     </div>
@@ -120,6 +133,7 @@
                 <th>{{ __('ID No.') }}</th>
                 <th>{{ __('Picture') }}</th>
                 <th>{{ __('Title') }}</th>
+                <th>{{ __('Sub Title') }}</th>
                 <th>{{ __('Status') }}</th>
                 <th>{{ __('Description') }}</th>
                 <th>{{ __('Action') }}</th>
@@ -133,6 +147,7 @@
                 <td>00{{$i++}}</td>
                 <td>@if($data->imageurl==NULL)<img src="{{asset('public/blankphoto.png')}}" style="width: 30px;"> @else <img src="{{asset('public/uploads/'.$data->imageurl)}}" style="width: 30px;">@endif</td>
                 <td>{{$data->title}}</td>
+                <td>{{$data->sub_title}}</td>
                 <td>Section {{$data->status}}</td>
                 <td>{!! $data->description !!}</td>
               
@@ -321,6 +336,16 @@
                     </div>
                   </div>
                   
+                  <div class="col-lg-12">
+                    <div class="form-group sip_mt">
+                      <div class="select_2_alska2">
+                        <label class="FormLabel1">{{ __('Sub Title') }}*</label>
+                      </div>
+                      <div class="selct_2_alska">
+                        <input type="text" name="sub_title" class="form-control" value="{{$data->sub_title}}">
+                      </div>
+                    </div>
+                  </div>
                   
                 </div>
               </div>

@@ -53,7 +53,6 @@
                         <div class="inner-text-content text-white">
                             <h1>{{ $section[3]->title }}</h1>
                             <p>{!! $section[3]->description !!}</p>
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12  order-lg-1 order-md-2">
@@ -77,7 +76,6 @@
                             <h3>{{ $section[4]->title }}</h3>
                             <p>{!! $section[4]->description !!}</p> 
 
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +90,6 @@
                         <div class="zigzag-red-box">
                             <h3>{{ $section[5]->title }}</h3>
                             <p>{!! $section[5]->description !!}</p> 
-                            <button class="btn red-small">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -116,13 +113,17 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <ul class="red-icon-list">
+                                @foreach($sections as $value)
                                 <li>
                                     <div class="icon-box">
-                                        <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-1.png') }}" class="img-fluid"/></div>
-                                        <h4>Some Title Here</h4>
+                                        <div class="circle-icon">
+                                            <img src="{{ asset('public/uploads/'.$value->imageurl) }}" class="img-fluid"/>
+                                        </div>
+                                        <h4>{{ $value->sub_title }}</h4>
                                     </div>
                                 </li>
-                                <li>
+                                @endforeach
+                                <!-- <li>
                                     <div class="icon-box">
                                         <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-2.png') }}" class="img-fluid"/></div>
                                         <h4>Some Title Here</h4>
@@ -151,7 +152,7 @@
                                         <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-6.png') }}" class="img-fluid"/></div>
                                         <h4>Some Title Here</h4>
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -192,8 +193,8 @@
                         <div class="large-title box-title dark c-center">
                             <h2>{{ $section[8]->title }}</h2>
                             <p>{!! $section[8]->description !!}</p>
-
-                            <button class="btn red-small mt-3">I agree</button>
+                        <a href="{{ url('escort/signup') }}" class="btn red-small mt-3">I agree</a>
+                            {{-- <button class="btn red-small mt-3">I agree</button> --}}
                         </div>
                     </div> 
                 </div>

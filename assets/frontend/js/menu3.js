@@ -18,3 +18,4 @@ function showHideMobile() {
   $('.dimmer').toggleClass('active');
   $('body').toggleClass('no-scrolling');
 }
+

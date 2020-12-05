@@ -7,7 +7,7 @@
                @foreach($health as $escort)
                <li>
                   <div class="img-box">
-                     <a href="{{ $escort->title }}" target="_blank">
+                     <a href="http://{{ $escort->title }}" target="_blank">
                      <img src="{{asset('public/localresources/'.$escort->image)}}" class="img-fluid"/>
                      <div class="top-content">{{$escort->name}}</div>
                      </a>
@@ -25,7 +25,7 @@
                @foreach($legal as $escort)
                <li>
                   <div class="img-box">
-                     <a href="{{ $escort->title }}" target="_blank">
+                     <a href="http://{{ $escort->title }}" target="_blank">
                      <img src="{{asset('public/localresources/'.$escort->image)}}" class="img-fluid"/>
                      <div class="top-content">{{$escort->name}}</div>
                      </a>
@@ -43,11 +43,11 @@
                @foreach($photographers as $escort)
                <li>
                   <div class="img-box">
-                     <a href="{{ $escort->title }}" target="_blank">
+                     <a href="http://{{ $escort->title }}" target="_blank">
                      <img src="{{asset('public/localresources/'.$escort->image)}}" class="img-fluid"/>
                      <div class="top-content">{{$escort->name}}</div>
                      </a>
-                      <div class="bottom-content">{{ $escort->title }}</div>
+                      <div class="bottom-content">{{ $escort->city }}</div>
                   </div>
                </li>
                @endforeach

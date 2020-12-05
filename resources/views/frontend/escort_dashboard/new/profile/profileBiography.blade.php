@@ -3,7 +3,7 @@
 @section('title', 'Escort - Biography')
 
 @section('content')
-<form method="POST" action="{{ route('profile.biography.update') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('profile.biography.update', $id) }}" enctype="multipart/form-data">
     @csrf
 
     @include('partials._profileSteps')
@@ -90,7 +90,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Attached Photo</th>
-                                    <th scope="col">Add here Photo URL</th>
+                                    <th scope="col">Thumbnail</th>
+                                    <th scope="col">Attach a purchase link so client can buy your items</th>
                                     <th scope="col">Remove</th>
                                 </tr>
                             </thead>
@@ -109,6 +110,9 @@
                                                     {{ $wishlist_item->image }}
                                                 </label>
                                             </div>
+                                        </td>
+                                        <td>
+                                                <img src="{{ asset('public/profile/'.$wishlist_item->image)  }}" class="img-circle" alt="Cinque Terre" width="60" height="60" style="border-radius: 50%;">
                                         </td>
                                         <td data-label="Add here Photo URL">
                                             <input type="text" class="form-control" name="images[{{ $index }}][url]" 

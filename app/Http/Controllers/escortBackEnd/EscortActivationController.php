@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use DB;
+use Carbon\Carbon;
 class EscortActivationController extends Controller {
     /**
      * Create a new  instance.
@@ -35,10 +36,21 @@ class EscortActivationController extends Controller {
     }
 
     public function ajaxCall(Request $request){
-      $profile_id = $request->profile_id;
-      $switchStatus = $request->switchStatus;
-      $todayDT = $request->todayDT;
-      DB::table('users')->where('id','=',$profile_id)->update(['activation'=>$switchStatus,'timer'=>$todayDT]);
-      echo "done";
+
+      $dtime = Auth::user()->timer;
+      $check1 = $request->check1;
+      $profile_id = Auth::user()->id;
+      $switchStatus = ((Auth::user()->activation == 1) ? 0 : 1);
+      $current = Carbon::now();
+      $cenvertedTime = date('Y-m-d H:i:s',strtotime('+'.$check1.' hour',strtotime($current)));
+      DB::table('users')->where('id','=',$profile_id)->update(['activation'=>$switchStatus,'timer'=>$cenvertedTime]);
+      return redirect()->back();
+      
+    }
+
+    public function ajaxCallDeactivate(Request $request){
+      $switchStatus  = $request->switchStatus; 
+      $profile_id = Auth::user()->id;
+      DB::table('users')->where('id','=',$profile_id)->update(['activation'=>$switchStatus,'timer'=>NULL]);
     }
 }

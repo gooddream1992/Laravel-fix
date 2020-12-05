@@ -7,6 +7,10 @@
    .ck-editor__editable p{
       height: 250px;
    }
+   .ck.ck-editor {
+    position: relative;
+    width: 100%;
+}
 </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

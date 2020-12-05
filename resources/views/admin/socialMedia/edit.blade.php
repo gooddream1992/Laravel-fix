@@ -27,7 +27,9 @@ float: right;
               <input type="hidden" name="id" value="@if(isset($socail[0]->id)) {{ $socail[0]->id }} @endif">
               <tr>
                 <td>
-                  <input type="file" name="icon">
+                  <input type="file" name="icon" id="icon">
+                  <br>
+                  <b>Icon Size Should be 64x64</b>
                   @if(isset($socail[0]->icon))
                     <input type="hidden" value="{{ $socail[0]->icon }}" name="icon">
                     <img src="{{ asset('public/icon/'.$socail[0]->icon) }}" alt="" width="50" height="50" title="{{ $socail[0]->socail_media_url }}">
@@ -41,7 +43,7 @@ float: right;
               </tr>
               <tr>
                 <td>
-                  <input type="submit" name="submit" value="Save" class="btn btn-success">                      
+                  <input type="submit" name="submit" value="Save" class="btn btn-success" id="submit">                      
                 </td>
               </tr>                    
             </form>
@@ -51,4 +53,15 @@ float: right;
     </div>
   </section>
 </div>
+<script>
+  $(document).ready(function(){
+    $("#submit").on('click',function(){
+      var imgWidth = $('#icon').width();
+      var imgHeight = $('#icon').height();
+      if(imgWidth > 64 || imgHeight > 64){
+      alert('Your Icon is too big, it must be less than 64x64');
+    });
+  }
+  });
+  </Script>
 @endsection

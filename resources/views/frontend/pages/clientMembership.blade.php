@@ -87,13 +87,12 @@ $description=$sliders->description;  }
                             <div class="inner-text-content text-white">
                                 <h2>{{$relation3->title}}</h2>
                                 {!!$relation3->description !!}
-                                <button class="btn red-small">Read More</button>
 
                             </div>
                         </div>
                         <?php $crelations4 =\App\ClientRelationship::all()->where('status', 4);?>
               @foreach($crelations4 as $relation4)
-                        <div class="col-lg-4 col-md-12  order-lg-1 order-md-2">
+                        <div class="col-lg-4 col-md-12  order-lg-1 order-md-2 align-self-center"> 
                             <img src="{{asset('public/uploads/'.$relation4->imageurl)}}" class="img-fluid" />
                         </div>
                         @endforeach
@@ -103,59 +102,48 @@ $description=$sliders->description;  }
             @endforeach
 
             {{-- SMPEDIT 15-10-2020 --}}
+            <?php $crelations8 =\App\ClientRelationship::all()->where('status', 8);
+            ?>
+            
             <section class="red-tab-sec">
                 <div class="group-red-box">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="box-title dark c-center">
-                                    <h2>What do you want to Ensure ?</h2>
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                                    @php
+                                        $title = array();
+                                        $sub_title = array();
+                                    @endphp
+                                    @foreach($crelations8 as $value8)
+                                        @php
+                                            $title['title']  = $value8->title;
+                                            $sub_title['sub_title'] = $value8->sub_title;
+                                        @endphp
+                                    @endforeach
+                                    {{-- <h2>What do you want to Ensure ?</h2> --}}
+                                    <h2>{{ $title['title'] }}</h2>
+                                    <h2></h2>
+                                    {{-- <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p> --}}
+                                    <p>{{ $sub_title['sub_title'] }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-10">
                                 <ul class="red-icon-list">
+                                    @foreach($crelations8 as $relation8)
                                     <li>
                                         <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-1.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
+                                            <div class="circle-icon"><img src="<?php echo asset('public/uploads/'.$relation8->imageurl) ?>" class="img-fluid"/></div>
+                                            <h4>{!! $relation8->description !!}</h4>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-2.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-3.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-4.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-5.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon-box">
-                                            <div class="circle-icon"><img src="{{ asset('public/images/red-circle-icon-6.png') }}" class="img-fluid"/></div>
-                                            <h4>Some Title Here</h4>
-                                        </div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </section>
@@ -172,11 +160,10 @@ $description=$sliders->description;  }
                             <div class="inner-text-content ">
                               <h2>{{$relation5->title}}</h2>
                                 {!!$relation5->description !!}
-                                <button class="btn red-small">Read More</button>
 
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-12  ">
+                        <div class="col-lg-4 col-md-12 align-self-center ">
                             <img src="{{asset('public/uploads/'.$relation5->imageurl)}}" class="img-fluid" />
                         </div>
                     </div>
@@ -202,22 +189,37 @@ $description=$sliders->description;  }
             @endforeach
 
             {{-- SMPEDIT 15-10-2020 --}}
+            <?php
+                $crelations9 =\App\ClientRelationship::all()->where('status', 9);
+                $title9 = array();
+                $image = array();
+            ?>
+            @foreach($crelations9 as $relation9)
+                @php 
+                    $title9['title'] = $relation9->title;
+                    $image['image'] = $relation9->imageurl;
+                @endphp
+            @endforeach
             <section class="know-the-rules row-am">
                 <div class="container">
                     <div class="row justify-content-lg-center justify-content-md-center">
                         <div class="col-lg-6 col-md-12  d-flex align-items-center">
-                            <img src="{{ asset('public/images/know-rules.jpg') }}" class="img-fluid" />
+                            <img src="{{ asset('public/uploads/'.$image['image']) }}" class="img-fluid" />
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="inner-text-content">
-                                <h2>Follow Rules</h2>
+                                {{-- <h2>Follow Rules</h2> --}}
+                                <h2>{{ $title9['title'] }}</h2>
                                 <ul class="rules-list">
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</li>
+                                    @foreach($crelations9 as $relation9)
+                                    <li>{!! $relation9->description !!}</li>
+                                    {{-- <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</li>
                                     <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </li>
                                     <li>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
                                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</li>
                                     <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </li>
-                                    <li>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li>
+                                    <li>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </li> --}}
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>

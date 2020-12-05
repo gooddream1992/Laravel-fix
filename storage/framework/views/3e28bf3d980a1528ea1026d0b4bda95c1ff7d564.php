@@ -27,7 +27,9 @@ float: right;
               <input type="hidden" name="id" value="<?php if(isset($socail[0]->id)): ?> <?php echo e($socail[0]->id); ?> <?php endif; ?>">
               <tr>
                 <td>
-                  <input type="file" name="icon">
+                  <input type="file" name="icon" id="icon">
+                  <br>
+                  <b>Icon Size Should be 64x64</b>
                   <?php if(isset($socail[0]->icon)): ?>
                     <input type="hidden" value="<?php echo e($socail[0]->icon); ?>" name="icon">
                     <img src="<?php echo e(asset('public/icon/'.$socail[0]->icon)); ?>" alt="" width="50" height="50" title="<?php echo e($socail[0]->socail_media_url); ?>">
@@ -41,7 +43,7 @@ float: right;
               </tr>
               <tr>
                 <td>
-                  <input type="submit" name="submit" value="Save" class="btn btn-success">                      
+                  <input type="submit" name="submit" value="Save" class="btn btn-success" id="submit">                      
                 </td>
               </tr>                    
             </form>
@@ -51,5 +53,16 @@ float: right;
     </div>
   </section>
 </div>
+<script>
+  $(document).ready(function(){
+    $("#submit").on('click',function(){
+      var imgWidth = $('#icon').width();
+      var imgHeight = $('#icon').height();
+      if(imgWidth > 64 || imgHeight > 64){
+      alert('Your Icon is too big, it must be less than 64x64');
+    });
+  }
+  });
+  </Script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('masters.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/honeydevealakmal/public_html/resources/views/admin/socialMedia/edit.blade.php ENDPATH**/ ?>

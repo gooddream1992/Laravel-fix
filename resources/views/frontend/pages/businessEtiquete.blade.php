@@ -68,11 +68,11 @@ $description=$sliders->description;  }
         <div id="content">
             <section class="umbrella-man">
                 <div class="container">
-                    <div class="row justify-content-lg-center justify-content-md-center">
-                        
-            <?php $business =\App\BusinessEtiquete::all()->where('status', 1);?>
-               
-              @foreach($business as $data)
+                    
+                    <?php $business =\App\BusinessEtiquete::all()->where('status', 1);?>
+                    
+                    @foreach($business as $data)
+                        <div class="row justify-content-lg-center justify-content-md-center">
 
                         <div class="col-lg-7 col-md-12  order-lg-2 order-md-1">
                             <div class="inner-text-content">
@@ -84,24 +84,30 @@ $description=$sliders->description;  }
                         <div class="col-lg-5 col-md-12 d-flex align-items-center order-lg-1 order-md-2">
                             <img src="{{asset('public/uploads/'.$data->imageurl)}}" class="img-fluid" />
                         </div>
-                         @endforeach
                     </div>
+                         @endforeach
                 </div>
             </section>
             <section class="red-tab-sec">
                 <ul class="nav nav-pills  nav-pills nav-justified" id="pills-tab" role="tablist">
                     @foreach($business_etiquetes as $key => $value)
-                    @if(!empty($value->toggle))
-                        @if($key%2==0)
-                    <li class="nav-item">
-                        <a class="nav-link single active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span class="sprint-user-icons"></span>{{ $value->toggle }}</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span class="sprint-user-icons"></span>{{ $value->toggle }}</a>
-                    </li>
-                    @endif
-                    @endif
+                        @if(!empty($value->toggle))
+                            @if($key%2==0)
+                                <li class="nav-item">
+                                    <a class="nav-link single active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                        <span class="sprint-user-icons"></span>
+                                        {{ $value->toggle }}
+                                    </a>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                        <span class="sprint-user-icons"></span>
+                                        {{ $value->toggle }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
                     @endforeach
                     <!-- <li class="nav-item">
                         <a class="nav-link multiple" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span class="sprint-user-icons"></span>Some Title Here</a>

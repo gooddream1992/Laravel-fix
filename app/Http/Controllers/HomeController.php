@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->inRandomOrder()
             ->limit(10)
             ->get();
-
+            
         $States = \App\State::all();
         $indpnts = \App\Independent::all();
         $provresrcs = \App\ProviderResource::all();

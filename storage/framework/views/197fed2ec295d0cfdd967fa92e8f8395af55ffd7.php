@@ -94,8 +94,8 @@
 
               </td>
               <td>
-                <a href="<?php echo e(route('local.resources.admin.delete',$value->id)); ?>" class="btn btn-xs btn-danger">Delete</a>
-                <a href="<?php echo e(route('local.resources.admin.edit',$value->id)); ?>" class="btn btn-xs btn-primary">Modify</a>
+                <a href="<?php echo e(route('local.resources.admin.delete',$value->data_id)); ?>" class="btn btn-xs btn-danger">Delete</a>
+                <a href="<?php echo e(route('local.resources.admin.edit',$value->data_id)); ?>" class="btn btn-xs btn-primary">Modify</a>
               </td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

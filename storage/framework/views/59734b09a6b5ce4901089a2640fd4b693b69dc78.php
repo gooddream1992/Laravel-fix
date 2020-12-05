@@ -70,7 +70,7 @@
         <?php else: ?>
         <img src="<?php echo e(asset('public/client_library/image/no_image_found.png')); ?>" alt="" class="fakeimg" style="height:65%;">
         <?php endif; ?>
-      <p><?php echo e($blog->description); ?></p>
+      <p><?php echo $blog->description; ?></p>
     </div>
     <div class="row">
     <a href="<?php echo e(route('client.blog.edit',$blog->id)); ?>" class="btn btn-primary" style="width: 140px; align-content: center;">
